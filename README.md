@@ -1,5 +1,3 @@
-# Leetcode
+# Mark Daily
   &lt;(￣︶￣)↗[GO!]
 
-
-Python/Cpp Leetcode practice

@@ -1,0 +1,11 @@
+\contentsline {section}{\numberline {1}Python知识点回顾及补充}{2}{}%
+\contentsline {section}{\numberline {2}基本语法}{2}{}%
+\contentsline {subsection}{\numberline {2.1}Python 数据结构的用法还有特点}{2}{}%
+\contentsline {subsection}{\numberline {2.2}异常处理}{2}{}%
+\contentsline {subsection}{\numberline {2.3}OOP}{2}{}%
+\contentsline {subsection}{\numberline {2.4}正则表达式}{3}{}%
+\contentsline {subsection}{\numberline {2.5}标准库}{3}{}%
+\contentsline {subsection}{\numberline {2.6}IO处理}{3}{}%
+\contentsline {section}{\numberline {3}Django}{3}{}%
+\contentsline {section}{\numberline {4}Scrapy}{3}{}%
+\contentsline {section}{\numberline {5}Python 面试}{3}{}%

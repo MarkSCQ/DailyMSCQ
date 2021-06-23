@@ -13,3 +13,10 @@ Why use react?
 2. Interactive UIs with Virtual DOM
 2. Performance and testing
 2. Very popular in industry
+
+Today:<br>
+Get to known to React and take a small sight of it.<br>
+
+Problem:<br>
+need to figure out how npm works and what are the vulnerabilities and the dependency issues<br>
+

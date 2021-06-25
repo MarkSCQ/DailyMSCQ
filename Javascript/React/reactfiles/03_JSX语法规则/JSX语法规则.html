@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hello react </title>
+
+</head>
+
+<body>
+    <div id="test"></div>
+    <script type="text/javascript" src="../react.development.js"></script>
+    <script type="text/javascript" src="../react-dom.development.js"></script>
+    <script type="text/javascript" src="../babel.min.js"></script>
+
+
+    <script type="text/babel">
+        const myId = "hello!!!!";
+        const myData = "HHHH reACT!!!";
+
+        // ！ 1. 创建虚拟DOM
+
+        const vdom = (<h2 id={myId}>
+            <span>
+                {myData}
+            </span>
+        </h2>);
+        // !  2.渲染虚拟DOM到页面
+        ReactDOM.render(vdom, document.getElementById("test"));
+        /*
+        JSX 语法规则：
+            1. 定义虚拟DOM时，不要写引号
+            2. 标签中混入JS表达式时 使用{}引入
+            3. 样式类名不用class 用className. class -> className
+            4. 内联样式需要用 style={{key:value}}的形式去写
+            5. 虚拟DOM不能有多个根标签，只能有一个根标签
+            6. 标签必须必和 <input type="text" />
+            7. 标签首字母
+                (1) 小写字母开头， 则将标签转换为html中同名元素，若html中无改标签同名元素，则报错
+                (2) 若大写开头，react就去渲染该组件，若组件未定义，则报错
+ 
+        */
+    </script>
+</body>
+
+</html>

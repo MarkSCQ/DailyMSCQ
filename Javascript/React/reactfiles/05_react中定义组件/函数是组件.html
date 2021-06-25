@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>05</title>
+
+</head>
+
+<body>
+    <div id="test"></div>
+    <script type="text/javascript" src="../react.development.js"></script>
+    <script type="text/javascript" src="../react-dom.development.js"></script>
+    <script type="text/javascript" src="../babel.min.js"></script>
+
+
+    <script type="text/babel">
+        //函数式组件
+        function Demo() {
+            return <h3>simple components</h3>
+        }
+        // react call the function
+        function MyComponent(){
+            console.log(this)//这里的this将会显示为undefined，因为经过babel翻译后进入严格模式 strict mode
+
+            return <h3>My Component</h3>
+        }
+
+        ReactDOM.render(<MyComponent />, document.getElementById("test")
+        /*
+        执行了ReactDOM.render(....)后发生了什么？
+        1. React解析足见标签 找到了MyComponent组件
+        2. 发现组件是使用函数定义的，随后调用该函数，随后将返回的虚拟dom转换为真实dom，随后呈现在页面中。
+        
+        */
+        );
+
+    </script>
+</body>
+
+</html>

@@ -81,3 +81,37 @@ Javascript 模块
 在实验中,使用到了babel。经过Babel翻译的jsx会进入严格模式(ES5 strict mode)
 <img src="./imgs/functional_components.PNG">
 (ES5 严格模式 strict mode 禁止自定义函数的this指向window)
+        
+
+关于 JavaScript class的三点
+1. constructor 不是必须写的,需要实例化的时候才写
+2. 关于super，如果a类继承b类且a中有构造器，那么a类构造器中super必须被调用
+3. 类中定义的方法 都是放在了类的原型对象上
+
+
+
+
+类式组件 
+1. 继承父类 react component
+2. 必须有render
+3. render必须有返回值
+
+
+执行了ReactDOM.render(....)后发生了什么？
+1. React解析足见标签 找到了MyComponent组件
+2. 发现组件是使用类定义的，随后new该类的实例，并通过该类的实例调用到圆形render的方法
+3. 将render返回的虚拟dom转化为真实dom，随后呈现在页面中
+
+
+什么事复杂组件？
+有状态（State）就是复杂组件
+
+什么是状态（state）？
+
+组件的状态驱动着页面。 => 数据在状态里。状态中的数据驱动叶绵绵的展示
+
+组件实例的三大核心属性
+1. State 状态
+
+
+

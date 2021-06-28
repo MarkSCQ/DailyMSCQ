@@ -20,10 +20,33 @@
                 console.log(`${this.name},${this.age}`)
             }
         }
+        class Student extends Person {
+            constructor(name, age, grade) {
+                // super 必须放在其他属性之前
+                super(name, age)
+                this.grade = grade;
 
-        const p1 = new Person("123ss", 4);
+            }
+            speak() {
+                console.log(`${this.name},${this.age},${this.grade}`)
+            }
+        }
+
+        const p1 = new Person("123ss", 4, "gaoyi");
         p1.speak()
 
         console.log(p1)
+
+
+        /* 
+        
+        
+        1. constructor 不是必须写的,需要实例化的时候才写
+        2. 关于super，如果a类继承b类且a中有构造器，那么a类构造器中super必须被调用
+        3. 类中定义的方法 都是放在了类的原型对象上
+        
+        
+        
+        */
     </script>
 </body>

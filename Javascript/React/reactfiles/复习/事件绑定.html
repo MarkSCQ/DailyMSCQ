@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>event binder</title>
+
+</head>
+
+<body>
+    <div id="test"></div>
+
+
+    <button id="btn1">btn1</button>
+    <button id="btn2">btn2</button>
+
+    <button onclick="demo()">BTN</button>
+
+    <script type="text/javascript">
+        const btn1 = document.getElementById("btn1");
+        btn1.addEventListener('click', () => {
+            alert("btn1");
+        })
+
+        const btn2 = document.getElementById("btn2");
+        btn2.onclick = () => {
+            alert("btn2")
+        }
+        function demo() {
+            alert("btn3")
+        }
+
+    </script>
+</body>
+
+</html>

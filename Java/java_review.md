@@ -559,6 +559,281 @@ Java8之后，允许接口里定义默认方法和类方法
 接口完全支持多继承，和类的继承类似，子接口拓展某个父接口，将会获得父接口中定义的一切。
 
 
+**字符串**
+
+放在常量池中
+
+下图中使用两个方法构建了string 由于==比较的是两个对象的地址，一个是在常量池中 一个位于堆中，地址不同 所以==结果是不想等
+
+<!-- ![String](./imgs/string.PNG) -->
+<img src="./imgs/string.PNG">
+
+<br>
+
+<br>
+<br>
+<br>
+
+使用 equals() 对比两个字符串是否相等
+
+**String类和常量池**
+
+**以下 看看就好** <br>
+java内存分析中 经常会提到以下几个常量池
+
+1. 全局字符串常量池 (String Pool) 
+   <br> 全局字符串常量池中存放的内容实在类加载完成后存到String Pool中的，在每个VM中只有一份，存放的是字符串敞亮的引用 (在堆中生成字符串对象实例) 
+2. class 文件常量池 (class Constant Pool)
+   <br> class常量池是在编译的时候每个class都有的，在编译阶段，存放的是常量(文本字符串，final常量等)和符号引用
+3. 运行时常量池 (Runtime Constant Pool)
+   <br> 运行时常量池是在加载完成之后，将每个class常量池中的符号引用值转存到运行时常量池中，也就是说每个class都有一个运行时常量池，类在解析之后，将符号引用替换为直接饮用，与全局常量池中的引用保持一致
+
+**常用String函数**
+
+1. str1.equals(str2) str1和str2 是否相同
+2. length() 字符串长度
+3. str1.charAt(index) str1 在下标为index的地方的字符
+4. equalsIgnoreCase(String other) 忽略大小写是否相等
+5. str1.indexOf(str2) 从左到右找大的第一个在str1中的str2，如果没找到返回-1
+6. str1.lastindexof(str2) 琢磨为找第一个子字符串的位置
+7. replace(char oldChar, char newChar)  可以换一个 也可以换一个字符串
+8. str1.starwith(str2) 是否以某个字符串为开头
+9. str1.endwith(str2) 是否以某个字符串为结尾
+10. str.substring(index1) 返回index1到末尾
+11. str.substring(index1,index2) 返回index1到index2的值，包括index1不包括index2
+12. str.toLowerCase() 小写
+13. str.toLowerCase() 大写
+14. str.trim() 删除该串中头部和尾部的空白字符
 
 
-234337910
+String  不可变字符序列，所有的替换截取字符穿，去空格，转换大小写都是生成了新的字符串
+
+
+**内部类**
+
+内部类是一类特殊的类，指的是定义在一个类的内部的类。实际开发中，为了方便的使用外部类的相关属性和方法，这个时候我们通常会定义一个内部类
+
+<img src="./imgs/classinsideclass.PNG">
+
+内部类可以直接使用外部类的成员，私有也行
+
+**内部类概念**
+
+一般情况，我们把类定义成独立的单元，有些情况下，我们把一个类放在一个类的内部定义，成为内部类，innerclasses
+
+内部类可以使用public default protected private 和static修饰。而外部类只能用default和public修饰
+
+注意 内部类是一个编译时概念。一旦编译成功，就会成为两个完全不同的类，对于一个名为Outer的外部类和其内部定义的名为Inner的内部类。编译完成后会出现Outer.class和Outer$Inner.class两个类的字节码文件。所以内部类是相对独立的一种存在。其成员变量方法名可以和外部类的相同。
+
+**内部类的作用**
+1. 内部类提供了更好的封装 只能让外部类直接访问，不允许同一个包中的其他类直接访问
+2. 内部类可以直接访问外部类的私有属性，内部类被当做其外部类的成员。但外部类不能访问内部类的内部属性。
+
+**内部类的分类**
+
+**成员内部类 - 非静态内部类**（外部类里使用非静态内类和平时使用其他类没有什么不同）
+1. 非静态内部类对象必须及存在一个外部类的对象里。因此，如果有一个非静态内部类对象，那么一定存在对应的外部类对象。非静态内部类对象单独属于外部类的某个对象
+2. 非静态内部类可以直接访问外部类成员但是外部类不能直接访问非静态内部类成员。
+3. 非静态内部类不能有静态方法，静态属性和静态初始化块
+4. 成员变量访问要点
+   1. 内部类里方法的局部变量：变量名
+   2. 内部类属性： this.变量名
+   3. 外部类属性：外部类名.this.变量名
+   
+
+**静态内部类** 就是在class前加个 static
+1. 定义方式
+
+         static class ClassName{
+            //class content
+         }
+2. 使用要点
+   1. 静态内部类可以访问外部类的静态成员，不能访问外部类的普通成员
+   2. 静态内部类看做外部类的一个静态成员
+
+<img src="./imgs/staticinnerclass.PNG">
+
+**匿名内部类**
+
+适合那种只需要使用一次的类。比如说键盘监听操作等。在安卓开发，awt，swing开发中常见
+
+语法：
+
+         new 父类构造器(实参类表) \实现接口(){
+            // 匿名内部类类体
+         }
+
+Example:
+
+         package com.AnonymousClass;
+         public class TestAnonymousClass {
+
+            public void test(A a) {
+               a.run();
+            }
+
+            public static void main(String[] args) {
+               TestAnonymousClass tm = new TestAnonymousClass();
+         //        tm.test(new AA());
+               tm.test(new A() {
+                     @Override
+                     public void run() {
+                        System.out.println("TestAnonymousClass.run0");
+                     }
+               });
+               tm.test(new A() {
+                     @Override
+                     public void run() {
+                        System.out.println("TestAnonymousClass.run1");
+                     }
+               });
+
+            }
+         }
+
+         class AA implements A {
+            @Override
+            public void run() {
+               System.out.println("AA.run()");
+            }
+         }
+
+         interface A {
+            void run();
+         }
+
+
+         OUTPUT:  TestAnonymousClass.run0
+                  TestAnonymousClass.run1
+
+
+没用一次调一次 每一次都是新的
+
+
+**局部内部类**
+
+定义在方法内部的，作用于只限于本方法，成为局部内部类
+
+局部内部类的使用主要是用来解决比较复杂的问题。想创建一个类来辅助我们的解决方案，到那个时候又不希望这个类是公共可用的，所以就产生了局部内部类。局部内部类和成员类一样被编译，只是她的作用域发生了改变，他只能在该方法中被使用，除了该方法就会失效。
+
+实际开发中应用很少
+ 
+
+
+**Array**
+1. 数组定义 概念
+2. 常见的操作
+3. 多维数组
+4. 常见算法
+
+数组定义 相同类型数据的有序集合。数组描述的是想同类型的若干数据按照一定的先后次序排列组合而成。其中一个数据成为一个元素。每一个元素都可以通过下标访问。
+
+四个基本特点
+1. 长度确定，一旦创建 长度无法改变
+2. 元素类型必须一致，不能混用
+3. 数据类型可以是任何数据类型，包括基本类型和引用类型
+4. 数组本身属于引用类型，数组也是对象
+5. java中对象在堆中，因此数组无论保存的原始类型还是其他对象类型，顺组本身是在堆中存储的
+6. 给数组元素赋值，数组是对象，数组中的元素是对象的属性
+  
+<img src="./imgs/array.PNG">
+
+静态初始化
+
+         int[] a={1,2,3};
+
+动态初始化
+
+         int[] a = new int[3];
+         for assign values or .....
+
+
+对象内存分析案例
+
+<img src="./imgs/array2_1.PNG">
+
+上图中创建了mans 数组，和两个Man对象 m1和m2。mans 数组的0和1设为m1和m2
+
+<img src="./imgs/array2_2.PNG">
+
+创建过程如上图数组，m1和m2都在堆内存中，m1 m2给数组的0和1赋值，传递了地址。
+
+another iteration iteration
+
+      for(arraytype item:arrayname){
+         
+      }
+
+数组的拷贝
+
+      arrayCopy(object src, int scrpos. object dest, int destpos, int length)
+
+      指明从src的哪里拷到目标的哪里
+
+<img src="./imgs/arraycopy.PNG">
+
+
+**常见的数组函数**
+
+      package com;
+      import java.lang.reflect.Array;
+      import java.util.Arrays;
+      public class arraystest {
+
+         public static void main(String[] args) {
+            int[] a ={5,6,1,2,2,3,2,3,4};
+            System.out.println(Arrays.toString(a));
+            Arrays.sort(a);
+            System.out.println(Arrays.toString(a));
+            int idx = Arrays.binarySearch(a,4);
+            System.out.println(idx);
+            Arrays.fill(a,3,5,100);
+            // fill the array with contents
+            System.out.println(Arrays.toString(a));
+
+         }
+      }
+
+多维数组
+
+      一个二维数组的定义方式
+      a=3
+      
+      typename[][] arrayname = new typename[a][];
+
+
+      遍历一个二维数组并输出例子：
+
+      String[][] b = new String[3][2];
+      for (int i = 0; i < b.length; i++) {
+            for (int j = 0; j < b[i].length; j++)
+               b[i][j] = "\'" + String.valueOf(i) + "," + String.valueOf(j) + "\'";
+      }
+      注意 Arrays.toString只能处理一维数组
+      for (String[] str : b) {
+         System.out.println(Arrays.toString(str));
+
+      }
+
+**Comparable Interface**
+
+相对某个类的对象之间进行比较，就需要事项Comparable接口，接口中只有一个方法compareTo,这个方法定义了之前对象之间的比较规则，依照这个比较规则就可以的实现对象的排序。
+
+利用这个接口进行排序，这个接口函数compareTo其实就是一个判别器 大于小于等于的问题
+
+Comparable接口只有一个方法
+
+      public int compareTo(Object obj) obj 为比较对象
+
+      一个compareTo的例子
+      
+      public int compareTo(Object o){
+         Man man = (Man) o;
+         if(this.age<man.age){
+            return -1;
+         }
+         if(this.age>man.age){
+            return 1;
+         }
+         return 0;
+      }

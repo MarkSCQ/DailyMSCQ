@@ -837,3 +837,18 @@ Comparable接口只有一个方法
          }
          return 0;
       }
+
+
+常用类
+
+包装类
+
+八种基本数据类型对应的包装类
+
+<img src="./imgs/wrappedclass.PNG">
+
+
+
+<img src="./imgs/auto1.PNG">
+<img src="./imgs/auto2.PNG">
+<img src="./imgs/auto3.PNG">

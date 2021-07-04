@@ -852,3 +852,96 @@ Comparable接口只有一个方法
 <img src="./imgs/auto1.PNG">
 <img src="./imgs/auto2.PNG">
 <img src="./imgs/auto3.PNG">
+
+
+String StringBuilder StringBuffer
+
+String 不可变 源码中定义 private final char value[] 不可变字符串序列
+StringBuilder 可变 效率高 线程不安全
+StringBuffer  可变 效率低 线程安全
+
+StringBuilder StringBuffer 可变字符串序列 继承 AbstractStringBuilder
+
+DateFormat 时间和字符串相互转换
+
+
+时间对象转换成字符串
+ 
+
+<img src="./imgs/date1.PNG">
+
+
+File 类 用来代表文件和目录，文件的io操作
+
+异常操作
+1. 异常机制 安全处理错误继续执行
+   1. 本质
+   2. 概念 程序运行过程中出现的非正常现象 输入错误 需要处理的文件不存在 数组越界等
+   3. 分类
+2. 异常处理
+   1. try catch finally
+   2. throws声明异常
+   3. 自定义异常
+3. 处理步骤
+   1. 处理异常的步骤
+   
+
+Java 是采用面向对象的方式来处理异常 处理过程如下
+1. 抛出异常，当执行一个方法时，如果发生异常，则这个方法生成代表该异常的一个对象，停止当前执行路径并把异常对象提交给JRE
+2. 捕获异常，JRE得到该异常后，寻找相应的代码来处理该异常，JRE在方法的调用栈中查找，从生成异常的方法开始回溯，直到找到相应的异常代码为止
+
+
+Java中定义了很多异常。
+<img src="./imgs/exception.PNG">
+
+
+
+Error JVM不可恢复的崩溃
+
+RuntimeException 运行时异常 运行时才能发现
+
+CheckedException 已检查异常 编译时就能发现。这类异常必须要在编译时作出处理，否则无法通过编译
+<img src="./imgs/checkedexception.PNG">
+
+
+异常处理 捕获异常
+   <img src="./imgs/solveexception.PNG">
+
+
+
+声明异常 throws
+
+当CheckedException产生时，不一定立刻处理它，可以把异常throws出去。
+
+在方法中使用try catch finally是有这个方法来处理异常。但是在一些情况下，当前方法并不需要处理发生的异常，而是向上传递给调用它的方法处理。
+
+如果一个方法中可能产生某种异常，但是不能确定如何处理这种异常，则应根据异常规范，在方法的收不声明该方法可以抛出异常。
+
+如果一个方法抛出多个已检查异常，就必须在方法的首部列出所有的异常，之间以逗号隔开
+
+
+
+Java Threading
+
+两种创建方式
+1. 使用Runnable接口
+   1. 这个runnable 接口有一个run()函数 实现方法两个 要么写个class 要么直接如下
+   <img src="./imgs/runnable1.PNG">
+   <img src="./imgs/runnable2.PNG">
+2. 实现threadclass
+   <img src="./imgs/thread1.PNG">
+
+在多线程中一个线程出现异常不会影响到其他线程的工作。
+
+ThreadX.join()  会让ThreadX先执行 然后其余的thread再并行
+
+.join(), calling thread wait until the specified thread dies or for x miliseconds
+
+
+daemon 守护线程 non-user thread background running thread. for example garbage collection is running using daemon thread. JVM will not finish until all the user thread finish. The daemon thread is not user thread. SO if we set all thread as daemon thread, jvm will terminated immediately.
+
+**泛型 generic**
+
+1. 数据类型的参数化
+2. 数据类型只能是引用类型
+3. 

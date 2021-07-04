@@ -17,22 +17,24 @@
     <script type="text/babel">
 
         class Weather extends React.Component {
-            constructor(props) {
-                super(props)
-                //初始化状态
-                this.state = { isHot: false, wind: "small wind" }
-                this.changeWeather = this.changeWeather.bind(this)
-            }
+            // constructor(props) {
+            // super(props)
+            //初始化状态
+            // this.state = { isHot: false, wind: "small wind" }
+            // this.changeWeather = this.changeWeather.bind(this)
+
+            state = { isHot: false }
+            // }
             render() {
                 const { isHot } = this.state
                 return <h1 onClick={this.changeWeather}>Today is very {isHot ? "hot" : "cold"}</h1>
             }
-            changeWeather() {
+            changeWeather = () => {
                 // console.log(this.state.isHot)
                 const isHot = this.state.isHot;
                 // this.state.isHot=!isHot;
-                this.setState({isHot:!isHot})
-                console.log(this.state.isHot)
+                this.setState({ isHot: !isHot })
+                // console.log(this.state.isHot)
 
             }
         }

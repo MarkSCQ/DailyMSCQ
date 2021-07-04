@@ -17,7 +17,6 @@ def login_view(request):
         # Attempt to sign user in
         username = request.POST["username"]
         password = request.POST["password"]
-        identification = request.POST["identification"]
         user = authenticate(request, username=username,
                             password=password)
 
@@ -25,7 +24,6 @@ def login_view(request):
         if user is not None:
             login(request, user)
             
-            it = Profile.objects.get(username=username).identification
             # if identification in student and can be verified
             # go to student
             # if identification in student and can be verified

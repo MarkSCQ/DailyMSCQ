@@ -944,4 +944,231 @@ daemon 守护线程 non-user thread background running thread. for example garba
 
 1. 数据类型的参数化
 2. 数据类型只能是引用类型
-3. 
+
+
+类型擦除
+
+编码是采用泛型写的类型参数，编译器都会在编译时去掉，称这种行为 类型擦除
+
+泛型主要用于编一阶段，编译后生成的字节码class文件不包含泛型中类型信息，涉及类型转换仍然是普通的强制类型转换。类型参数在编译后会被替换为object，运行时虚拟机不知道泛型。
+
+泛型主要是方便了程序员代码编写以及更好的安全性检测。
+
+
+
+泛型 - 数据类型占位符
+这种标志符可以用任何标志符标记。一般采用这几个 E,T,K,V,N,？
+
+
+
+
+| 泛型标记 | 对应单词 | 说明                       |
+| -------- | -------- | -------------------------- |
+| E        | Element  | 在容器中，表示容器中的元素 |
+| T        | Type     | 表示普通java类             |
+| K        | Key      | 表示键，例如 Map中的 Key   |
+| V        | Value    | 表示值                     |
+| N        | Number   | 表示数值类型               |
+| ?        | Text     | 表示不确定的java类型       |
+
+
+泛型类
+
+把泛型定义在类上，用户使用该类的时候，才把类型明确下来，泛型类的具体使用方法实在类名的后面添加一个或者多个类型参数声明 例如 <T> <T,K,V>
+
+      语法结构
+      public class 类名 <泛型标志符>
+      {
+
+      }
+
+Example:
+         
+         类文件
+         public class Generic<T> {
+            private T flag;
+
+            public T getFlag() {
+               return flag;
+            }
+            public void setFlag(T flag){
+               this.flag = flag;
+            }
+         }
+
+         Generic<String> ge = new Generic<>();
+         ge.setFlag("1adsa23");
+         System.out.println(ge.getFlag());
+
+
+         Generic<Double> ge1 = new Generic<>();
+         ge1.setFlag(3.141);
+         System.out.println(ge1.getFlag());
+
+
+
+泛型接口
+
+和泛型类的声明方式相同。泛型接口的具体类型需要在实现类中进行声明
+
+
+      语法结构
+      public interface 接口名<泛型标志符>
+      {
+
+      }
+
+下面的例子是用了string作为T的占位符 在public class IgenericImpl implements Igeneric<String>中定义了String
+Example:
+         
+         接口文件
+         package com.GenericTest;
+         public interface Igeneric<T> {
+            T getName(T name);
+         }
+         实现文件
+         public class IgenericImpl implements Igeneric<String> {
+            @Override
+            public String getName(String name) {
+
+               return name;
+            }
+         }
+
+         使用类调用
+         IgenericImpl ig = new IgenericImpl();
+         String na = ig.getName("123fasdf");
+         System.out.println(na);
+
+         使用接口调用记得加上类型标志符
+         Igeneric<String> ig2 = new IgenericImpl();
+         String igname = ig2.getName("asdfasdf123123");
+         System.out.println(igname);
+
+
+泛型方法
+
+泛型类中定义的的泛型可以在方法中使用。但是我们经常需要仅仅在某一个方法上使用泛型，这个时候就可以使用反省方法。
+泛型方法是指将方法的参数类型定义成泛型，一边在调用时接受不同的类型参数。类型参数可以有很多个，用逗号隔开。例如<K,V> 定义式类型参数一般放在返回值前面。
+
+调用泛型方法时，不需要泛型类那样告诉编译器是什么类型，编译器可以自动推断出来。
+
+语法结构
+
+      非静态方法 无返回值
+      public<泛型表示符号> void getname(泛型表示符号 name){
+         
+      }
+      非静态方法 返回值类型为 泛型表示符号
+      public<泛型表示符号> 泛型表示符号 getname(泛型表示符号 name){
+         
+      }
+
+      Example:
+      public <T> void printname(T name) {
+         System.out.println(name);
+      }
+
+      public <T> T returnname(T name) {
+         return name;
+      }
+
+
+静态方法，静态方法中使用泛型需要注意一点，那就是静态方法无法访问类上定义的泛型。如果静态方法操作的引用数据类型不确定的时候，必须要将泛型定义在方法上
+
+
+语法结构
+
+
+      静态方法 无返回值
+      public static <泛型表示符号> void getname(泛型表示符号 name){
+         
+      }
+      静态方法 返回值类型为 泛型表示符号
+      public static <泛型表示符号> 泛型表示符号 getname(泛型表示符号 name){
+         
+      }
+
+      Example:
+      public static <T> void printname(T name) {
+         System.out.println(name);
+      }
+
+      public static <T> T returnname(T name) {
+         return name;
+      }
+
+
+非静态方法使用可以有两个 1 泛型类/实现的泛型接口中使用泛型函数；2 在类中写泛型函数
+
+
+   <img src="./imgs/genericmethod1.PNG">
+
+
+   <img src="./imgs/genericmethod1_1.PNG">
+
+
+   <img src="./imgs/genericmethod2.PNG">
+
+
+泛型方法和可变参数 可变参数指的是args 一个输入array
+
+在泛型方法中，泛型也可以定义可变参数类型
+
+      语法结构
+      public <泛型表示符号> void getname(泛型表示符号 name){
+         
+      }
+
+      Example：
+      public <T> void method(T...args){
+
+      }
+
+
+通配符和上下限定
+
+无界通配符
+
+"?"表示类型通配符，用于代替具体的类型，只能在<>中使用，可以解决当具体类型不确定的问题
+
+      语法结构
+      public void getname(Generic<?>  generic){
+         
+      }
+
+通配符的上限限定
+
+上限限定表示通配符的类型是T类以及T类的子类或者T接口以及T接口的子接口
+
+      语法结构 example
+      public void showflag(Generic<? extends Number>  generic){
+         
+      }
+
+如下图所示，T被限定为Number的子类
+<img src="./imgs/wildcardupper1.PNG">
+
+
+通配符的下限限定
+下限限定表示通配符的类型是T类以及T类的父类或者T接口以及T接口的父接口
+该方法不适用于泛型类
+
+      语法结构 example
+      public void showflag(Generic<? super Integer>  generic){
+         
+      }
+
+上限 下限 区别 
+上限：当前类或者当前类的子类，当前接口或者当前接口的子接口
+下限：当前类或者当前类的父类，当前接口或者当前接口的父接口
+
+Generic summary
+
+泛型根本作用，用于编译阶段，编译后的字节码不包含泛型中的类型信息。解决了ClassCastExecption这种异常的出现。泛型仅仅在编译时有效。类型被当做参数，编译后被Object替换。运行时JVM不知道泛型。
+
+使用泛型时，以下几种情况时错误的：
+1. 基本类型不能用于泛型
+   1. Test<int> t 是错误写法 => Test<Integer> t
+2. 不能通过类型参数创建对象
+   1. T elm = new T() 运行时，类型参数T会被替换为Object，无法创建T类型的对象，容易引起无解。Java中不支持这种写法

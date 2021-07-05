@@ -127,3 +127,94 @@ render()中的this是谁? MyComponent的实例对象，MyComponent组件实例�
       2. 箭头函数
 3. 状态数据 不能直接修改或者更新
 
+
+Props 传递参数
+1. class中调用 this.props.variablename
+2. function中调用 props.variablename
+
+
+Destructuring the props and state
+1. in function, destructuring in function variable <br> 
+    <img src="../imgs/des1.PNG"><br>
+2. destructuring in body<br>
+    <img src="../imgs/des2.PNG"><br>
+3.destructuring in class<br>
+    <img src="../imgs/des3class.PNG"><br>
+    <img src="../imgs/des4class.PNG"><br>
+ 
+
+
+click in Functional Components
+1. do not put () in {}
+   what should is as below
+
+        function FunctionClick() {
+            const fun = () => {
+                console.log("caonimalegebi")
+            }
+            return (
+                <div>
+                    <button onClick={fun}>
+                        func
+                    </button>
+                </div>
+            )
+        }
+2. 这两种写法都ok
+   <img src="../imgs/funclick.PNG"> 
+
+3. Class Component中写记得加上this example如下图
+    <img src="../imgs/classclick.PNG"> 
+
+
+Event binding in React
+
+    // write in class
+    mtheod 1-3
+    changeMsg() {
+        this.setState({
+            msg: "goodbye"
+        })
+    }
+    
+    method 4 in official tutorial
+    clickmsg = ()=>{
+        this.setState({msg:"bye"})
+    }
+* method 1
+
+        // write in render()
+        <button onClick={this.changeMsg.bind(this)}>click</button> 
+
+* method 2
+
+        // write in render()
+        <button onClick={this.changeMsg}>click</button> 
+
+* method 3 
+
+        // write in render()
+        <button onClick={()=>this.changeMsg()}>click</button>
+
+* method 4 
+
+        // write in render()
+        clickmsg = ()=>{this.setState({msg:"bye"})}       
+        
+
+What are the differencs between using binding adn arrow function???
+
+
+Passing Component to component
+
+setting parameters or props. In the image below, the function is passed as param. The *greetHandler* is functioned as param name, the param content or value is the function *this.greetparent*.
+
+<img src="../imgs/passpara.PNG">
+
+The image below is child component which is called to make a button and call the *greetparent* function. This component takes the parent component's input as event to be triggered and it will also insert *"KID"* to tell it from child component.
+
+<img src="../imgs/passkid.PNG"> 
+
+The flow of how this work can be described as below.
+
+<img src="../imgs/flow.PNG"> 

@@ -10,6 +10,8 @@ import EventBind from './components/EventBind';
 import ParentComponent from './components/ParentComponent';
 import Usergreeting from './components/Usergreeting';
 import Namelist from './components/Namelist';
+import StyleSheet from './components/StyleSheet';
+import Inline from './components/Inline';
 
 function App() {
   return (
@@ -28,7 +30,8 @@ function App() {
        */}
 
 
-      <Namelist />
+      <StyleSheet primary={true} />
+      <Inline />
 
       {/* <StateCounter /> */}
 

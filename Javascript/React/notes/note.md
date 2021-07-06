@@ -218,3 +218,45 @@ The image below is child component which is called to make a button and call the
 The flow of how this work can be described as below.
 
 <img src="../imgs/flow.PNG"> 
+
+
+**Lists and Keys**
+
+When rendering list, remember render the key too. The updates of data is based on the key attribute. Key is a must for react.
+1. A "key" is a special string attribute you need to linclude when creating lists of elements.
+2. Keys give the elements a stable identity
+3. Keys help react identify which items have been changed, added or removed
+4. Help in efficient update of user interface
+
+
+**Index as key**
+
+Problems: when using index as key, there will not have huge difference if we add some elemenmts at the tail. However, there might cause problems when insert at the head.
+
+**Example**
+
+<img src="../imgs/idxkey2.PNG"> 
+
+In the image above, we want to update the data by insert at the head. But when react read the data we want to insert, it compares the origin with current one we have, that is reusing the data. 
+
+As we human being, we might think the data should shift down if we add at the beginning. However, react will just reuse the data.
+
+In another word, the key and the value itself, do not have a strong relationship. This situation is more vivid when making the todo using this link (https://codepen.io/gopinav/pen/gQpepq).
+
+
+<img src="../imgs/idxkey.PNG"> 
+ 
+Index as key
+
+When to use index as a key?
+
+1. The items in your list do not have a unique id
+2. The list is static and will not chage
+3. The list will never be reordered or filtered
+
+
+
+Stying React Components
+1. CSS stylesheets
+2. inline stying
+3. CSS modules

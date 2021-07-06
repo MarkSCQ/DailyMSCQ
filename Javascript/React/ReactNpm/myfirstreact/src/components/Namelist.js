@@ -6,17 +6,22 @@ function Namelist() {
         {
             id: 1,
             name: "aaa",
-            age: 11
+            age: 11,
+            skill:'react'
         },
         {
             id: 2,
             name: "bbb",
-            age: 12
+            age: 12,
+            skill:'TypeScript'
+
         },
         {
             id: 3,
             name: "ccc",
-            age: 13
+            age: 13,
+            skill:'angular'
+
         },
     ]
 
@@ -29,8 +34,8 @@ function Namelist() {
     //     </ul>
     // ))
     //method 3 
-    const displayinfo2 = infos.map(x => (
-        <Person person={x} key={x.id} />
+    const displayinfo2 = infos.map((x,index) => (
+        <Person person={x} key={index} />
     ))
     return (
 

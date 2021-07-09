@@ -1,0 +1,62 @@
+[
+    {
+        "model": "testmodule.ChoiceQuestions",
+        "pk": 1,
+        "fields": {
+            "QuestionID": "ef0a23d5-ef36-4017-8392-89c2182b0459",
+            "QuestionContent": "Question 1 Content",
+            "ChoiceAnswer": "A",
+            "QuestionMark": 5
+        }
+    },
+    {
+        "model": "testmodule.ChoiceQuestions",
+        "pk": 2,
+        "fields": {
+            "QuestionID": "337e1457-c717-4250-a246-694d2b9ecf2b",
+            "QuestionContent": "Question 2 Content",
+            "ChoiceAnswer": "B",
+            "QuestionMark": 5
+        }
+    },
+    {
+        "model": "testmodule.ChoiceQuestions",
+        "pk": 3,
+        "fields": {
+            "QuestionID": "0ed72bf5-3eeb-44d5-9d17-8bce70b80291",
+            "QuestionContent": "Question 3 Content",
+            "ChoiceAnswer": "C",
+            "QuestionMark": 5
+        }
+    },
+    {
+        "model": "testmodule.ChoiceQuestions",
+        "pk": 4,
+        "fields": {
+            "QuestionID": "1e4a2ea0-c7ba-4621-b4a9-166bcb90ac4f",
+            "QuestionContent": "Question 4 Content",
+            "ChoiceAnswer": "B",
+            "QuestionMark": 5
+        }
+    },
+    {
+        "model": "testmodule.ChoiceQuestions",
+        "pk": 5,
+        "fields": {
+            "QuestionID": "366680e6-65b7-4879-81e0-eb8daa5ec4e0",
+            "QuestionContent": "Question 5 Content",
+            "ChoiceAnswer": "D",
+            "QuestionMark": 5
+        }
+    },
+    {
+        "model": "testmodule.ChoiceQuestions",
+        "pk": 6,
+        "fields": {
+            "QuestionID": "d0a406c3-7447-4af6-94a8-1757d7c50a9f",
+            "QuestionContent": "Question 6 Content",
+            "ChoiceAnswer": "D",
+            "QuestionMark": 5
+        }
+    }
+]

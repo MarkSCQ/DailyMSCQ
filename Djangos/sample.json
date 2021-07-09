@@ -1,0 +1,38 @@
+[
+    {
+        "SubjectUUID ": "52387ded-dc3d-48b1-8fe4-44b9cb638f35",
+        "SubjectID ": "201-1",
+        "SubjectName ": "Algorithm A",
+        "SubjectDescription ": "Algorithm A Description"
+    },
+    {
+        "SubjectUUID ": "e213450d-0287-4157-a6dc-9f3f7302bf96",
+        "SubjectID ": "201-2",
+        "SubjectName ": "Algorithm B",
+        "SubjectDescription ": "Algorithm B Description"
+    },
+    {
+        "SubjectUUID ": "ccbcb44e-60e2-4ecc-a5f8-74b21a55bfc0",
+        "SubjectID ": "202-1",
+        "SubjectName ": "Operating System A",
+        "SubjectDescription ": "Operating System A Description"
+    },
+    {
+        "SubjectUUID ": "445882cc-001f-490b-bf23-62853e31a6da",
+        "SubjectID ": "202-2",
+        "SubjectName ": "Operating System B",
+        "SubjectDescription ": "Operating System B Description"
+    },
+    {
+        "SubjectUUID ": "0f904770-dd39-462c-a700-33e237081345",
+        "SubjectID ": "203-1",
+        "SubjectName ": "Data Structure A",
+        "SubjectDescription ": "Data Structure A Description "
+    },
+    {
+        "SubjectUUID ": "8a8c7c61-8410-463a-af5d-ffaaa31254e8",
+        "SubjectID ": "203-2",
+        "SubjectName ": "Data Structure B",
+        "SubjectDescription ": "Data Structure B Description"
+    }
+]

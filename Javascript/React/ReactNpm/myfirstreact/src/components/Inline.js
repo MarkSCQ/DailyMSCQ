@@ -7,7 +7,7 @@ const heading = {
 }
 function Inline() {
     return (
-        <div>
+        <div> 
             <h1 style={heading}>inline</h1>
         </div>
     )

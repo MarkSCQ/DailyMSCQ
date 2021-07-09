@@ -260,3 +260,334 @@ Stying React Components
 1. CSS stylesheets
 2. inline stying
 3. CSS modules
+
+
+
+Mounting Lifecycle Methods 
+
+1. constructor(props)
+   1. A special functiont hat will get called whenever a new component is created
+   2. initializing state, binding the event handlers
+   3. what you should not do: do not cause side effects like http requests
+   4. super(props), directly overwrite this.state
+2. static getDerivedStateFromProps(props,state)
+   This is a rarely used lifecycle method
+   1. this mehtod is used when the state of components depends on the changes in props over time
+   2. this method is used to get the props and set the state
+   3. this method is static, so you cannot use this to call it 
+   4. what you should not do: do not cause side effects like http requests
+3. render()
+   1. only required method
+   2. read props and states and return jsx
+   3. what you should not do: do not change the state or interact with DOM or make ajax calls
+   4. The childern components lifecycle methods are also executed.
+4. componentDidMount()
+   
+    componentDidMount() is invoked immediately after a component is mounted (inserted into the tree). Initialization that requires DOM nodes should go here. If you need to load data from a remote endpoint, this is a good place to instantiate the network request.
+
+   1. This mehod will be invoked once of a given component and Invoked immediately after a component and all its children components have been rendered to the DOM
+   2. this mehthod is a good palce to perform initialization that reqiures DOM nodes and also load data by making network requests. The side effects: ex: interacting with dom and perfrom any ajax calls to load data
+
+
+Updating lifecyclye methods
+1. static getDerivedStateFromProps(props,state)
+    * return null or an object to represent the updated state of the component. Method is called every time a component is re-rendered. 
+    * this method is used when the states depends on the props of the component
+    * you should not cause any side effect and get odd state from props 
+    * rarely used
+2. shouldComponentUpdate(nextProps, nextState) 
+   * Dictates if the component should re-render or not
+   * by defalut, all class components will render whenever the propos or their state changes
+   * This method can prevent that defalut behavior by return false
+   * Performance Optimization
+   * Should not cause side effects like http requests
+3. render()
+   1. only required method
+   2. read props and states and return jsx
+   3. what you should not do: do not change the state or interact with DOM or make ajax calls
+   4. The childern components lifecycle methods are also executed.
+4. getSnapshotBeforeUpdate(prevProps,prevState)
+   1. called right before the changes from the virtual DOM are to be relected in the DOM
+   2. rarely used
+   3. used to capture information of DOM
+   4. This method will either return null or return a value. Returned value will be passed as the third parameter to the next method.  
+5. componentDidUpdate(prevProps,prevSate,snapshot)
+   
+   componentDidUpdate() is invoked immediately after updating occurs. This method is not called for the initial render.
+
+   1. called after the render is finished in the re-render cycles
+   2. this method is garanteed to be called only once in each rerender cycle 
+   3. make ajax calles 
+
+
+
+
+shouldComponentUpdate(nextProps, nextState) 
+   * Dictates if the component should re-render or not
+   * by defalut, all class components will render whenever the propos or their state changes
+   * This method can prevent that defalut behavior by return false
+   * Performance Optimization
+   * Should not cause side effects like http requests
+
+<img src="../imgs/rp.PNG"> 
+ 
+
+ <img src="../imgs/sc.PNG"> 
+ <img src="../imgs/pc1.PNG"> 
+
+always rerender an new object or array when using purecomponent
+
+Summary for the PureComponent
+1. We can create a component by extending the PureComponent Class
+2. A PureComponent implements the shouldComponentUpdate lifecycle method by performing a shallow comparison on the props and state of the component
+3. if there is no difference, the component is not re-rendered - performance boost
+4. its a good idea to ensure that all the children components are also pure to avoid unexpected behaviors.
+5. Never mutate the state. Always return a new object that reflects the new state
+
+
+
+Fragments, wrap the contenst without using <> or \<div\>. 
+div cannot hold some special contents like table td contents
+
+PureComponents will only rerender the class components when there is a difference in shallow comparison of props and states. it uses shouldComponentUpdate with shallow prop and state comparison.
+
+Shallow comparion can be understood as value compariosn instead of reference comparison
+
+memo components is the purecomponents for the functional components
+
+
+Ref forwarding is a technique for automatically passing a ref through a component to one of its children. 
+
+
+// Ref a method to access dom node
+
+
+Ref forwarding  用于在父组件中操作子组件中的dom节点
+
+
+组件内的标签可以定义ref属性来标志自己
+
+the tag inside the component can be tracked by using ref
+
+
+Three types of writing refs
+1. string refs 
+   1. ref="xxx"
+2. function refs.
+   在下图实例中，ref的回调函数输出的值是当前input tag，a就是当前ref所在节点。a作为当前ref所在节点，赋值给了demo实例的input1属性
+   <img src="../imgs/functionref.PNG"> 
+
+            class NonStringRef extends Component {
+            clickhandler = () => {
+                console.log("@")
+                console.log(this)
+            }
+            showdata1 = () => {
+                const { input1 } = this
+                alert(input1.value)
+            }
+
+            showdata2 = () => {
+                const { input2 } = this
+                alert(input2.value)
+            }
+            render() {
+                return (
+                    <div>
+                        <input ref={currentNode => { this.input1 = currentNode }} type="text" placeholder="focus and display data" />&nbsp;
+                        <button onClick={this.showdata1}>click</button> &nbsp;
+                        <input ref={currentNode => { this.input2 = currentNode }} onBlur={this.showdata2} type="text" placeholder="los focus and display data" /> &nbsp;
+                    </div>
+                )
+            }
+        }
+    
+    回调式函数 ref，callback ref。回调式ref会执行两次当更新的时候。
+
+        官方说法：
+        If the ref callback is defined as an inline function, it will get called twice during updates, first with null and then again with the DOM element. This is because a new instance of the function is created with each render, so React needs to clear the old ref and set up the new one. You can avoid this by defining the ref callback as a bound method on the class, but note that it shouldn’t matter in most cases.
+
+    解释和例子
+    下方的代码例子是点击改变成hot或者cold。第一次页面正常渲染，实例对象被render调用然后渲染到页面。但是第二次使用的时候，会替换掉之前的ref，更新一个新的ref，所以会额外产生一个null。这种不明显的错误绝大部分时间不会产生致命的影响。
+
+        class FuncRef extends Component {
+
+            state = { isHot: true }
+
+            showInfo = () => {
+                const { input1 } = this
+                alert(input1.value)
+            }
+
+            changeWeather = () => {
+                this.setState({ isHot: !this.state.isHot })
+            }
+            render() {
+                return (
+                    <div>
+                        <h1 onClick={this.changeWeather}>Today is {this.state.isHot ? "hot" : "cold"}</h1>
+                        <input ref={(currentNode) => { this.input1 = currentNode; console.log("@", currentNode) }} type="text" />&nbsp;
+                        <button onClick={this.showInfo} >click</button> &nbsp;
+                    </div>
+                )
+            }
+        }
+
+        export default FuncRef
+
+    针对额外产生的null，在使用callback function时，解决办法就是把写在tag中的内联函数写到外头去，以下为示例
+
+        class NonStringRef extends Component {
+            clickhandler = () => {
+                console.log("@")
+                console.log(this)
+            }
+            showdata1 = () => {
+                const { input1 } = this
+                alert(input1.value)
+            }
+
+            showdata2 = () => {
+                const { input2 } = this
+                alert(input2.value)
+            }
+            render() {
+                return (
+                    <div>
+                        <input ref={currentNode => { this.input1 = currentNode }} type="text" placeholder="focus and display data" />&nbsp;
+                        <button onClick={this.showdata1}>click</button> &nbsp;
+                        <input ref={currentNode => { this.input2 = currentNode }} onBlur={this.showdata2} type="text" placeholder="los focus and display data" /> &nbsp;
+                    </div>
+                )
+            }
+        }
+
+        export default NonStringRef
+
+
+3. create ref
+
+    会用 React.createRef()相对于回调函数 callback的方式略嫌麻烦，需要几个ref就得create几个ref。这是react官方最推荐的 ref书写形式。没有之一。
+
+        class RefCreateRef extends Component {
+            // React.createRef() 调用后可以返回一个容器，该容器可以存储被ref表示的节点，该容器“专人专用”。只能存一个。多次反复存储会产生覆盖。
+            myRef = React.createRef();
+            myRef2 = React.createRef();
+
+            showData = () => {
+                // current is fixed current是固定的属性 不能更改
+                // console.log(this.myRef.current.value)
+                // const { input1 } = this
+                alert(this.myRef.current.value)
+            }
+            showData2 = () => {
+                // const { input2 } = this
+                // alert(input2.value)
+                alert(this.myRef.current.value)
+            }
+
+            render() {
+                return (
+                    <div>
+                        {/* input is storeed in myRef */}
+                        <input ref={this.myRef} type="text" /> &nbsp;
+
+                        <button onClick={this.showData} >click</button> &nbsp;
+
+                        <input onBlur={this.showData2} ref={this.myRef2} type="text" />
+
+                    </div>
+                )
+            }
+        }
+
+        export default RefCreateRef
+
+Ref summary
+1. 字符串ref 尽量避免ref 除非条件不允许
+2. 回调式 callback
+3. createRef()
+
+Call back 常用 23都是ok的。
+
+
+事件
+1. 通过onXXXX属性指定的事件处理函数
+   1. Reack使用的是自定义事件，而不是原生DOM事件，这是为了更好的兼容性
+   2. React中的事件是通过事件委托的方式处理（委托了给了最外层元素），这是为了高效。
+2. 通过event.target得到发生事件的DOM元素对象 react官方提示，不要过分使用ref
+
+
+
+Controlled Component
+页面中所有输入类的DOM，随着输入可以把值维护到state中，等需要使用时，将值从state中取出 这就是受控组件。Controlled component
+
+
+Un-Controlled Componnet
+随用随取
+
+
+官方说法
+
+        Uncontrolled Components
+
+        In most cases, we recommend using controlled components to implement forms. In a controlled component, form data is handled by a React component. The alternative is uncontrolled components, where form data is handled by the DOM itself.
+
+
+        Controlled Components
+        In HTML, form elements such as <input>, <textarea>, and <select> typically maintain their own state and update it based on user input. In React, mutable state is typically kept in the state property of components, and only updated with setState().
+
+        We can combine the two by making the React state be the “single source of truth”. Then the React component that renders a form also controls what happens in that form on subsequent user input. An input form element whose value is controlled by React in this way is called a “controlled component”.
+
+
+
+下面一段代码想要达到的目的是 1.输入uname passwd;2. 存入state中
+<img src="../imgs/currying1.PNG"> 
+
+分析：
+1. 有两种存储input data到state中的方法 一个是每一个input写一个setState，另一个是利用currying
+2. 第一种方法 每一个input写一个setState，虽然效果区别不大，但是很麻烦。如下所列，passwd，uname需要个写一个。如果是普通的登录倒还好，如果是注册需要填写大量数据，那这种方法就很笨拙
+
+        saveUname = (event) => {
+            this.setState({ username: event.target.value })
+        }
+
+        savePasswd = (event) => {
+            this.setState({ password: event.target.value })
+        }
+
+3. 利用 function currying 可以将多个save setState合为一个。上图的一些细节问题
+   1. onChange 需要的是一个函数 而不是函数返回值
+   2. 利用currying，返回的将会是一个function而不是一个value，所以通过使用currying的方式写函(return)可以实现目的
+   3. 上图中saveData()中的data，这个data在传值的时候扮演的是一个string的角色，也就是说我们如果setState中写的data，不会对应为password或者username，他将会被创建为一个新的字段data。所以这里不能直接写一个data上去，需要在data外头加上[]进行包裹
+4. 但是，通过对于onChange的分析，我们可以得出一个结论，即onChange需要的是一个函数而不是一个值。arrow function 箭头函数就可以被纳入考虑。如下面代码块所示，将onChange的函数写成arrow function也可以达到目标。并且此时不需要currying
+
+        saveData2 = (data, value) => {
+            this.setState({ [data]: value })
+        }
+
+        uname <input type="text" name="username" onChange={(event) => this.saveData2("username", event.target.value)} /> <br />
+
+
+高阶函数：如果一个函数符合下面两个规范中的任何一个，那么他就是高阶函数
+1. 若函数A，接收的参数是一个函数，那么A就可以称之为高阶函数
+2. 若函数A，调用的返回值依旧是一个函数，那么A就可以称之为高阶函数
+3. 常见的高阶函数 Promise SetTimeout array.map
+
+函数currying 通过函数调用继续返回函数的方式，实现多次接收参数后统一处理的函数编码形式
+
+        一个简单的currying
+
+        function sum(a){
+            return (b)=>{
+                return (c)=>{
+                    return a+b+c
+                }
+            }
+        }
+
+        sum(1)(2)(3)
+
+
+
+组件生命周期

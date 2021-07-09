@@ -12,6 +12,23 @@ import Usergreeting from './components/Usergreeting';
 import Namelist from './components/Namelist';
 import StyleSheet from './components/StyleSheet';
 import Inline from './components/Inline';
+import Form from './components/Form';
+import Form2 from './components/Form2';
+import Lc from './components/Lc';
+import FragmentReact from './components/FragmentReact';
+import Table from './components/Table';
+import ParentComp from './components/ParentComp';
+import RefsDemo from './components/RefsDemo';
+import FocusInput from './components/FocusInput';
+import RFParentInput from './components/RFParentInput';
+import NonStringRef from './components/NonStringRef';
+import FuncRef from './components/FuncRef';
+import RefCreateRef from './components/RefCreateRef';
+import ReactEventHandle from './components/ReactEventHandle';
+import NonControlledComponent from './components/NonControlledComponent';
+import ControlledComponent from './components/ControlledComponent';
+import Curring from './components/Curring';
+
 
 function App() {
   return (
@@ -31,7 +48,7 @@ function App() {
 
 
       <StyleSheet primary={true} />
-      <Inline />
+      <Curring />
 
       {/* <StateCounter /> */}
 

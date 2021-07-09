@@ -9,21 +9,16 @@ from django.contrib.auth.admin import UserAdmin
 
 class Profile_Admin(UserAdmin):
     list_display = ("username", )
-    # add_fieldsets = (
-    #     (None, {
-    #         'fields': ('identification'), }
-    #      ),
+    ordering = ("username",)
 
-    # )
-
-    fieldsets = UserAdmin.fieldsets + (
-        (None, {'fields': ('idcode', 'identification',)}),
-
-    )
+    def cancel_orders(self, request, queryset):
+        queryset.update(order_status=Subject.CANCELLED)
+    cancel_orders.short_description = "Mark selected orders as cancelled"
 
 
-class Subject_Admin(models.Model):
-    list_display = ("SubjectName", "SubjectID", "SubjectDescriptio",)
+
+class Subject_Admin(admin.ModelAdmin):
+    list_display = ("SubjectName", "SubjectID",)
     ordering = ("SubjectName",)
     actions = ['cancel_orders', ]
 
@@ -32,8 +27,8 @@ class Subject_Admin(models.Model):
     cancel_orders.short_description = "Mark selected orders as cancelled"
 
 
-class Course_Admin(models.Model):
-    list_display = ("CourseID", "CousrseName", "CourseSubject",
+class Course_Admin(admin.ModelAdmin):
+    list_display = ("CourseID", "CourseeName", "CourseSubject",
                     "CourseTimeStart", "CourseTimeEnd",)
     ordering = ("CourseID",)
     actions = ['cancel_orders', ]
@@ -43,7 +38,7 @@ class Course_Admin(models.Model):
     cancel_orders.short_description = "Mark selected orders as cancelled"
 
 
-class Teacher_Admin(models.Model):
+class Teacher_Admin(admin.ModelAdmin):
     list_display = ("idcode", "TeacherBaseInfo", "identification",)
     ordering = ("idcode",)
     actions = ['cancel_orders', ]
@@ -53,7 +48,7 @@ class Teacher_Admin(models.Model):
     cancel_orders.short_description = "Mark selected orders as cancelled"
 
 
-class Student_Admin(models.Model):
+class Student_Admin(admin.ModelAdmin):
     list_display = ("idcode", "StudentBaseInfo", "identification",)
     ordering = ("idcode",)
     actions = ['cancel_orders', ]
@@ -63,7 +58,7 @@ class Student_Admin(models.Model):
     cancel_orders.short_description = "Mark selected orders as cancelled"
 
 
-class CourseTaken_Admin(models.Model):
+class CourseTaken_Admin(admin.ModelAdmin):
     list_display = ("Student", "Crouse", "TestTimeStart", "TestTimeEnd",)
     ordering = ("Student",)
     actions = ['cancel_orders', ]
@@ -73,7 +68,7 @@ class CourseTaken_Admin(models.Model):
     cancel_orders.short_description = "Mark selected orders as cancelled"
 
 
-class ChoiceQuestions_Admin(models.Model):
+class ChoiceQuestions_Admin(admin.ModelAdmin):
     list_display = ("QuestionContent", "ChoiceAnswer", "QuestionMark",)
     ordering = ("QuestionContent",)
     actions = ['cancel_orders', ]
@@ -83,7 +78,7 @@ class ChoiceQuestions_Admin(models.Model):
     cancel_orders.short_description = "Mark selected orders as cancelled"
 
 
-class Choices_Admin(models.Model):
+class Choices_Admin(admin.ModelAdmin):
     list_display = ("ChoiceQues", "ChoiceCorrect",)
     ordering = ("ChoiceQues",)
     actions = ['cancel_orders', ]
@@ -93,7 +88,7 @@ class Choices_Admin(models.Model):
     cancel_orders.short_description = "Mark selected orders as cancelled"
 
 
-class FillQuestions_Admin(models.Model):
+class FillQuestions_Admin(admin.ModelAdmin):
     list_display = ("QuestionContent", "QuestionMark",)
     ordering = ("QuestionContent",)
     actions = ['cancel_orders', ]
@@ -103,7 +98,7 @@ class FillQuestions_Admin(models.Model):
     cancel_orders.short_description = "Mark selected orders as cancelled"
 
 
-class TextQuestions_Admin(models.Model):
+class TextQuestions_Admin(admin.ModelAdmin):
     list_display = ("QuestionContent", "QuestionMark",)
     ordering = ("QuestionContent",)
     actions = ['cancel_orders', ]
@@ -113,7 +108,7 @@ class TextQuestions_Admin(models.Model):
     cancel_orders.short_description = "Mark selected orders as cancelled"
 
 
-class TestInfo_Admin(models.Model):
+class TestInfo_Admin(admin.ModelAdmin):
     list_display = ("TestID", "TestCourse", "TestSubject",
                     "TestTimeStart", "TestTimeEnd",)
     ordering = ("TestID",)
@@ -124,7 +119,7 @@ class TestInfo_Admin(models.Model):
     cancel_orders.short_description = "Mark selected orders as cancelled"
 
 
-class TestContent_Admin(models.Model):
+class TestContent_Admin(admin.ModelAdmin):
     list_display = ("TestID",)
     ordering = ("TestID",)
     actions = ['cancel_orders', ]
@@ -134,7 +129,7 @@ class TestContent_Admin(models.Model):
     cancel_orders.short_description = "Mark selected orders as cancelled"
 
 
-class ChoiceQues_StudentAnswer_Admin(models.Model):
+class ChoiceQues_StudentAnswer_Admin(admin.ModelAdmin):
     list_display = ("TestID", "ChoiceQues", "ChoiceAns",)
     ordering = ("TestID",)
     actions = ['cancel_orders', ]
@@ -144,7 +139,7 @@ class ChoiceQues_StudentAnswer_Admin(models.Model):
     cancel_orders.short_description = "Mark selected orders as cancelled"
 
 
-class FillQues_StudentAnswer_Admin(models.Model):
+class FillQues_StudentAnswer_Admin(admin.ModelAdmin):
     list_display = ("TestID", "FilleQues",)
     ordering = ("TestID",)
     actions = ['cancel_orders', ]
@@ -154,7 +149,7 @@ class FillQues_StudentAnswer_Admin(models.Model):
     cancel_orders.short_description = "Mark selected orders as cancelled"
 
 
-class TextQues_StudentAnswer_Admin(models.Model):
+class TextQues_StudentAnswer_Admin(admin.ModelAdmin):
     list_display = ("TestID", "TextQues",)
     ordering = ("TestID",)
     actions = ['cancel_orders', ]
@@ -164,9 +159,9 @@ class TextQues_StudentAnswer_Admin(models.Model):
     cancel_orders.short_description = "Mark selected orders as cancelled"
 
 
-class StudentAnswers_Admin(models.Model):
+class StudentAnswers_Admin(admin.ModelAdmin):
     list_display = ("StudentID", "Test",)
-    ordering = ("TestID",)
+    ordering = ("StudentID",)
     actions = ['cancel_orders', ]
 
     def cancel_orders(self, request, queryset):
@@ -174,8 +169,8 @@ class StudentAnswers_Admin(models.Model):
     cancel_orders.short_description = "Mark selected orders as cancelled"
 
 
-class Grades_Admin(models.Model):
-    list_display = ("TestID", "TextQues",)
+class Grades_Admin(admin.ModelAdmin):
+    list_display = ("TestID", "StudentID",)
     ordering = ("TestID",)
     actions = ['cancel_orders', ]
 
@@ -185,21 +180,19 @@ class Grades_Admin(models.Model):
 # list_display = ('username', 'email', 'first_name', 'last_name', 'is_staff', 'is_active')
 
 
-
-
 admin.site.register(Profile, Profile_Admin)
 
-# admin.site.register(Subject, Subject_Admin)
-# admin.site.register(Course, Course_Admin)
-# admin.site.register(Teacher, Teacher_Admin)
-# admin.site.register(Student, Student_Admin)
-# admin.site.register(Profile, CourseTaken_Admin)
-# admin.site.register(Profile, ChoiceQuestions_Admin)
-# admin.site.register(Profile, FillQuestions_Admin)
-# admin.site.register(Profile, TextQuestions_Admin)
-# admin.site.register(Profile, TestContent_Admin)
-# admin.site.register(Profile, ChoiceQues_StudentAnswer_Admin)
-# admin.site.register(Profile, FillQues_StudentAnswer_Admin)
-# admin.site.register(Profile, TextQues_StudentAnswer_Admin)
-# admin.site.register(Profile, StudentAnswers_Admin)
-# admin.site.register(Profile, Grades_Admin)
+admin.site.register(Subject, Subject_Admin)
+admin.site.register(Course, Course_Admin)
+admin.site.register(Teacher, Teacher_Admin)
+admin.site.register(Student, Student_Admin)
+admin.site.register(CourseTaken, CourseTaken_Admin)
+admin.site.register(ChoiceQuestions, ChoiceQuestions_Admin)
+admin.site.register(FillQuestions, FillQuestions_Admin)
+admin.site.register(TextQuestions, TextQuestions_Admin)
+admin.site.register(TestContent, TestContent_Admin)
+admin.site.register(ChoiceQues_StudentAnswer, ChoiceQues_StudentAnswer_Admin)
+admin.site.register(FillQues_StudentAnswer, FillQues_StudentAnswer_Admin)
+admin.site.register(TextQues_StudentAnswer, TextQues_StudentAnswer_Admin)
+admin.site.register(StudentAnswers, StudentAnswers_Admin)
+admin.site.register(Grades, Grades_Admin)

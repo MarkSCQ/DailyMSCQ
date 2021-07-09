@@ -1172,3 +1172,7 @@ Generic summary
    1. Test<int> t 是错误写法 => Test<Integer> t
 2. 不能通过类型参数创建对象
    1. T elm = new T() 运行时，类型参数T会被替换为Object，无法创建T类型的对象，容易引起无解。Java中不支持这种写法
+
+
+
+

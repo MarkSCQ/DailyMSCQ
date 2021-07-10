@@ -591,3 +591,48 @@ Un-Controlled Componnet
 
 
 组件生命周期
+
+
+Mount: 第一次被render到page上
+Unmount: 组件被移除成为unmount
+
+
+
+Render 调用的次数1+n。第一次渲染 render到页面，后面没更新一次state就需要render一次
+
+
+
+在关键点调用特殊函数完成特殊的任务。生命周期回调（钩子）（函数），react会帮你调。
+
+componentDidMount()
+
+componnetWillUnmount()
+
+
+
+
+
+关于生命周期
+1. 组件从创建到死亡会经历一些特定的阶段
+2. React组建中包换一系列钩子函数（生命周期回调函数），会在特定时间点调用
+3. 在定义组件时，会在特定的生命周期回调函数中做特定的工作
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

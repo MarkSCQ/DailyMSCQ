@@ -28,6 +28,8 @@ import ReactEventHandle from './components/ReactEventHandle';
 import NonControlledComponent from './components/NonControlledComponent';
 import ControlledComponent from './components/ControlledComponent';
 import Curring from './components/Curring';
+import ReactLifeCycle from './components/ReactLifeCycle';
+import Lifecycle2 from './components/Lifecycle2';
 
 
 function App() {
@@ -46,9 +48,8 @@ function App() {
       <EventBind />
        */}
 
-
       <StyleSheet primary={true} />
-      <Curring />
+      <Lifecycle2 />
 
       {/* <StateCounter /> */}
 

@@ -93,11 +93,33 @@ class Teacher(models.Model):
     idcode = models.CharField(
         verbose_name='ID Code', max_length=20, default="")
 
+    # courseTaught = models.ForeignKey(
+    #     Course, blank=True, null=True, on_delete=models.SET_NULL, verbose_name="Course")
+
     def __str__(self):
         return self.TeacherBaseInfo.username
 
     class Meta:
         verbose_name = "Teacher"
+        verbose_name_plural = verbose_name
+
+
+class CourseTaught(models.Model):
+    Teacher = models.ForeignKey(
+        Teacher, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Student Name')
+    Crouse = models.ForeignKey(
+        Course,  on_delete=models.SET_NULL, null=True, blank=True, verbose_name="Course Name")
+
+    TestTimeStart = models.DateTimeField(
+        verbose_name="Start Time", default=None, null=True, blank=True)
+    TestTimeEnd = models.DateTimeField(
+        verbose_name="End Time", default=None, null=True, blank=True)
+
+    def __str__(self):
+        return self.Student.StudentBaseInfo.username
+
+    class Meta:
+        verbose_name = "Course Taken"
         verbose_name_plural = verbose_name
 
 
@@ -110,7 +132,7 @@ class Student(models.Model):
         verbose_name='ID Code', max_length=20, default="")
 
     def __str__(self):
-        return self.StudentBaseInfo.username
+        return self.TeacherBaseInfo.username
 
     class Meta:
         verbose_name = "Student"

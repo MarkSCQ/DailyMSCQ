@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>
+
+    </title>
+
+</head>
+
+<body>
+    <div id="title"></div>
+    <script type="text/javascript" src="../react.development.js"></script>
+    <script type="text/javascript" src="../react-dom.development.js"></script>
+    <script type="text/javascript" src="../babel.min.js"></script>
+
+
+    <script type="text/babel">
+
+
+
+        class LifeCycle extends React.Component {
+
+            state = { opacity: 1 }
+            death = () => {
+                const getdom = document.getElementById("title")
+                console.log(getdom)
+                ReactDOM.unmountComponentAtNode(document.getElementById("title"));
+            }
+
+            // 组件挂在完毕
+            componentDidMount() {
+                this.timer = setInterval(() => {
+                    let { opacity } = this.state
+
+                    opacity -= 0.1
+
+                    if (opacity <= 0) {
+                        opacity = 1
+                    }
+                    this.setState({ opacity })
+
+                }, 200);
+            }
+            // 组件将要卸载
+            componentWillUnmount() {
+                clearInterval(this.timer)
+
+            }
+            render() {
+                return (
+                    <div >
+                        <div>
+                            <h2 style={{ opacity: this.state.opacity }}>老子学不会</h2>
+                        </div>
+                        <button onClick={this.death}>嗝屁</button>
+                    </div>
+                )
+            }
+        }
+
+
+        ReactDOM.render(<LifeCycle />, document.getElementById("title"))
+
+
+
+    </script>
+</body>
+
+</html>

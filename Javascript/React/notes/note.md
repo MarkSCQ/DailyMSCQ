@@ -619,15 +619,73 @@ componnetWillUnmount()
 
 
 
+LifeCyclye
 
 
 
+强制更新，forceUpdate()，不受到shouldComponentUpdate()限制
 
 
 
+旧生命周期总结
+1. 初始化阶段：由ReactDOM.render触发，初次渲染
+   1. constructor()
+   2. componentWillMount()
+   3. render()
+   4. componnetDidMount()==>常用 一般在这个钩子中做一些初始化的事儿。例如开启定时器，发送网络请求，订阅请求
+2. 更新阶段：由组件内部this.setState或父组件render触发（强制更新，forceUpdate，234）
+   1. shouldComponentUpdate()
+   2. componentWillUpdate()
+   3. render()
+   4. componentDidUpdate()
+3. 卸载组件:由ReactDOM.unmountComponnetAtNode()触发
+   1. componentWillUnmount() ===> 常用。一般在这个钩子中做一些收尾工作，例如 关闭定时器，取消订阅消息
+
+
+<img src="../imgs/react生命周期(旧).png"> 
+
+
+新版本lifecycle中名称更新，除了willunmount,其他的will都要加上UNSAFE_
+* UNSAFE_componentWillMount()
+* UNSAFE_componentWillReceiveProps()
+* UNSAFE_componentWillUpdate()
+
+<img src="../imgs/react生命周期(新).png"> 
 
 
 
+getDerivedStateFromProps() 从props中得到一个衍生的状态。这个函数有两个参数 一个props一个state
+一旦使用这个函数，那么state将无法做出更新。从上图新的生命周期中可以看出，getDerivedStateFromProps在中间截断，也就是说无论是mount亦或者update，如果getDerivedStateFromProps存在且有了赋值效果，那么state都无法被更新。使用场景和概率极低。
+
+适用场景，state的值完全基于props。官网说明：
+*This method exists for rare use cases where the state depends on changes in props over time. For example, it might be handy for implementing a <Transition> component that compares its previous and next children to decide which of them to animate in and out.*
+
+这个方法不是必须使用，因为通过constructor也可以得到props
+
+
+
+getSnapshotBeforeUpdate() 更新之前获取快照
+
+
+中文说明 在最近一次渲染输出（提交到DOM节点）之前调用。他使得组件能再发生更改之前从DOM中捕获一些信息。此生命周期的任何返回值将作为参数传递给componentDidUpdate（）
+
+此方法使用场景并不常见  
+
+
+新生命周期 总结
+1. 初始化阶段，由ReactDOM.render触发，初次渲染
+   1. constructor()
+   2. getDerivedStateFromProps()
+   3. render()
+   4. componnetDidMount()==>常用 一般在这个钩子中做一些初始化的事儿。例如开启定时器，发送网络请求，订阅请求
+2. 更新阶段，由组件内部this.setState()或父组件重新render触发
+   1. getDerivedStateFromProps()
+   2. shouldComponentUpdate()
+   3. render()
+   4. getSanpshotBeforeUpdate
+   5. componentDidUpdate()
+3. 卸载组件，由ReactDOM.unmountComponentAtNode()触发
+   1. componentWillUnmount() ===> 常用。一般在这个钩子中做一些收尾工作，例如 关闭定时器，取消订阅消息
 
 
 

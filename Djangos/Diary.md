@@ -34,4 +34,3 @@ Make Mirgration and Migrate；
             class Meta:
                 verbose_name = "User Profile"
                 verbose_name_plural = verbose_name
-3. if 

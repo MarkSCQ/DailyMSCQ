@@ -30,6 +30,8 @@ import ControlledComponent from './components/ControlledComponent';
 import Curring from './components/Curring';
 import ReactLifeCycle from './components/ReactLifeCycle';
 import Lifecycle2 from './components/Lifecycle2';
+import Lifecycle3 from './components/Lifecycle3';
+import News from './components/News';
 
 
 function App() {
@@ -49,8 +51,7 @@ function App() {
        */}
 
       <StyleSheet primary={true} />
-      <Lifecycle2 />
-
+ 
       {/* <StateCounter /> */}
 
 

@@ -1,0 +1,7 @@
+wait()
+
+notify()
+
+notifyall()
+
+synchronized

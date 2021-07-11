@@ -58,14 +58,16 @@ class Course(models.Model):
         verbose_name='Course ID', max_length=20,  default="")
     CourseSubject = models.ForeignKey(
         Subject, verbose_name='Course Subject', null=True, on_delete=models.SET_NULL, blank=True)
-    CourseeName = models.CharField(
+    CourseName = models.CharField(
         verbose_name="Course Name", max_length=100,  default="")
-    CourseTimeStart = models.DateTimeField(verbose_name="Start Date")
-    CourseTimeEnd = models.DateTimeField(verbose_name="End Date")
+    CourseTimeStart = models.DateTimeField(
+        verbose_name="Start Date", default=None, null=True, blank=True)
+    CourseTimeEnd = models.DateTimeField(
+        verbose_name="End Date", default=None, null=True, blank=True)
     CourseDescription = models.TextField(verbose_name="Course Description")
 
     def __str__(self):
-        return self.CousrseName
+        return self.CourseName
 
     class Meta:
         verbose_name = "Course"
@@ -221,7 +223,7 @@ class FillQuestions(models.Model):
         verbose_name='Question Answer', max_length=20,  default="")
     QuestionMark = models.IntegerField(verbose_name="Mark")
 
-    FillExplanation = models.TextField(
+    QuestionExplanation = models.TextField(
         default="Explanation is ...", verbose_name="Fill Explanation")
 
     def __str__(self):
@@ -373,7 +375,7 @@ class Grades(models.Model):
     DoneState = models.CharField(
         max_length=20, choices=DONE_STATE, default="UNFINISHED", verbose_name="Done State")
     GradeDate = models.DateTimeField(
-        null=True, blank=True, default=timezone.now)
+        null=True, blank=True, verbose_name="Grade Date")
     Course = models.ForeignKey(
         Course, null=True, on_delete=models.SET_NULL,  verbose_name="Course")
 

@@ -28,7 +28,7 @@ class Subject_Admin(admin.ModelAdmin):
 
 
 class Course_Admin(admin.ModelAdmin):
-    list_display = ("CourseID", "CourseeName", "CourseSubject",
+    list_display = ("CourseID", "CourseName", "CourseSubject",
                     "CourseTimeStart", "CourseTimeEnd",)
     ordering = ("CourseID",)
     actions = ['cancel_orders', ]

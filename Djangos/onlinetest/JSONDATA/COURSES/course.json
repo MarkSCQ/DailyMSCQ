@@ -1,0 +1,86 @@
+[
+    {
+        "model": "testmodule.Course",
+        "pk": 1,
+        "fields": {
+            "CourseUUID": "ef0a23d5-ef36-4017-8392-89c2182b0459",
+            "CourseID": "CS201-1",
+            "CourseSubject": "52387ded-dc3d-48b1-8fe4-44b9cb638f35",
+            "CourseName": "Algorithm A",
+            "CourseTimeStart": "2021-09-10 08:00",
+            "CourseTimeEnd": "2021-12-10 08:00",
+            "CourseDescription": "Algorithm A"
+        }
+    },
+    {
+        "model": "testmodule.Course",
+        "pk": 2,
+        "fields": {
+            "CourseUUID": "337e1457-c717-4250-a246-694d2b9ecf2b",
+            "CourseID": "CS201-2",
+            "CourseSubject": "e213450d-0287-4157-a6dc-9f3f7302bf96",
+            "CourseName": "Algorithm B",
+            "CourseTimeStart": "2021-09-10 08:00",
+            "CourseTimeEnd": "2021-12-10 08:00",
+            "CourseDescription": "Algorithm B"
+        }
+    },
+    {
+        "model": "testmodule.Course",
+        "pk": 3,
+        "fields": {
+            "CourseUUID": "0ed72bf5-3eeb-44d5-9d17-8bce70b80291",
+            "CourseID": "CS202-1",
+            "CourseSubject": "ccbcb44e-60e2-4ecc-a5f8-74b21a55bfc0",
+            "CourseName": "Operating System A",
+            "CourseTimeStart": "2021-09-10 08:00",
+            "CourseTimeEnd": "2021-12-10 08:00",
+            "CourseDescription": "Operating System A"
+        }
+    },
+    {
+        "model": "testmodule.Course",
+        "pk": 4,
+        "fields": {
+            "CourseUUID": "1e4a2ea0-c7ba-4621-b4a9-166bcb90ac4f",
+            "CourseID": "CS202-2",
+            "CourseSubject": "445882cc-001f-490b-bf23-62853e31a6da",
+            "CourseName": "Operating System B",
+            "CourseTimeStart": "2021-09-10 08:00",
+            "CourseTimeEnd": "2021-12-10 08:00",
+            "CourseDescription": "Operating System B"
+        }
+    },
+    {
+        "model": "testmodule.Course",
+        "pk": 5,
+        "fields": {
+            "CourseUUID": "366680e6-65b7-4879-81e0-eb8daa5ec4e0",
+            "CourseID": "CS203-1",
+            "CourseSubject": "0f904770-dd39-462c-a700-33e237081345",
+            "CourseName": "Data Structure A",
+            "CourseTimeStart": "2021-09-10 08:00",
+            "CourseTimeEnd": "2021-12-10 08:00",
+            "CourseDescription": "Data Structure A"
+        }
+    },
+    {
+        "model": "testmodule.Course",
+        "pk": 6,
+        "fields": {
+            "CourseUUID": "d0a406c3-7447-4af6-94a8-1757d7c50a9f",
+            "CourseID": "CS203-2",
+            "CourseSubject": "8a8c7c61-8410-463a-af5d-ffaaa31254e8",
+            "CourseName": "Data Structure B",
+            "CourseTimeStart": "2021-09-10 08:00",
+            "CourseTimeEnd": "2021-12-10 08:00",
+            "CourseDescription": "Data Structure B"
+        }
+    }
+]
+
+
+
+
+
+

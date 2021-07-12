@@ -688,6 +688,63 @@ getSnapshotBeforeUpdate() 更新之前获取快照
    1. componentWillUnmount() ===> 常用。一般在这个钩子中做一些收尾工作，例如 关闭定时器，取消订阅消息
 
 
+经典面试题
+1. react/vue 中的key有什么作用？Key的内部原理是什么
+2. 为什么遍历列表式，key最好不要用index？
+
+1. 虚拟DOM中Key的作用：
+   1. 简单地说就是：key是虚拟DOM对象的标识，在更新显式时key起着极其重要的作用
+   2. 详细的说：当状态中的数据发生变化时，react会根据新数据生成新的虚拟DOM，随后react进行新虚拟dom和旧虚拟dom的diffing对比。规则如下：
+      1. 旧虚拟dom中找到了与新虚拟dom中相同的key
+         1. 若虚拟dom中内容不变，直接使用之前的真实dom
+         2. 若虚拟dom中内容改变，则声称新的真实dom，随后替换掉页面中之前的真实dom
+      2. 旧虚拟DOM中没有找到与新虚拟DOM中相同的key
+         1. 根据数据创见得新的真实dom，然后渲染到页面
+2. 用index作为key引发的问题
+   1. 若对数据进行：逆序添加，逆序删除等破坏顺序的操作
+      1. 会产生没有必要的真实DOM更新 ==> 界面效果没问题，效率低
+   2. 如果结构中包含输入类DOM
+      1. 会产生错误DOM的更新 ==> 界面有问题
+   3. 注意，如果不存在对数据的逆序添加，逆序删除等破坏顺序的操作，仅用于渲染列表用于展示，index作为key是没有问题的
+        
+3. 开发中如何选择key?:
+    1.最好使用每条数据的唯一标识作为key, 比如id、手机号、身份证号、学号等唯一值。
+    2.如果确定只是简单的展示数据，用index也是可以的。
+
+
+
+## What is State?
+
+The state is an instance of React Component Class can be defined as an object of a set of observable properties that control the behavior of the component. In other words, the State of a component is an object that holds some information that may change over the lifetime of the component. For example, let us think of the clock that we created in this article, we were calling the render() method every second explicitly, but React provides a better way to achieve the same result and that is by using State, storing the value of time as a member of the component’s state. We will look into this more elaborately later in the article.
+ 
+
+Difference of Props and State.
+
+We have already learned about Props and we got to know that Props are also objects that hold information to control the behavior of that particular component, sounds familiar to State indeed but props and states are nowhere near be same. Let us differentiate the two.
+ 
+Props are immutable i.e. once set the props cannot be changed, while State is an observable object that is to be used to hold data that may change over time and to control the behavior after each change.
+States can only be used in Class Components while Props don’t have this limitation.
+While Props are set by the parent component, State is generally updated by event handlers. For example, let us consider the toggle the theme of the GeeksforGeeks {IDE} page. It can be implemented using State where the probable values of the State can be either light or dark and upon selection, the IDE changes its color. 
+
+
+What is Ajax:
+
+Difference NPM and Yarn
+
+Portal:
+
+(from Docs)
+Portals provide a way to render children into a DOM node that exists outside the DOM hierarchy of the parent component.
+
+但是前提是你得知道那个目标的id或者能够用一种方式捕捉到那个target
+
+(传送门)
+
+Why need it?
+
+
+
+
 
 
 

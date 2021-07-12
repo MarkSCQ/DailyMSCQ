@@ -1,10 +1,14 @@
-Django insert data:
-1. How to make custom command
-   1. https://blog.csdn.net/wangfan741/article/details/109964718
-   2. https://docs.djangoproject.com/zh-hans/3.1/howto/custom-management-commands/
-2. load json file to Django
-   1. Foreign key: using pk value to make a reference
-   2. if the target model has primary, using primary key value as instead of using pk value. In the example Json code below, the uuid is functioned as the primariy key value of the foreign key. Normally, when there is no primary key, using pk value, if primary key value exists, use primary key value
+## Django insert data:
+
+How to make custom command
+1. https://blog.csdn.net/wangfan741/article/details/109964718
+2. https://docs.djangoproject.com/zh-hans/3.1/howto/custom-management-commands   
+
+
+## DJANGO loaddata using JSON file
+
+1. Foreign key: using pk value to make a reference
+2. if the target model has primary, using primary key value as instead of using pk value. In the example Json code below, the uuid is functioned as the primariy key value of the foreign key. Normally, when there is no primary key, using pk value, if primary key value exists, use primary key value
 
             Example
             {
@@ -22,7 +26,7 @@ Django insert data:
         } 
 
 
-Make Mirgration and Migrate；
+## Make Mirgration and Migrate；
 1. Each time want to remvoe all dataset and migrations, remember removing the sqlite file
 2. If the project has many different types of users, using inhritance maybe a good choice
     reference ：https://stackoverflow.com/questions/33554401/setting-up-foreignkeys-in-loaddata-for-django
@@ -34,3 +38,13 @@ Make Mirgration and Migrate；
             class Meta:
                 verbose_name = "User Profile"
                 verbose_name_plural = verbose_name
+
+
+
+
+
+
+## URL configurations of DJANGO
+
+
+

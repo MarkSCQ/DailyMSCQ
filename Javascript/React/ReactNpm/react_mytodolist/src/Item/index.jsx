@@ -30,11 +30,16 @@ export default class Item extends Component {
     }
 
     deleteHandler = (id) => {
+
         return () => {
+            console.log(id)
+            console.log("this is delete fucntion")
             if (window.confirm("Do you really want to delete it?")) {
                 this.props.deleteTodos(id)
             }
             else {
+                return;
+
             }
         }
     }
@@ -50,7 +55,7 @@ export default class Item extends Component {
                         <input type="checkbox" onClick={this.checkHandler(id)} defaultChecked={isDone} />
                         <span>{content}</span>
                     </label>
-                    <button className="btn btn-danger" style={{ display: this.state.mouse_state ? "block" : "none" }} onClick={this.deleteHandler}>DELETE</button>
+                    <button className="btn btn-danger" style={{ display: this.state.mouse_state ? "block" : "none" }} onClick={this.deleteHandler(id)}>DELETE</button>
                 </li>
             </div>
         )

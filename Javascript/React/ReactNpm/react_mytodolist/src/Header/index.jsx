@@ -16,6 +16,7 @@ export default class Header extends Component {
         }
         if (target.value.trim() === "") {
             alert("Invalid Input")
+            return;
         }
         const newTodo = { id: nanoid(), content: target.value, isDone: false }
         console.log(newTodo)
@@ -32,7 +33,7 @@ export default class Header extends Component {
     render() {
         return (
             <div className="todo-header">
-                <input type="text" onKeyUp={this.inputHandler} placeholder="请输入你的任务名称，按回车键确认" />
+                <input type="text" onKeyUp={this.inputHandler} placeholder="Add Today's Mission!" />
             </div>
         )
     }

@@ -52,7 +52,7 @@ export default class Item extends Component {
             <div>
                 <li onMouseLeave={this.handleMouse(false)} onMouseEnter={this.handleMouse(true)} style={{ backgroundColor: this.state.mouse_state ? "skyblue" : "white" }} >
                     <label>
-                        <input type="checkbox" onClick={this.checkHandler(id)} defaultChecked={isDone} />
+                        <input type="checkbox" onClick={this.checkHandler(id)} checked={isDone} />
                         <span>{content}</span>
                     </label>
                     <button className="btn btn-danger" style={{ display: this.state.mouse_state ? "block" : "none" }} onClick={this.deleteHandler(id)}>DELETE</button>

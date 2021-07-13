@@ -1,39 +1,83 @@
 import React, { Component } from 'react'
+
+import List from './List'
+import Footer from './Footer'
+import Header from './Header'
+
 import './App.css'
+
 export default class App extends Component {
+
+    // !  initial state
+    state = {
+        todos: [
+            {
+                id: '001',
+                content: 'sleep',
+                isdone: false
+            },
+            {
+                id: '002',
+                content: 'eat',
+                isdone: false,
+            },
+            {
+                id: '003',
+                content: 'code',
+                isdone: true
+            },
+            {
+                id: '004',
+                content: 'shopping',
+                isdone: true
+            }
+        ]
+    }
+
+    addTodos = (TodoObj) => {
+        const { todos } = this.state
+
+        const newTodo = [TodoObj, ...todos]
+
+        this.setState({ todos: newTodo })
+    }
+
+    updateTodos = (id, isdone) => {
+
+        const { todos } = this.state
+
+        // ! 匹配处理数据
+        const newtodos = todos.map((todoObj) => {
+            if (todoObj.id === id) {
+                return { ...todoObj, isdone }
+            }
+            else {
+                return todoObj
+            }
+        })
+        this.setState({ todos: newtodos })
+    }
+
+
+    removeTodos = (id) => {
+        const { todos } = this.state
+        const newtodos = todos.filter((todoObj) => {
+            return todoObj.id !== id
+        })
+        this.setState({ todos: newtodos })
+
+    }
+
+
     render() {
+        const { todos } = this.state
         return (
             <div>
-                <div classname="todo-container">
-                    <div classname="todo-wrap">
-                        <div classname="todo-header">
-                            <input type="text" placeholder="请输入你的任务名称，按回车键确认" />
-                        </div>
-                        <ul classname="todo-main">
-                            <li>
-                                <label>
-                                    <input type="checkbox" />
-                                    <span>xxxxx</span>
-                                </label>
-                                <button classname="btn btn-danger" style={{ display: 'none' }}>删除</button>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="checkbox" />
-                                    <span>yyyy</span>
-                                </label>
-                                <button classname="btn btn-danger" style={{ display: 'none' }}>删除</button>
-                            </li>
-                        </ul>
-                        <div classname="todo-footer">
-                            <label>
-                                <input type="checkbox" />
-                            </label>
-                            <span>
-                                <span>已完成0</span> / 全部2
-                            </span>
-                            <button classname="btn btn-danger">清除已完成任务</button>
-                        </div>
+                <div className="todo-container">
+                    <div className="todo-wrap">
+                        <Header addTodos={this.addTodos} />
+                        <List todos={todos} updateTodos={this.updateTodos} removeTodos={this.removeTodos} />
+                        <Footer />
                     </div>
                 </div>
             </div>

@@ -1,62 +1,65 @@
 import React, { Component } from 'react'
 
+
 import './App.css'
 
-import Header from './Header/index'
-import List from './List/index'
-import Footer from './Footer/index'
+import Header from './Header'
+import List from './List'
+import Footer from './Footer'
+
+
+
 
 export default class App extends Component {
 
     state = {
         todos: [
             { id: "001", content: "sleep", isDone: false },
-            { id: "002", content: "eat", isDone: false },
+            { id: "002", content: "work out", isDone: false },
             { id: "003", content: "code", isDone: false },
-            { id: "004", content: "files", isDone: false },
+            { id: "004", content: "eat", isDone: false },
         ]
     }
 
 
-    addTodos = (todoObj) => {
+    // ! ----- Header Input ----- 
+    addTodo_App = (todoObj) => {
         const { todos } = this.state
-        const newTodos = [todoObj, ...todos]
-        this.setState({ todos: newTodos })
-    }
+        const newtodo = [todoObj, ...todos]
 
-    checkTodos = (id, isDone) => {
-        console.log("this is checkTodos()")
-        console.log(id, isDone)
+        this.setState({ todos: newtodo })
+    }
+    // * ----- Header Input ----- 
+
+
+    // ! ----- Todo Item Remove ----- 
+    removeTodo_App = (id) => {
         const { todos } = this.state
-        console.log(todos)
-        const newtodos = todos.map((todo) => {
-            if (todo.id === id) {
-                todo.isDone = isDone
-                return { ...todo, isDone }
+        const newtodos = todos.filter((todoObj) => {
+            return todoObj.id !== id
+        })
+        this.setState({ todos: newtodos })
+    }
+    // * ----- Todo Item Remove ----- 
+
+
+    checkTodo_App = (id, isDone) => {
+        console.log("object")
+        const { todos } = this.state
+        const newtodos = todos.map((todoObj) => {
+            if (todoObj.id === id) {
+                todoObj.isDone = isDone
+                return { ...todoObj, isDone }
             }
             else {
-                return todo
+                return todoObj
             }
         })
         console.log(newtodos)
         this.setState({ todos: newtodos })
+
     }
 
-    deleteTodos = (id) => {
-        console.log("this si deleteTodos()")
-        const { todos } = this.state
-        console.log("todos")
-        console.log(todos)
-
-        const newtodos = todos.filter((td) => {
-            return td.id !== id
-        })
-        console.log(newtodos)
-
-        this.setState({
-            todos: newtodos
-        })
-    }
 
 
     render() {
@@ -64,13 +67,20 @@ export default class App extends Component {
         return (
             <div className="todo-container">
                 <div className="todo-wrap">
-                    <Header addTodos={this.addTodos} />
-                    <List todos={todos} checkTodos={this.checkTodos} deleteTodos={this.deleteTodos} />
-                    <Footer todos={todos} checkTodos={this.checkTodos} />
+
+                    <Header addTodo_App={this.addTodo_App} />
+
+                    <List
+                        todos={todos}
+                        addTodo_App={this.addTodo_App}
+                        removeTodo_App={this.removeTodo_App}
+                        checkTodo_App={this.checkTodo_App}
+                    />
+
+                    <Footer todos={todos} />
+
                 </div>
             </div>
         )
     }
 }
-
-// export default App

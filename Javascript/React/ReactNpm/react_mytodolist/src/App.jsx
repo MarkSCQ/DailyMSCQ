@@ -57,11 +57,26 @@ export default class App extends Component {
         })
         console.log(newtodos)
         this.setState({ todos: newtodos })
-
     }
 
+    checkAllTodo_App = (checkState) => {
+        console.log("checkAllTodo_App")
+        const { todos } = this.state
+        const newtodos = todos.map((todoObj) => {
+            return { ...todoObj, isDone: checkState }
+        })
+        this.setState({ todos: newtodos })
+    }
+    removeAllSelected_App = () => {
+        const { todos } = this.state
+        const newtodos = todos.filter((todoObj) => {
+            return todoObj.isDone === false
+        })
+        console.log(newtodos)
 
+        this.setState({ todos: newtodos })
 
+    }
     render() {
         const { todos } = this.state
         return (
@@ -77,7 +92,11 @@ export default class App extends Component {
                         checkTodo_App={this.checkTodo_App}
                     />
 
-                    <Footer todos={todos} />
+                    <Footer
+                        todos={todos}
+                        checkAllTodo_App={this.checkAllTodo_App}
+                        removeAllSelected_App={this.removeAllSelected_App}
+                    />
 
                 </div>
             </div>

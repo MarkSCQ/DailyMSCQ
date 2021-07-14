@@ -13,7 +13,13 @@ export default class Footer extends Component {
         return todos.length
     }
 
+    checkAll = (event) => {
+        this.props.checkAllTodo_App(event.target.checked)
+    }
 
+    removeSelected = () => {
+        this.props.removeAllSelected_App()
+    }
     render() {
         const { todos } = this.props
         const checkeds = this.countChecked(todos)
@@ -24,12 +30,12 @@ export default class Footer extends Component {
         return (
             <div className="todo-footer">
                 <label>
-                    <input type="checkbox" />
+                    <input type="checkbox" onChange={this.checkAll} checked={dones === checkeds && dones !== 0 ? true : false} />
                 </label>
                 <span>
-                    <span>已完成{checkeds}</span> / 全部{dones}
+                    <span>Dones {checkeds}</span> / {dones}
                 </span>
-                <button className="btn btn-danger">清除已完成任务</button>
+                <button className="btn btn-danger" onClick={this.removeSelected}>Remove Selected Ones</button>
             </div>
         )
     }

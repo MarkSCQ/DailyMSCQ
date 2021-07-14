@@ -29,7 +29,7 @@ export default class Item extends Component {
 
     checkHandler = (id) => {
         return (event) => {
-            this.props.checkTodo_App(id,event.target.checked)
+            this.props.checkTodo_App(id, event.target.checked)
 
         }
     }
@@ -45,7 +45,7 @@ export default class Item extends Component {
                         <input type="checkbox" onChange={this.checkHandler(id)} checked={isDone} />
                         <span id={id}>{content}</span>
                     </label>
-                    <button className="btn btn-danger" onClick={this.removeHandler(id)} style={{ display: this.state.mouseState ? "block" : "none" }}>删除</button>
+                    <button className="btn btn-danger" onClick={this.removeHandler(id)} style={{ display: this.state.mouseState ? "block" : "none" }}>DELETE</button>
                 </li>
 
             </div>

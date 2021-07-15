@@ -742,12 +742,23 @@ Portals provide a way to render children into a DOM node that exists outside the
 
 Why need it?
 
+TodoList相关知识点回顾
+
+1. 拆分组件，实现静态组件。注意className style的写法
+2. 动态初始化列表，如何确定将数据放在哪个组件的state中
+   1. 某个组件使用：放在其自身的state中
+   2. 某些组件使用，放在他们公共的父组件state中，官方称这种操作为状态提升
+3. 父子组件通信
+   1. 父组件给子组件传递数据，通过props
+   2. 子组件给父组件传递数据，通过props，需要父组件传递子组件一个函数
+4. 注意defaultChecked和checked区别，类似的还有defaultvalue和value
+5. 状态在哪里，操作状态的方法就在哪里
 
 
 
 
 
-
-
-
+Ajax axios
+1. 配置
+2. 
 

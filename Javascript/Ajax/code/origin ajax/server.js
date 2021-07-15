@@ -58,14 +58,14 @@ app.get('/timeout', (request, response) => {
 
 })
 
-app.get('/axios-server', (request, response) => {
+app.all('/axios-server', (request, response) => {
     // 设置响应体，允许跨域
     response.setHeader("Access-Control-Allow-Origin", "*");
     response.setHeader("Access-Control-Allow-Headers", "*");
 
     const data = { name: "Axios" };
 
-    response.send("JSON.stringify(data)")
+    response.send(JSON.stringify(data))
     // 设置响应体
 
 })

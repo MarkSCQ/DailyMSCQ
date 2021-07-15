@@ -15,9 +15,32 @@ app.get('/server', (request, response) => {
 app.post('/server', (request, response) => {
     // 设置响应体，允许跨域
     response.setHeader("Access-Control-Allow-Origin", "*")
+    response.setHeader("Access-Control-Allow-Headers", "*")
     // 设置响应体
     response.send("HELLO EXPRESS POST")
 })
+// 任意类型的请求
+app.all('/server', (request, response) => {
+    // 设置响应体，允许跨域
+    response.setHeader("Access-Control-Allow-Origin", "*")
+    response.setHeader("Access-Control-Allow-Headers", "*")
+    // 设置响应体
+    response.send("HELLO EXPRESS POST")
+})
+
+app.all('/json-server', (request, response) => {
+    // 设置响应体，允许跨域
+    response.setHeader("Access-Control-Allow-Origin", "*");
+    response.setHeader("Access-Control-Allow-Headers", "*");
+
+    const data = { id: 12, name: "333" };
+    // 设置响应体
+
+    let str = JSON.stringify(data)
+    response.send(str);
+})
+
+
 // 监听端口启动服务
 app.listen(8000, () => {
     console.log("Express is running , 8000 is used")

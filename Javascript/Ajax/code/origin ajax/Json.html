@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        cnm
+    </title>
+
+    <style>
+        #result {
+            width: 200px;
+            height: 100px;
+            border: solid 1px #903;
+        }
+    </style>
+</head>
+
+
+
+<body>
+    <div id='result'></div>
+
+    <script>
+        const result = document.getElementById("result");
+
+        window.onkeydown = () => {
+            console.log("123")
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', 'http://127.0.0.1:8000/json-server')
+            xhr.responseType = 'json'
+            xhr.send("a:100&b:200")
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState == 4) {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        result.innerHTML = xhr.response.name + " " + xhr.response.id
+                        console.log(xhr.response)
+                        // 处理json 手动解决
+                        // let data = JSON.parse(xhr.response)
+                        // 自动转换
+
+                    }
+                }
+            }
+        }
+        // content.addEventListener("click", () => {
+        //     console.log("object");
+
+        //     const xhr = new XMLHttpRequest();
+        //     xhr.open('POST', 'http://127.0.0.1:8000/server')
+        //     // 请求这里可以设置任意格式，只要服务端能处理
+        //     xhr.send("a:100&b:200")
+        //     // xhr.send("a=100&b=200")
+        //     xhr.onreadystatechange = () => {
+        //         if (xhr.readyState == 4) {
+        //             if (xhr.status >= 200 && xhr.status < 300) {
+        //                 result.innerHTML = xhr.response
+        //             }
+        //         }
+        //     }
+
+        // });
+
+    </script>
+
+
+</body>
+
+
+
+</html>

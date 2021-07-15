@@ -51,3 +51,8 @@ HyperText transportation Protocol 超文本传输协议。协议规定了浏览�
             </body>
         </html>
 ```
+
+使用nodemon可以使nodejs代码在不重启的条件下进行更新
+安装npm install -g nodemon
+
+IE缓存，IE浏览器会缓存Ajax请求结果，下一次Ajax请求时，会先去访问本地缓存，而不是访问服务端返回的最新数据，对于时效性较强的服务，缓存会影响结果

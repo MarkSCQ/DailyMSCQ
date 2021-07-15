@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>axios 发送 AJAX请求</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+</head>
+
+<body>
+    <button id="get">GET</button>
+    <button id="post">POST</button>
+    <button id="ajax">AJAX</button>
+
+    <script>
+
+        const getbtn = document.getElementById("get");
+        const postbtn = document.getElementById("post");
+        const ajaxbtn = document.getElementById("ajax");
+        axios.defaults.baseURL = "http://127.0.0.1:8000"
+        getbtn.addEventListener("click", () => {
+            axios.get('/axios-server', {
+                params: {
+                    id: 100,
+                    vip: 7
+                },
+                Header: {
+                    name: 'mark',
+                    age: 200
+                }
+            })
+        })
+
+    </script>
+</body>
+
+</html>

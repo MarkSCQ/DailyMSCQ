@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        cnm
+    </title>
+
+    <style>
+        #result {
+            width: 200px;
+            height: 100px;
+            border: solid 1px #903;
+        }
+    </style>
+</head>
+
+
+
+<body>
+    <button id='btn1'>btn1</button>
+    <button id='btn2'>btn2</button>
+    <script>
+        const btn1 = document.getElementById("btn1");
+        const btn2 = document.getElementById("btn2");
+        let x = null
+
+        // 表示变量
+        let isSending = false//是否正咋发送Ajax请求 
+
+        btn1.addEventListener('click', () => {
+            //如果正在发送 取消请求
+            if(isSending)
+                x.abort()
+            x = new XMLHttpRequest();
+            // 修改表示变量
+            isSending = true
+            x.open('GET', 'http://127.0.0.1:8000/timeout')
+            x.send()
+            x.onreadystatechange = () => {
+                if (x.readyState == 4)
+                    isSending = false
+
+
+            }
+
+
+        });
+        btn2.addEventListener('click', () => {
+            // abort取消请求
+            x.abort();
+        });
+    </script>
+
+
+</body>
+
+
+
+</html>

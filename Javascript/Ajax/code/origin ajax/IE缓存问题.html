@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        cnm
+    </title>
+
+    <style>
+        #result {
+            width: 200px;
+            height: 100px;
+            border: solid 1px #903;
+        }
+    </style>
+</head>
+
+
+
+<body>
+    <div id='result'></div>
+    <button id='btn'>bbbb</button>
+    <script>
+        const btn = document.getElementById("btn");
+        const result = document.getElementById("result");
+
+        btn.addEventListener('click', () => {
+            console.log("object")
+            const xhr = new XMLHttpRequest();
+            // 超时回调
+            xhr.timeout = 2000;
+            xhr.ontimeout = () => {
+                alert("Exception")
+            }
+
+            // 网络错误
+            xhr.onerror = () => {
+                alert("Error")
+
+            }
+            xhr.open('GET', 'http://127.0.0.1:8000/timeout')
+            xhr.send()
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState == 4) {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        result.innerHTML = xhr.response
+                        console.log(xhr.response)
+
+
+                    }
+                }
+            }
+        });
+
+    </script>
+
+
+</body>
+
+
+
+</html>

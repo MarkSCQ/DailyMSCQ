@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        cnm
+    </title>
+
+    <style>
+        #result {
+            width: 200px;
+            height: 100px;
+            border: solid 1px #903;
+        }
+    </style>
+</head>
+
+
+
+<body>
+    <button id='btn1'>btn1</button>
+    <button id='btn2'>btn2</button>
+    <script>
+        const btn1 = document.getElementById("btn1");
+        const btn2 = document.getElementById("btn2");
+        let x = null
+        btn1.addEventListener('click', () => {
+            x = new XMLHttpRequest();
+
+            x.open('GET', 'http://127.0.0.1:8000/timeout')
+            x.send()
+
+        });
+        btn2.addEventListener('click', () => {
+            // abort取消请求
+            x.abort();
+        });
+    </script>
+
+
+</body>
+
+
+
+</html>

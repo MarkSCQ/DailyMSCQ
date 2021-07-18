@@ -29,7 +29,7 @@ export default class Search extends Component {
                 <section className="jumbotron">
                     <h3 className="jumbotron-heading">Search Github Users</h3>
                     <div>
-                        {/* // ! this is using createRef:  <input ref={this.keyWordRef} type="text" placeholder="enter the name you search" /> */}
+                        {/* // ! this is using cre:wqateRef:  <input ref={this.keyWordRef} type="text" placeholder="enter the name you search" /> */}
                         <input ref={c => this.keyWordRef = c} type="text" placeholder="enter the name you search" />
                         &nbsp;
                         <button onClick={this.searchHandler}>Search</button>

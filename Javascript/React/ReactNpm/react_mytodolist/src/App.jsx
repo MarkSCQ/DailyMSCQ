@@ -35,7 +35,7 @@ export default class App extends Component {
                             <div className="panel-body">
                                 {/* 注册路由，编写路有链接 */}
                                 <Route path="/about" component={About} />
-                                <Route path="/home" component={Home} />f
+                                <Route path="/home" component={Home} />
                             </div>
                         </div>
                     </div>

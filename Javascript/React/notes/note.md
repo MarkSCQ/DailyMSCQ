@@ -784,14 +784,54 @@ react 路由的基本使用
 
 1.  明确好界面中的导航区，展示区
 2.  导航区的 a 标签改为 Link 标签
-        ```js
-        <Link to="/xxxx"> Demo</Link>
-        ```
+    `js <Link to="/xxxx"> Demo</Link> `
 3.  展示区写 Route 标签进行路径匹配 `
-   '''js
-   <Route path='/xxxx' component={demo} />
-   '''
+    '''js
+    <Route path='/xxxx' component={demo} />
+    '''
 4.  <App> 的最外侧报过了一个
     ```js
     <BrowserRouter></BrowserRouter> <HashRouter></HashRouter>
     ```
+
+路由组件和一般组建的区别
+
+1.  写法不同
+    1. 一般组件 <Demo />
+    2. 路由组件 <Route path="/demo" component={Demo}/>
+2.  存放位置不同
+    1. 一般组件 components
+    2. 路由组件 pages
+3.  接收到的 props 不同
+
+    1.  一般组件 写组件标签时传递了什么 就能收到什么
+    2.  路由组件 接收到三个关键属性
+
+        ```
+        history:
+            go: ƒ go(n)
+            goBack: ƒ goBack()
+            goForward: ƒ goForward()
+            push: ƒ push(path, state)
+            replace: ƒ replace(path, state)
+
+        location:
+            pathname: "/about"
+            search: ""
+            state: undefined
+
+        match:
+            params: {}
+            path: "/about"
+            url: "/about"
+        ```
+
+封装NavLink
+1. NavLink可以实现路由连接的高亮，通过activeClassName指定样式名
+2. 标签体内容是一个特殊的标签属性
+3. 通过this.props.children可以获取标签体内容
+
+
+{this.props} 展开props中内容
+
+

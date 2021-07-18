@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
 
-import { BrowserRouter, Route, Link } from 'react-router-dom'
+import { BrowserRouter, Route, NavLink, Link } from 'react-router-dom'
 
-
+// NavLink Link的升级版 这里用于高亮
 import Home from './components/pages/Home'
 import About from './components/pages/About'
 import Header from './components/Header'
+import MyNavLink from './components/MyNavLink'
+
+
+
 export default class App extends Component {
 
 
@@ -14,7 +18,7 @@ export default class App extends Component {
             <div>
                 <div className="row">
                     <div className="col-xs-offset-2 col-xs-8">
-                        <div className="page-header"><h2>React Router Demo</h2></div>
+                        <Header />
                     </div>
                 </div>
                 <div className="row">
@@ -25,8 +29,13 @@ export default class App extends Component {
                             <a className="list-group-item active" href="./home.html">Home</a> */}
 
                             {/* react中靠路有链接实现切换组件 */}
-                            <Link className="list-group-item" to="/about">About</Link>
-                            <Link className="list-group-item" to="/home">Home</Link>
+                            {/* 
+                            写法一 props 传递 标签内容
+                            <MyNavLink to="/about" content="About" />
+                            <MyNavLink to="/home" content="Home" /> */}
+                            {/* 写法二 标签体传递标签内容 */}
+                            <MyNavLink to="/home">Home</MyNavLink>
+                            <MyNavLink to="/about">About</MyNavLink>
 
                         </div>
                     </div>

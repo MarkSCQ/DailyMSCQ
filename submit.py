@@ -3,15 +3,23 @@ import os
 
 def submit_default():
 
-    cmd_list = ["git pull", "git add .", "git commit -m 'msg'", "git push"]
+    cmd_list = ["git pull", "git add .", "git commit -m ''", "git push"]
 
     for i in cmd_list:
         os.system(i)
 
+
 def SubmiMain():
-    pass
-print("1. Default Submit")
-print("2. New Submit")
+    print("1. Default Submit")
+
+    print("2. Update Default Submit")
+
+    print("3. Config Settings")
+
+    exit = False
+
+    while not exit :
+        pass
 
 
 

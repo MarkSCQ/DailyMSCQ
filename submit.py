@@ -3,7 +3,10 @@ import os
 
 def submit_default():
 
-    cmd_list = ["git pull", "git add .", "git commit -m ''", "git push"]
+    cmd_list = ["git pull",
+                "git add .",
+                "git commit -m ''",
+                "git push"]
 
     for i in cmd_list:
         os.system(i)
@@ -18,9 +21,8 @@ def SubmiMain():
 
     exit = False
 
-    while not exit :
+    while not exit:
         pass
-
 
 
 print("Select:")

@@ -7,6 +7,7 @@ import Home from './components/pages/Home'
 import About from './components/pages/About'
 import Header from './components/Header'
 import MyNavLink from './components/MyNavLink'
+import Test from './components/Test'
 
 
 
@@ -45,6 +46,7 @@ export default class App extends Component {
                                 {/* 注册路由，编写路有链接 */}
                                 <Route path="/about" component={About} />
                                 <Route path="/home" component={Home} />
+                                <Route path="/home" component={Test} />
                             </div>
                         </div>
                     </div>

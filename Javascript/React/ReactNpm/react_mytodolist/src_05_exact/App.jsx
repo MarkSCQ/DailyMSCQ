@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { BrowserRouter, Route, NavLink, Link, Switch, Redirect } from 'react-router-dom'
+import { BrowserRouter, Route, NavLink, Link, Switch } from 'react-router-dom'
 
 // NavLink Link的升级版 这里用于高亮
 import Home from './components/pages/Home'
@@ -35,21 +35,18 @@ export default class App extends Component {
                             <MyNavLink to="/about" content="About" />
                             <MyNavLink to="/home" content="Home" /> */}
                             {/* 写法二 标签体传递标签内容 */}
-                            <MyNavLink to="/home">Home</MyNavLink>
-                            <MyNavLink to="/about">About</MyNavLink>
+                            <Switch>
+                                <MyNavLink exact to="/home">Home</MyNavLink>
+                                <MyNavLink exact to="/about">About</MyNavLink>
+                            </Switch>
                         </div>
                     </div>
                     <div className="col-xs-6">
                         <div className="panel">
                             <div className="panel-body">
                                 {/* 注册路由，编写路有链接 */}
-                                <Switch>
-
-                                    <Route path="/about" component={About} />
-                                    <Route path="/home" component={Home} />
-                                    <Redirect to="/about" />
-                                </Switch>
-
+                                <Route path="/about" component={About} />
+                                <Route path="/home" component={Home} />
                             </div>
                         </div>
                     </div>

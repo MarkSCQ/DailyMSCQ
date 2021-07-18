@@ -826,12 +826,75 @@ react 路由的基本使用
             url: "/about"
         ```
 
-封装NavLink
-1. NavLink可以实现路由连接的高亮，通过activeClassName指定样式名
+封装 NavLink
+
+1. NavLink 可以实现路由连接的高亮，通过 activeClassName 指定样式名
 2. 标签体内容是一个特殊的标签属性
-3. 通过this.props.children可以获取标签体内容
+3. 通过 this.props.children 可以获取标签体内容
+
+{this.props} 展开 props 中内容
+
+Switch react-router-dom
+
+1. 通常情况下，path 和 component 是一一对应关系
+2. switch 可以提高路由匹配效率
+
+样式丢失(多级路由结构)
+
+1. 每一次切换路由不一定会触发网页请求。具体的内容通过 F12->NetWork->All 查看
+2. react url 如果无法匹配，默认跳转到 index.html,
+
+Solution：
+
+1. public/index.html 中 更改 css 文件路径
+   ```js
+       <link rel="stylesheet" href="./CSS/bootstrap.css">
+       =>
+       <link rel="stylesheet" href="/CSS/bootstrap.css">
+   ```
+2. public/index.html 中 PUBLIC_URL 代表了 public folder 的绝对路径
+   ```js
+   <link rel="stylesheet" href="./CSS/bootstrap.css">
+   =>
+   <link rel="stylesheet" href="%PUBLIC_URL%/CSS/bootstrap.css">
+   ```
+3. 不更改 CSS 文件中的路径,但是通常开发都是使用 BrowserRouter
+   ```
+   BrowserRouter = > HashRouter
+   ```
+
+路由的严格匹配和模糊匹配
+
+路由精准匹配 exact 设置为 true，默认情况下是模糊匹配。使用场景，如果默认匹配不会造成错误，那么久不开启严格匹配。只有在开启严格匹配时不出错才会使用严格匹配。严格匹配不能随便打开。
+
+```js
+<Route exact={true} path="/about" component={About} />
+```
+
+路由匹配-严格匹配模糊匹配总结
+
+1. 默认是使用模糊匹配（输入路径必须包含要匹配的路径，且顺序必须一致）
+2. 开启严格匹配：
+   ```js
+   <Route exact={true} path="/about" component={About} />
+   ```
+3. 严格匹配不能随便开启，需要开的时候再开。有些时候开启严格匹配会导致无法继续匹配二级路由
+
+Redirect 在 Route 中哪个都匹配不上时，Redirect 将会跳转到设置的页面
+
+1. 一般写在所有路有注册的最下方，当所有路由都无法匹配时，跳转到 Redirect 指定的路由
+2. Example：
+
+   ```js
+    <Switch>
+        <Route path="/about" component={About} />
+        <Route path="/home" component={Home} />
+        <Redirect to="/about" />
+    </Switch>
+
+   ```
 
 
-{this.props} 展开props中内容
-
-
+二级路由，多级/嵌套路由
+1. 注册子路由需要写上父路由的path值
+2. 路由匹配是按照注册路由的顺序进行的

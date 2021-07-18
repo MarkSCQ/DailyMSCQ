@@ -10,7 +10,7 @@ export default class Home extends Component {
             <div>
                 <h3>Home Page</h3>
                 <div>
-                    <ul className="nav nav-tabs">
+                    <ul class="nav nav-tabs">
                         <li>
                             <MyNavLinkSub to="/home/news">News</MyNavLinkSub>
 

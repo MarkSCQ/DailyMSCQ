@@ -187,7 +187,6 @@ Event binding in React
         // write in render()
         clickmsg = ()=>{this.setState({msg:"bye"})}
 
-
 What are the differencs between using binding adn arrow function???
 
 Passing Component to component
@@ -307,8 +306,7 @@ shouldComponentUpdate(nextProps, nextState)
 - Performance Optimization
 - Should not cause side effects like http requests
 
-<img src="../imgs/rp.PNG"> 
-
+<img src="../imgs/rp.PNG">
 
  <img src="../imgs/sc.PNG"> 
  <img src="../imgs/pc1.PNG">
@@ -694,7 +692,7 @@ TodoList 相关知识点回顾
 4. 注意 defaultChecked 和 checked 区别，类似的还有 defaultvalue 和 value
 5. 状态在哪里，操作状态的方法就在哪里
 
- # react 脚手架配置代理总结
+# react 脚手架配置代理总结
 
 ## 方法一
 
@@ -749,3 +747,51 @@ TodoList 相关知识点回顾
 
 1. 优点：可以配置多个代理，可以灵活的控制请求是否走代理。
 2. 缺点：配置繁琐，前端请求资源时必须加前缀。
+
+消息订阅发布机制 PubSubJS
+
+React 路由
+
+SPA
+
+1. 单页 web 应用 spa single page web application
+2. 整个应用只有一个完整的页面
+3. 点击页面中的链接不会刷新页面，只会进行局部更新
+4. 数据都需要进行 ajax 请求获取，并在前端异步展现
+
+路由的理解
+
+1. 什么事路由
+   1. 一个路由就是一个映射关系，key:value
+   2. key 为路径 value 可能是 function 或者 component
+2. 路由分类
+   1. 后端路由
+      1. 理解：value 是 function，用来处理客户端请求
+      2. 注册路由，router.get(path,function(req,res))
+      3. 工作过程，当 node 接收到一个请求时，根据请求路径找到匹配的路由，调用路由中的函数来处理请求，返回响应的数据
+   2. 前端路由
+      1. 浏览器路由，value 是 component，用于展示页面内容
+      2. 注册路由，<Router path="/test" component={est} >
+      3. 工作过程，当浏览器 path 改为/test 时，当前路由组件就会变为 Test 组件
+
+React-router 的理解
+
+react-router-dom
+react-native-dom
+react-any
+
+react 路由的基本使用
+
+1.  明确好界面中的导航区，展示区
+2.  导航区的 a 标签改为 Link 标签
+        ```js
+        <Link to="/xxxx"> Demo</Link>
+        ```
+3.  展示区写 Route 标签进行路径匹配 `
+   '''js
+   <Route path='/xxxx' component={demo} />
+   '''
+4.  <App> 的最外侧报过了一个
+    ```js
+    <BrowserRouter></BrowserRouter> <HashRouter></HashRouter>
+    ```

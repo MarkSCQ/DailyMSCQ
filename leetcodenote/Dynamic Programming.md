@@ -1,6 +1,5 @@
 # 1D Dynamic Programming Problems
 
-
 ### 70. Climbing Stairs
 
 Fib. Define first several steps and using iterations and state transformation function to searching the results.
@@ -11,15 +10,13 @@ Fib. Define first several steps and using iterations and state transformation fu
             prevv = 1
             prev = 2
             curr = 0
-            
+
             for i in range(2,n):
                 curr = prev+prevv
-                
+
                 prevv = prev
                 prev = curr
             return curr
-
-
 
 ### 198. House Robber
 
@@ -29,14 +26,13 @@ CORE: choose whether take the dp[i-1] or dp[i-2]+nums[i-1] dp denotes the money 
         int[] dp=new int[nums.length+1];
 
         dp[1]=nums[0];
-        
+
         for(int i=2;i<nums.length+1;i++){
              // CORE
             dp[i] = Math.max(dp[i-1],dp[i-2]+nums[i-1]);
         }
         return dp[dp.length-1];
     }
-
 
 ### 300. Longest Increasing Subsequence
 
@@ -52,7 +48,6 @@ Subsequence: do not need to be continuous
 
         return max(comp)
 
-
 ### 413. Arithmetic Slices
 
     def numberOfArithmeticSlices(self, nums: List[int]) -> int:
@@ -62,10 +57,8 @@ Subsequence: do not need to be continuous
                 dps[i]=dps[i-1]+1
         return sum(dps)
 
-
-
 ### 1137. N-th Tribonacci Number
-    
+
 Fib + hashtable
 
     public int tribonacci(int n) {
@@ -74,26 +67,22 @@ Fib + hashtable
              // CORE
             ini[i%3]=ini[0]+ini[1]+ini[2];
         }
-        return ini[n%3];   
+        return ini[n%3];
     }
-
-
-
 
 # 2D Dynamic Programming Problems
 
-
 ### 64. Minimum Path Sum
 
-the ini_matrix is used to calculate the current amount of steps. Very easy question. 
+the ini_matrix is used to calculate the current amount of steps. Very easy question.
 
         def minPathSum(self, grid: List[List[int]]) -> int:
-            
-            ini_matrix=[[0 for j in range(len(grid[0]))] for i in range(len(grid))] 
-            
+
+            ini_matrix=[[0 for j in range(len(grid[0]))] for i in range(len(grid))]
+
             for i in range(len(grid)):
                 for j in range(len(grid[0])):
-                    
+
                     if i==0 and j==0:
                         ini_matrix[0][0]=grid[0][0]
                     elif i==0 :
@@ -104,3 +93,4 @@ the ini_matrix is used to calculate the current amount of steps. Very easy quest
                         ini_matrix[i][j] = min(ini_matrix[i-1][j],ini_matrix[i][j-1])+grid[i][j]
             print(ini_matrix)
             return ini_matrix[-1][-1]
+

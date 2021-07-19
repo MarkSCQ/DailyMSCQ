@@ -25,14 +25,14 @@ export default class Detail extends Component {
         // console.log(title)
 
         // ! 接收params
-        // const { id, title } = this.props.match.params
+        const { id, title } = this.props.match.params
 
-        // const findResult = msgArray.find((msg) => { return msg.id === id })
+        const findResult = msgArray.find((msg) => { return msg.id === id })
 
 
         // ! 接收 state 参数
-        const { id, title } = this.props.location.state || {} // ! 从存在的state中取值，如果state因为清除历史记录为空，则利用空对象，传入空值避免错误
-        const findResult = msgArray.find((msg) => { return msg.id === id }) || {} // ! 如果没有找到这个对象，则利用空对象，传入空值避免错误
+        // const { id, title } = this.props.location.state || {} // ! 从存在的state中取值，如果state因为清除历史记录为空，则利用空对象，传入空值避免错误
+        // const findResult = msgArray.find((msg) => { return msg.id === id }) || {} // ! 如果没有找到这个对象，则利用空对象，传入空值避免错误
         const news = "info id: " + findResult.id + " content: " + findResult.content
         // console.log(news)
         return (

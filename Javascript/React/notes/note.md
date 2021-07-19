@@ -986,3 +986,30 @@ replace 将不会留下痕迹，也就是说使用 replace 后，后退会失效
 
 <Link replace={true} to={{ pathname: '/home/message/detail', state: { id: msg.id, title: msg.title } }}>{msg.title}</Link>
 ···
+
+
+编程式路由导航
+
+借助this.props.history对象上的API对操作路由跳转前进后退
+
+* this.props.history.push()
+* this.props.history.replace()
+* this.props.history.goBack()
+* this.props.history.goForward()
+* this.props.history.go()
+
+
+withRouter 给一般组件加上路由组件的几个基本属性history location match. 解决了一般组件无法使用路由功能的问题
+withRouter 加工一般组件，让一般组件具备路由组件特有的api，withRouter的返回值是一个加工过的新组建
+
+BrowserRouter HashRouter 区别
+1. 底层原理不一样
+   1. BrowserRouter使用的是H5的history API，不兼容IE9以及以下版本
+   2. HashRouter使用的是URL哈希值
+2. URL表现形式不一样
+   1. BrowserRouter 的路径中没有#，例如 localhost:3000/demo/test
+   2. HashRouter 的路径包含#，例如 localhost:3000/#/demo/test
+3. 刷新后对路由state参数的影响
+   1. BrowserRouter 没有任何影响，因为state存在history对象中
+   2. **HashRouter 刷新后会导致路由state参数的丢失**
+4. 备注：HashRouter 可以用于解救而一些路径错误相关的问题

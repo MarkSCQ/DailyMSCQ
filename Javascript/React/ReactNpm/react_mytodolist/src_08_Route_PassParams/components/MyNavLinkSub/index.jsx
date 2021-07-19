@@ -7,7 +7,7 @@ export default class MyNavLinkSub extends Component {
 
         return (
             <div>
-                <NavLink activeClassName="MarkSub" className="list-group-item"  {...this.props}>{children}</NavLink>
+                <NavLink activeClassName="MarkSub" className="list-group-item" to={to}>{children}</NavLink>
             </div>
         )
     }

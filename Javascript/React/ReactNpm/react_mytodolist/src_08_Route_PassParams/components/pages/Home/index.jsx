@@ -12,11 +12,11 @@ export default class Home extends Component {
                 <div>
                     <ul className="nav nav-tabs">
                         <li>
-                            <MyNavLinkSub  to="/home/news">News</MyNavLinkSub>
+                            <MyNavLinkSub to="/home/news">News</MyNavLinkSub>
 
                         </li>
                         <li>
-                            <MyNavLinkSub  to="/home/message">Message</MyNavLinkSub>
+                            <MyNavLinkSub to="/home/message">Message</MyNavLinkSub>
                         </li>
                     </ul>
                 </div>

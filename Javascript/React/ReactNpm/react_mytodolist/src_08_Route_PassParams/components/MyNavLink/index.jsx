@@ -10,7 +10,7 @@ export default class MyNavLink extends Component {
                 {/* 写法一 props 传递 标签内容 */}
                 {/* <NavLink activeClassName="Mark" className="list-group-item" to={to}>{content}</NavLink> */}
                 {/* 写法二 标签体传递标签内容 */}
-                <NavLink activeClassName="Mark" className="list-group-item"  {...this.props}>{children}</NavLink>
+                <NavLink activeClassName="Mark" className="list-group-item" to={to}>{children}</NavLink>
             </div>
         )
     }

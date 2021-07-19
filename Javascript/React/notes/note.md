@@ -945,7 +945,44 @@ Redirect 在 Route 中哪个都匹配不上时，Redirect 将会跳转到设置�
 
     4.  备注：获取到的 search 是 urlencoded 编码字符串，需要借助 querystring 解析
 
-3.  state 参数，路由组件的 state 不是之前 class 的 state
+3.  state 参数，路由组件的 state 不是之前 class 的 state，地址栏不会显示参数信息
 
+    1.  路由链接(携带参数)
 
-BrowserRouter 一直在维护history，刷新不会丢失当前内容
+        ```js
+        <Link
+          to={{
+            pathname: "/home/message/detail",
+            state: { id: msg.id, title: msg.title },
+          }}
+        >
+          {msg.title}
+        </Link>
+        ```
+
+    2.  注册路由(无需声明，正常注册即可)
+
+            ```js
+            <Route path="/home/message/detail" component={Detail} />
+            ```
+
+    3.  接收参数
+
+            ```js
+            const { id, title } = this.props.location.state || {}
+            const findResult = msgArray.find((msg) => { return msg.id === id }) || {}
+            ```
+
+    4.  备注：刷新可以保留参数
+
+BrowserRouter 一直在维护 history，刷新不会丢失当前内容
+
+push replace 对于浏览器历史的操作
+
+push 类似压栈，对于每一个点击的记录进行压栈，后退的过程类似于出栈。
+
+replace 将不会留下痕迹，也就是说使用 replace 后，后退会失效。设置方法很简单直接 replace 或者 replace={true}即可
+···js
+
+<Link replace={true} to={{ pathname: '/home/message/detail', state: { id: msg.id, title: msg.title } }}>{msg.title}</Link>
+···

@@ -35,8 +35,8 @@ export default class App extends Component {
                             <MyNavLink to="/about" content="About" />
                             <MyNavLink to="/home" content="Home" /> */}
                             {/* 写法二 标签体传递标签内容 */}
-                            <MyNavLink  to="/home">Home</MyNavLink>
-                            <MyNavLink  to="/about">About</MyNavLink>
+                            <MyNavLink to="/home">Home</MyNavLink>
+                            <MyNavLink to="/about">About</MyNavLink>
                         </div>
                     </div>
                     <div className="col-xs-6">

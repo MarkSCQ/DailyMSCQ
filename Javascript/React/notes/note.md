@@ -886,15 +886,66 @@ Redirect 在 Route 中哪个都匹配不上时，Redirect 将会跳转到设置�
 2. Example：
 
    ```js
-    <Switch>
-        <Route path="/about" component={About} />
-        <Route path="/home" component={Home} />
-        <Redirect to="/about" />
-    </Switch>
-
+   <Switch>
+     <Route path="/about" component={About} />
+     <Route path="/home" component={Home} />
+     <Redirect to="/about" />
+   </Switch>
    ```
 
-
 二级路由，多级/嵌套路由
-1. 注册子路由需要写上父路由的path值
+
+1. 注册子路由需要写上父路由的 path 值
 2. 路由匹配是按照注册路由的顺序进行的
+
+路由组件传参
+
+1.  params 参数
+
+    1. 路有链接(携带参数)
+
+       ```js
+       <Link to={`/home/message/detail/${msg.id}/${msg.title}`}>
+         {msg.title}
+       </Link>
+       ```
+
+    2. 注册路由(声明接受)
+
+       ```js
+       <Route path="/home/message/detail/:id/:title" component={Detail} />
+       ```
+
+    3. 接收参数
+
+       ```js
+       const { id, title } = this.props.match.params;
+       ```
+
+2.  search 参数
+
+    1.  路由链接(携带参数)
+        ```js
+        <Link to={`/home/message/detail/?id=${msg.id}&title=${msg.title}`}>
+          {msg.title}
+        </Link>
+        ```
+    2.  注册路由(无需声明，正常注册即可)
+
+        ```js
+        <Route path="/home/message/detail" component={Detail} />
+        ```
+
+    3.  接收参数
+
+        ```js
+        const { search } = this.props.location;
+        const { id, title } = qs.parse(search.slice(1));
+        ```
+
+    4.  备注：获取到的 search 是 urlencoded 编码字符串，需要借助 querystring 解析
+
+3.  state 参数，路由组件的 state 不是之前 class 的 state
+
+
+BrowserRouter 一直在维护history，刷新不会丢失当前内容

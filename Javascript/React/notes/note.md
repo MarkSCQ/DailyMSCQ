@@ -987,51 +987,65 @@ replace 将不会留下痕迹，也就是说使用 replace 后，后退会失效
 <Link replace={true} to={{ pathname: '/home/message/detail', state: { id: msg.id, title: msg.title } }}>{msg.title}</Link>
 ···
 
-
 编程式路由导航
 
-借助this.props.history对象上的API对操作路由跳转前进后退
+借助 this.props.history 对象上的 API 对操作路由跳转前进后退
 
-* this.props.history.push()
-* this.props.history.replace()
-* this.props.history.goBack()
-* this.props.history.goForward()
-* this.props.history.go()
+- this.props.history.push()
+- this.props.history.replace()
+- this.props.history.goBack()
+- this.props.history.goForward()
+- this.props.history.go()
 
-
-withRouter 给一般组件加上路由组件的几个基本属性history location match. 解决了一般组件无法使用路由功能的问题
-withRouter 加工一般组件，让一般组件具备路由组件特有的api，withRouter的返回值是一个加工过的新组建
+withRouter 给一般组件加上路由组件的几个基本属性 history location match. 解决了一般组件无法使用路由功能的问题
+withRouter 加工一般组件，让一般组件具备路由组件特有的 api，withRouter 的返回值是一个加工过的新组建
 
 BrowserRouter HashRouter 区别
+
 1. 底层原理不一样
-   1. BrowserRouter使用的是H5的history API，不兼容IE9以及以下版本
-   2. HashRouter使用的是URL哈希值
-2. URL表现形式不一样
+   1. BrowserRouter 使用的是 H5 的 history API，不兼容 IE9 以及以下版本
+   2. HashRouter 使用的是 URL 哈希值
+2. URL 表现形式不一样
    1. BrowserRouter 的路径中没有#，例如 localhost:3000/demo/test
    2. HashRouter 的路径包含#，例如 localhost:3000/#/demo/test
-3. 刷新后对路由state参数的影响
-   1. BrowserRouter 没有任何影响，因为state存在history对象中
-   2. **HashRouter 刷新后会导致路由state参数的丢失**
+3. 刷新后对路由 state 参数的影响
+   1. BrowserRouter 没有任何影响，因为 state 存在 history 对象中
+   2. **HashRouter 刷新后会导致路由 state 参数的丢失**
 4. 备注：HashRouter 可以用于解救而一些路径错误相关的问题
-
-
-
 
 Redux
 
 是什么？
-1. 专门用于状态管理的JS库
-2. 可以用在react angular vue中
-3. 作用，集中式管理react应用中多个组件的共享的状态
-   
+
+1. 专门用于状态管理的 JS 库
+2. 可以用在 react angular vue 中
+3. 作用，集中式管理 react 应用中多个组件的共享的状态
+
 什么时候用？
+
 1. 某个组件的状态，需要其他组件可以随时拿到(共享)
 2. 一个组件需要改变另一个组件的状态(通信)
 3. 总体原则，能不用就不用，如果不用会导致比较难得实现才会考虑使用。
 
+加法器总结
 
-
-
-
-
-
+1. 去除 Count 组件自身状态
+2. .src 下创建 redux 相关文件
+   1. redux folder。 注意，引入时请确保使用正确的引用方式，不然会出错
+      1. store.js
+      2. count_reducer.js
+3. store.js
+   1. 引入 redux 中的 createStore 函数，创建一个 store
+   2. createStore 调用时需要穿入一个为其服务的 reducer
+   3. 记得暴露 store 对象
+   4. 请明确这里暴露的 store 对象在被引入时的写法，大小写或者引入方法
+4. count_reducer.js
+   1. reducer 的本质是一个函数，接收：preState,action 返回加工后的状态
+   2. reduce 人有两个作用，初始化状态，加工状态
+   3. reducer 被第一次调用时，是 store 自动触发的，传递的 preState 是 undefined
+      (因此需要给一个初始值，如果不想要 preState 是 undefined)
+5. 在index.js中检测store状态的改变，一旦发生改变就可以重新渲染<App/>
+   1. 注意redux只负责状态管理至于状态的钢鞭驱动着页面展示的过程需要我们自己写
+   2. 写的方法有两种
+      1. 在componentWillMount中利用this.setState({}) 传递一个空的object。render会在state更新是渲染页面，这个方法可以间接地更新render值
+      2. 

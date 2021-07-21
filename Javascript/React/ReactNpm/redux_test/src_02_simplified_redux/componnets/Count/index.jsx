@@ -44,6 +44,7 @@ export default class Count extends Component {
         }, 500)
     }
 
+    // ! 第一种更新state的写法
     componentDidMount() {
         // 监测 redux 中状态的变化，只要变化，就调用render
         // 生命周期的钩子都是组建的实例对象

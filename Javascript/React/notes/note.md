@@ -1042,10 +1042,11 @@ Redux
 4. count_reducer.js
    1. reducer 的本质是一个函数，接收：preState,action 返回加工后的状态
    2. reduce 人有两个作用，初始化状态，加工状态
-   3. reducer 被第一次调用时，是 store 自动触发的，传递的 preState 是 undefined
-      (因此需要给一个初始值，如果不想要 preState 是 undefined)
+   3. reducer 被第一次调用时，是 store 自动触发的
+        - 传递的 preState 是 undefined
+        - 传递的 action是：{type:'@@REDUX/INIT_a.2.b.4}
+      (因此需要给一个初始值，如果不想要 preStateb是 undefined)
 5. 在index.js中检测store状态的改变，一旦发生改变就可以重新渲染<App/>
    1. 注意redux只负责状态管理至于状态的钢鞭驱动着页面展示的过程需要我们自己写
    2. 写的方法有两种
       1. 在componentWillMount中利用this.setState({}) 传递一个空的object。render会在state更新是渲染页面，这个方法可以间接地更新render值
-      2. 

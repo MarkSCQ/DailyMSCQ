@@ -1,8 +1,6 @@
 import React, { Component, createRef } from 'react'
 
 // 获取redux中store的状态
-import store from '../../redux/store'
-// 获取action对象
 
 
 export default class Count extends Component {
@@ -17,7 +15,6 @@ export default class Count extends Component {
 
         //通知redux加
 
-        store.dispatch({ type: "add", data: parseInt(userAdder) })
         // this.setState({ currentNumber: parseInt(this.state.currentNumber) + parseInt(userAdder) })
 
     }
@@ -25,42 +22,28 @@ export default class Count extends Component {
     minusHandler = () => {
         console.log("minusHandler")
         const userAdder = this.selectRef.current.value
-        store.dispatch({ type: "minus", data: parseInt(userAdder) })
     }
 
     addIfOddHandler = () => {
         console.log("addOddHandler")
         const userAdder = this.selectRef.current.value
-        const currentNumber = store.getState()
-        if (currentNumber % 2 !== 0) {
-            store.dispatch({ type: "add", data: parseInt(userAdder) })
-        }
 
     }
 
     addIfAsyncHandler = () => {
         console.log("addAsyncHandler")
         const userAdder = this.selectRef.current.value
-        const { currentNumber } = this.state
-        setTimeout(() => {
-            store.dispatch({ type: "add", data: parseInt(userAdder) })
-        }, 500)
+        // setTimeout(() => {
+        //     store.dispatch(creatorAddition(userAdder*1))
+        // }, 500)
     }
 
-    // ! 第一种更新state的写法
-    componentDidMount() {
-        // 监测 redux 中状态的变化，只要变化，就调用render
-        // 生命周期的钩子都是组建的实例对象
-        store.subscribe(() => {
-            this.setState({}) //setState 会触发render 所以间接的调用了render是的store.getState()更新到最新的值
-        })
-    }
-
+    // ! 第一种更新state的写
     render() {
         return (
             <div>
 
-                <h1>Current : {store.getState()}</h1>
+                <h1>Current : { }</h1>
                 <select ref={this.selectRef}>
                     <option value="1">1</option>
                     <option value="2">2</option>

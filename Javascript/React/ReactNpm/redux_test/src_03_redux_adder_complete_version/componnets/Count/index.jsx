@@ -2,8 +2,8 @@ import React, { Component, createRef } from 'react'
 
 // 获取redux中store的状态
 import store from '../../redux/store'
-// 获取action对象
-
+import { creatorAddition } from '../../redux/count_action'
+import { creatorMinus } from '../../redux/count_action'
 
 export default class Count extends Component {
     selectRef = React.createRef();
@@ -17,7 +17,7 @@ export default class Count extends Component {
 
         //通知redux加
 
-        store.dispatch({ type: "add", data: parseInt(userAdder) })
+        store.dispatch(creatorAddition(userAdder*1))
         // this.setState({ currentNumber: parseInt(this.state.currentNumber) + parseInt(userAdder) })
 
     }
@@ -25,7 +25,7 @@ export default class Count extends Component {
     minusHandler = () => {
         console.log("minusHandler")
         const userAdder = this.selectRef.current.value
-        store.dispatch({ type: "minus", data: parseInt(userAdder) })
+        store.dispatch(creatorMinus(userAdder*1))
     }
 
     addIfOddHandler = () => {
@@ -33,7 +33,7 @@ export default class Count extends Component {
         const userAdder = this.selectRef.current.value
         const currentNumber = store.getState()
         if (currentNumber % 2 !== 0) {
-            store.dispatch({ type: "add", data: parseInt(userAdder) })
+            store.dispatch(creatorAddition(userAdder*1))
         }
 
     }
@@ -43,7 +43,7 @@ export default class Count extends Component {
         const userAdder = this.selectRef.current.value
         const { currentNumber } = this.state
         setTimeout(() => {
-            store.dispatch({ type: "add", data: parseInt(userAdder) })
+            store.dispatch(creatorAddition(userAdder*1))
         }, 500)
     }
 

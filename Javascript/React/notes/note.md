@@ -1027,26 +1027,50 @@ Redux
 2. 一个组件需要改变另一个组件的状态(通信)
 3. 总体原则，能不用就不用，如果不用会导致比较难得实现才会考虑使用。
 
-加法器总结
+1. 加法器总结
+   1. 去除 Count 组件自身状态
+   2. .src 下创建 redux 相关文件
+      1. redux folder。 注意，引入时请确保使用正确的引用方式，不然会出错
+         1. store.js
+         2. count_reducer.js
+   3. store.js
+      1. 引入 redux 中的 createStore 函数，创建一个 store
+      2. createStore 调用时需要穿入一个为其服务的 reducer
+      3. 记得暴露 store 对象
+      4. 请明确这里暴露的 store 对象在被引入时的写法，大小写或者引入方法
+   4. count_reducer.js
+      1. reducer 的本质是一个函数，接收：preState,action 返回加工后的状态
+      2. reduce 人有两个作用，初始化状态，加工状态
+      3. reducer 被第一次调用时，是 store 自动触发的
+           - 传递的 preState 是 undefined
+           - 传递的 action是：{type:'@@REDUX/INIT_a.2.b.4}
+         (因此需要给一个初始值，如果不想要 preStateb是 undefined)
+   5. 在index.js中检测store状态的改变，一旦发生改变就可以重新渲染<App/>
+      1. 注意redux只负责状态管理至于状态的钢鞭驱动着页面展示的过程需要我们自己写
+      2. 写的方法有两种
+         1. 在componentWillMount中利用this.setState({}) 传递一个空的object。render会在state更新是渲染页面，这个方法可以间接地更新render值
+2. 加法器完整版总结
+   1. 新增文件count_action.js 专门用于创建action对象
+   2. constant.js 中写常量名，避免手滑写错变量名字符串等信息
 
-1. 去除 Count 组件自身状态
-2. .src 下创建 redux 相关文件
-   1. redux folder。 注意，引入时请确保使用正确的引用方式，不然会出错
-      1. store.js
-      2. count_reducer.js
-3. store.js
-   1. 引入 redux 中的 createStore 函数，创建一个 store
-   2. createStore 调用时需要穿入一个为其服务的 reducer
-   3. 记得暴露 store 对象
-   4. 请明确这里暴露的 store 对象在被引入时的写法，大小写或者引入方法
-4. count_reducer.js
-   1. reducer 的本质是一个函数，接收：preState,action 返回加工后的状态
-   2. reduce 人有两个作用，初始化状态，加工状态
-   3. reducer 被第一次调用时，是 store 自动触发的
-        - 传递的 preState 是 undefined
-        - 传递的 action是：{type:'@@REDUX/INIT_a.2.b.4}
-      (因此需要给一个初始值，如果不想要 preStateb是 undefined)
-5. 在index.js中检测store状态的改变，一旦发生改变就可以重新渲染<App/>
-   1. 注意redux只负责状态管理至于状态的钢鞭驱动着页面展示的过程需要我们自己写
-   2. 写的方法有两种
-      1. 在componentWillMount中利用this.setState({}) 传递一个空的object。render会在state更新是渲染页面，这个方法可以间接地更新render值
+
+异步action和同步action
+
+action -> object 同步action
+
+action -> function 异步action
+
+异步action总结
+1. 明确，延迟的动作不想交给组件自身，想要交给action 
+2. 何时需要异步action：想要对状态惊醒操作，但是具体的数据靠异步任务返回（非必须）
+3. 具体编码
+   1. yarn add redux-thunk，并配置在store中
+   2. 创建action的函数不再返回一般对象，而是一个函数，在该函数中写异步任务
+   3. 异步任务有结果后，分发一个同步action区真正操作数据
+4. NOTE: 异步action不是必须要写的，完全可以自己等待异步任务的结果后再去分发同步action
+
+
+
+
+
+<img src="../imgs/react-redux模型图.png">

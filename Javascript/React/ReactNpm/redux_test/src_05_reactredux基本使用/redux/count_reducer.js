@@ -7,7 +7,7 @@ import { ADD, MINUS } from './constant'
 const initState = 0
 // reducer只用于处理核心问题
 function countReducer(preState = initState, action) {
-    console.log(preState, action)
+    console.log("From Reducer ",preState, action)
     const { type, data } = action
 
     switch (type) {

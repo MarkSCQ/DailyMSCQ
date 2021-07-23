@@ -1027,7 +1027,7 @@ Redux
 2. 一个组件需要改变另一个组件的状态(通信)
 3. 总体原则，能不用就不用，如果不用会导致比较难得实现才会考虑使用。
 
-1. 加法器总结
+4. 加法器总结
    1. 去除 Count 组件自身状态
    2. .src 下创建 redux 相关文件
       1. redux folder。 注意，引入时请确保使用正确的引用方式，不然会出错
@@ -1042,35 +1042,55 @@ Redux
       1. reducer 的本质是一个函数，接收：preState,action 返回加工后的状态
       2. reduce 人有两个作用，初始化状态，加工状态
       3. reducer 被第一次调用时，是 store 自动触发的
-           - 传递的 preState 是 undefined
-           - 传递的 action是：{type:'@@REDUX/INIT_a.2.b.4}
-         (因此需要给一个初始值，如果不想要 preStateb是 undefined)
-   5. 在index.js中检测store状态的改变，一旦发生改变就可以重新渲染<App/>
-      1. 注意redux只负责状态管理至于状态的钢鞭驱动着页面展示的过程需要我们自己写
+         - 传递的 preState 是 undefined
+         - 传递的 action 是：{type:'@@REDUX/INIT_a.2.b.4}
+           (因此需要给一个初始值，如果不想要 preStateb 是 undefined)
+   5. 在 index.js 中检测 store 状态的改变，一旦发生改变就可以重新渲染<App/>
+      1. 注意 redux 只负责状态管理至于状态的钢鞭驱动着页面展示的过程需要我们自己写
       2. 写的方法有两种
-         1. 在componentWillMount中利用this.setState({}) 传递一个空的object。render会在state更新是渲染页面，这个方法可以间接地更新render值
-2. 加法器完整版总结
-   1. 新增文件count_action.js 专门用于创建action对象
+         1. 在 componentWillMount 中利用 this.setState({}) 传递一个空的 object。render 会在 state 更新是渲染页面，这个方法可以间接地更新 render 值
+5. 加法器完整版总结
+   1. 新增文件 count_action.js 专门用于创建 action 对象
    2. constant.js 中写常量名，避免手滑写错变量名字符串等信息
 
+异步 action 和同步 action
 
-异步action和同步action
+action -> object 同步 action
 
-action -> object 同步action
+action -> function 异步 action
 
-action -> function 异步action
+异步 action 总结
 
-异步action总结
-1. 明确，延迟的动作不想交给组件自身，想要交给action 
-2. 何时需要异步action：想要对状态惊醒操作，但是具体的数据靠异步任务返回（非必须）
+1. 明确，延迟的动作不想交给组件自身，想要交给 action
+2. 何时需要异步 action：想要对状态惊醒操作，但是具体的数据靠异步任务返回（非必须）
 3. 具体编码
-   1. yarn add redux-thunk，并配置在store中
-   2. 创建action的函数不再返回一般对象，而是一个函数，在该函数中写异步任务
-   3. 异步任务有结果后，分发一个同步action区真正操作数据
-4. NOTE: 异步action不是必须要写的，完全可以自己等待异步任务的结果后再去分发同步action
-
-
-
-
+   1. yarn add redux-thunk，并配置在 store 中
+   2. 创建 action 的函数不再返回一般对象，而是一个函数，在该函数中写异步任务
+   3. 异步任务有结果后，分发一个同步 action 区真正操作数据
+4. NOTE: 异步 action 不是必须要写的，完全可以自己等待异步任务的结果后再去分发同步 action
 
 <img src="../imgs/react-redux模型图.png">
+求和案例，react-redux基本使用
+1. 明确两个概念
+   1. UI组件，不能使用任何redux的api，只负责页面的呈现和交互
+   2. 容器组件，负责和redux通信，把结果交给UI组件
+2. 如何创建一个容器组件，靠react-redux的connect函数
+   1. connect(mapStateToProps, mapDispatchToProps) (UI组件)
+      -   mapStateToProps：映射状态，返回值是一个对象
+      -   mapDispatchToProps：映射操作状态的方法，返回值是一个对象
+3. NOTE：容器组件中的store是靠props穿进去的，而不是在容器组件中直接引入  
+   NOTE：mapDispatchToProps也可以写成一个对象
+
+
+ 求和案例 react-redux优化
+ 1. 容器组件和UI组件混合成一个文件（注意暴露问题）
+ 2. 无需自己给容器组件传递store，给<App/>包裹一个<Provider store={store}>即可
+ 3. 使用了react-redux后也不用再自己检测redux中状态的改变了，容器组件可以自动完成这个工作
+ 4. mapDispatchToProps也可以简单地写成一个对象
+ 5. 一个组件要和redux打交道要经过哪几步？
+    1. 定义UI组件
+    2. 引入connect生成一个容器组件并暴露
+       1. connect(mapStateToProps,mapDispatchToProps)(UIComponnet)
+       2. mapStateToProps传递状态，mapDIspatchToProps指定完成当前操作的function名，该function的名字可在action中获取，具体方法的执行在reducer中获取，这里的获取的前提是自己写好这两个file
+       3. 在UI组建中通过this.props.xxxx进行读取和操作状态
+       4. 

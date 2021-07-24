@@ -2,14 +2,14 @@
 
 import React, { Component } from 'react'
 
-import CountUI from './container/Count'
+import Count from './containers/Count'
 
 
 export default class App extends Component {
   render() {
     return (
       <div>
-        <CountUI />
+        <Count />
       </div>
     )
   }

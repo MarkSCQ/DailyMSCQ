@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>Promise Time test</head>
+
+<body>
+
+
+    <script type="text/javascript">
+
+        function test(variable, time) {
+            setTimeout(() => {
+                console.log("this is from async fun ", variable)
+            }, time);
+        }
+        function test1(variable) {
+            console.log("this is from async fun ", variable)
+        }
+
+        async function wrapTest1() {
+            console.log("Before Test 1")
+            let val = await test1(1)
+            console.log("----------------------- 1")
+            console.log("After Test 1")
+        }
+        async function wrapTest2() {
+            console.log("Before Test 2")
+            let val = await test1(2)
+            console.log("----------------------- 2")
+
+            console.log("After Test 2")
+        }
+
+        wrapTest1()
+        console.log("-----------------------MID")
+        wrapTest2()
+        // function getSomething() {
+        //     return "something";
+        // }
+
+        // async function testAsync() {
+        //     return Promise.resolve("hello async");
+        // }
+
+        // async function test() {
+        //     const v1 = await getSomething();
+        //     const v2 = await testAsync();
+        //     console.log(v1, v2);
+        // }
+
+        // test();
+    </script>
+
+
+</body>
+
+</html>

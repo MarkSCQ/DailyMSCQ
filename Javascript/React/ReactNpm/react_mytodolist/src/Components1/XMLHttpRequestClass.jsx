@@ -15,7 +15,7 @@ export default class XMLHttpRequestClass extends Component {
 
     XMLHttpRequestData = () => {
         return new Promise((resolve, reject) => {
-            const xhr = new XMLHttpRequest();
+            const xhr = new XMLHttpRequest(); //XMLHttpRequest (XHR) objects are used to interact with servers. 
             xhr.responseType = "json"
             // Initializes a request.
             xhr.open('GET', 'https://randomuser.me/api')

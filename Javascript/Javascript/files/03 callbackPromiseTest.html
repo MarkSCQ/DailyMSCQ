@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>2333</title>
+</head>
+
+<body>
+    <div id="result"></div>
+    <button id="btn">CLICKME!</button>
+    <script type="text/javascript">
+
+        function test1(num) {
+            return () => {
+                document.getElementById("result").innerText = "hello world " + num
+            }
+        }
+        // param
+        function test2(num) {
+            document.getElementById("result").innerText = "hello world " + num
+        }
+        // method 1
+        // document
+        //     .getElementById("btn")
+        //     .addEventListener('click', () => {
+        //         document.getElementById("result").innerText = "hello world"
+        //     })
+        // method 2
+        document
+            .getElementById("btn")
+            .addEventListener('click', test1(123))
+
+    </script>
+</body>
+
+</html>

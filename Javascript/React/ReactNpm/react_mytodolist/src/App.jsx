@@ -5,8 +5,7 @@ import { Button } from 'antd';
 import './App.less';
 // import FetchWithClass from './Components/FetchWithClass';
 // import AxiosWithClass from './Components/AxiosWithClass';
-import GetData from './Components4/GetData';
-
+import Todo from './Components5/Todo';
 
 // import 'antd/dist/antd.css'
 
@@ -21,10 +20,8 @@ export default class App extends Component {
                 <Button type="link">Link Button</Button> <br />
                 <Button type="text">Text Button</Button> <br />
                 <Button type="default">Default Button</Button> <br /> */}
-                <GetData />
-                <hr />
-                {/* <FetchWithClass /> */}
-                <hr />
+                <Todo />
+                 {/* <FetchWithClass /> */}
                 {/* <XHRwithClass /> */}
                 {/* <AxiosWithClass /> */}
             </div>

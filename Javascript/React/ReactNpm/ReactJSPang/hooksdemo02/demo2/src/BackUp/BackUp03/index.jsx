@@ -13,7 +13,6 @@ import { nanoid } from 'nanoid'
 import moment from 'moment';
 
 import Item from '../Item'
-import '../table.css'
 
 export default class Todo extends Component {
 
@@ -27,6 +26,10 @@ export default class Todo extends Component {
         newinfo: { id: undefined, issues: "", price: 0, date: "", status: false, isNew: true },
     }
 
+    // inputRef = React.createRef()
+    // inputDateRef = React.createRef()
+    // inputIssueRef = React.createRef()
+    // inputPriceRef = React.createRef()
 
     formRef = React.createRef()
 
@@ -36,6 +39,14 @@ export default class Todo extends Component {
             return info.id !== id
         })
         this.setState({ infos: new_infos })
+    }
+
+    addInfoToState = (info) => {
+        if (info.trim().length === 0) {
+            alert('Cannot add empty contents')
+            return
+        }
+        this.setState({ infos: [...this.state.infos, { id: nanoid(), issues: info, status: false }] })
     }
 
     inputInfo = (field) => {
@@ -52,6 +63,13 @@ export default class Todo extends Component {
         }
     }
 
+    addProcess = () => {
+        const inputVal = this.inputRef.current.input.value
+        this.addInfoToState(inputVal)
+        this.inputRef.current.setValue("")
+    }
+
+
     dateGetter = (memontObject) => {
         this.setState({
             newinfo: {
@@ -63,10 +81,14 @@ export default class Todo extends Component {
     }
 
     resetNew = () => {
-        console.log(this.formRef)
-
         this.formRef.current.resetFields(["datepicker", "issueinput", "price"]);
         this.setState({ newinfo: { id: 0, issues: "", date: "", status: false, isNew: true } })
+    }
+
+    setWithField = (fieldName) => {
+        return (event) => {
+            this.setState({ newinfo: { ...this.state.newinfo, [fieldName]: event.target.value } })
+        }
     }
 
     makeData = (data) => {
@@ -92,8 +114,26 @@ export default class Todo extends Component {
         this.resetNew()
     }
 
+    // formFun = () => {
+    //     const form = Form();
+    //     const onReset = () => {
+    //         form.resetFields();
+    //     };}
+
+    onReset = () => {
+        console.log("123")
+        console.log(this.formRef)
+        console.log("321")
+
+    };
     render() {
         const { infos } = this.state
+        /* in nodejs
+        const Moment = require('moment')
+        const array = [{date:"2018-05-11"},{date:"2018-05-12"},{date:"2018-05-10"}]
+        const sortedArray  = array.sort((a,b) => new Moment(a.date).format('YYYYMMDD') - new Moment(b.date).format('YYYYMMDD'))
+        console.log(sortedArray)
+         */
         // ! define the table
         const columns = [
             {
@@ -102,6 +142,7 @@ export default class Todo extends Component {
                 key: 'Date',
                 //     sorter: (a, b) => a.age - b.age,
                 sorter: (a, b) => {
+
                     return new moment(a.Date).format('YYYYMMDD') - new moment(b.Date).format('YYYYMMDD')
                 }
             },
@@ -109,7 +150,6 @@ export default class Todo extends Component {
                 title: 'Issues',
                 dataIndex: 'Issues',
                 key: 'Issues',
-                // onFilter: (value, record) => record.name.indexOf(value) === 0,
             },
             {
                 title: 'Price',
@@ -124,56 +164,55 @@ export default class Todo extends Component {
         return (
             <div style={{ margin: "50px" }}>
 
-                <Form
-                    ref={this.formRef}
-                    labelCol={{ span: 8 }}
-                    wrapperCol={{ span: 16 }}>
-
-                    {/* <label><b>Date: &nbsp;&nbsp;</b></label> */}
-                    <Form.Item
-                        name="datepicker"
-                        label="Date"
+                <Form ref={this.formRef}>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td><label><b>Date: &nbsp;</b></label> </td>
+                                <td>
+                                    <Form.Item name="datepicker" >
+                                        <DatePicker
+                                            style={{ width: "330px" }}
+                                            onChange={this.dateGetter}
+                                        />
+                                    </Form.Item>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label><b>Content: &nbsp;</b></label></td>
+                                <td>
+                                    <Form.Item name="issueinput">
+                                        <Input
+                                            style={{ width: "330px" }}
+                                            onKeyUp={this.inputInfo("issues")} />
+                                    </Form.Item>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label><b>Price: &nbsp;</b></label></td>
+                                <td>
+                                    <Form.Item name="price" >
+                                        <Input
+                                            type="number"
+                                            style={{ width: "330px" }}
+                                            onKeyUp={this.inputInfo("price")} />
+                                    </Form.Item>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <Button
+                        onClick={this.submitForm}
+                        type="primary"
+                        style={{ width: "80px", height: "25px", fontSize: "10px", borderRadius: "8px" }}
                     >
-                        <DatePicker
-                            style={{ width: "330px" }}
-                            onChange={this.dateGetter}
-                        />
-                    </Form.Item>
-
-                    <Form.Item name="issueinput" label="Issue">
-                        <Input
-                            style={{ width: "330px" }}
-                            onKeyUp={this.inputInfo("issues")} />
-                    </Form.Item>
-
-
-                    <Form.Item name="price" label="Price">
-                        <Input
-                            type="number"
-                            style={{ width: "330px" }}
-                            onKeyUp={this.inputInfo("price")} />
-                    </Form.Item>
-                    <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-
-                        <Button
-                            onClick={this.submitForm}
-                            type="primary"
-                            style={{ width: "80px", height: "25px", fontSize: "10px", borderRadius: "8px" }}
-                        >
-                            <b>Add</b>
-                        </Button>
-                    </Form.Item>
+                        <b>Add</b>
+                    </Button>
 
                 </Form>
 
-                <Table
-                    columns={columns}
-                    dataSource={data}
-                    pagination={false}
-                    onChange={this.onChangeTb}
-                    style={{ width: "600px" }}
-                />
-            </div >
+                <Table columns={columns} dataSource={data} pagination={false} onChange={this.onChangeTb} />
+            </div>
         )
     }
 }

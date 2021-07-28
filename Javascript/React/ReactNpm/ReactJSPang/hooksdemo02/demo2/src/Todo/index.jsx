@@ -27,8 +27,9 @@ export default class Todo extends Component {
     }
 
     inputRef = React.createRef()
-
-
+    inputDateRef = React.createRef()
+    inputIssueRef = React.createRef()
+    inputPriceRef = React.createRef()
     deleteProcess = (id) => {
         console.log("@ ", id)
         const new_infos = this.state.infos.filter(info => {
@@ -45,12 +46,17 @@ export default class Todo extends Component {
         this.setState({ infos: [...this.state.infos, { id: nanoid(), issues: info, status: false }] })
     }
 
-    inputInfo = (event) => {
-        const { target, keyCode } = event
+    inputInfo = (field) => {
+        return (event) => {
+            const { target, keyCode } = event
 
-        if (keyCode === 13) {
-            this.addInfoToState(target.value)
-            this.inputRef.current.setValue("")
+            this.setState({
+                newinfo: {
+                    ...this.state.newinfo,
+                    [field]: target.value
+                }
+            })
+            console.log("@ ", this.state.newinfo)
         }
     }
 
@@ -61,41 +67,43 @@ export default class Todo extends Component {
     }
 
 
-    dateGetter = async (memontObject) => {
-        const prevStateNewInfo = { ...this.state.newinf }
-        console.log(typeof (moment(memontObject).format('YYYY-MM-DD')))
-        console.log(prevStateNewInfo)
-
-        await this.setState({
+    dateGetter = (memontObject) => {
+        this.setState({
             newinfo: {
                 ...this.state.newinfo,
-                date: moment(memontObject).format('YYYY-MM-DD')
+                date: moment(memontObject).format('YYYY-MM-DD'),
+                id: nanoid()
             }
         })
-
-        console.log(this.state.date)
-        console.log(this.state)
-        // return moment(memontObject).format('YYYY-MM-DD')
-        // this.setState()
-
     }
 
     resetNew = () => {
+        this.inputDateRef.current.value = ""
         this.setState({ newinfo: { id: 0, issues: "", date: "", status: false, isNew: true } })
     }
 
     setWithField = (fieldName) => {
         return (event) => {
-            this.setState({ newinfo: { id: 0, issues: "", date: "", status: false, isNew: true } })
+            this.setState({ newinfo: { ...this.state.newinfo, [fieldName]: event.target.value } })
         }
     }
 
     makeData = (data) => {
+        console.log("data is ", data)
         return data.map(info => {
             return { key: info.id, Issues: info.issues, Date: info.date, Price: info.price }
         })
     }
 
+    submitForm = () => {
+        const oldinfos = this.state.infos
+        oldinfos.push(this.state.newinfo)
+        console.log(this.state.oldinfos)
+        this.setState({ infos: oldinfos })
+        this.resetNew()
+        console.log(this.state.infos)
+
+    }
     render() {
         const { infos } = this.state
 
@@ -117,8 +125,10 @@ export default class Todo extends Component {
                 key: 'Price',
             },
         ];
+        console.log('infos@!', this.state.infos)
 
         const data = this.makeData(this.state.infos)
+        console.log(this.state.newinfo)
         return (
             <div style={{ margin: "50px" }}>
 
@@ -127,20 +137,32 @@ export default class Todo extends Component {
                         <tbody>
                             <tr>
                                 <td><label><b>Date: &nbsp;</b></label> </td>
-                                <td><DatePicker style={{ height: "25px" }} onChange={this.dateGetter} /><br /></td>
+                                <td><DatePicker
+                                    style={{ height: "25px" }}
+                                    onChange={this.dateGetter}
+                                    ref={this.inputDateRef}
+                                /><br /></td>
                             </tr>
                             <tr>
                                 <td><label><b>Content: &nbsp;</b></label></td>
-                                <td><Input style={{ width: "330px", height: "25px" }} ref={this.inputRef} onKeyUp={this.inputInfo} /></td>
+                                <td><Input
+                                    style={{ width: "330px", height: "25px" }}
+                                    ref={this.inputIssueRef}
+                                    onKeyUp={this.inputInfo("issues")} /></td>
                             </tr>
                             <tr>
                                 <td><label><b>Price: &nbsp;</b></label></td>
-                                <td><Input type="number" style={{ width: "330px", height: "25px" }} ref={this.inputRef} onKeyUp={this.inputInfo} /></td>
+                                <td><Input
+                                    type="number"
+                                    style={{ width: "330px", height: "25px" }}
+                                    ref={this.inputPriceRef}
+                                    onKeyUp={this.inputInfo("price")} /></td>
                             </tr>
                         </tbody>
                     </table>
 
                     <Button
+                        onClick={this.submitForm}
                         type="primary"
                         style={{ width: "80px", height: "25px", fontSize: "10px" }}
                     >

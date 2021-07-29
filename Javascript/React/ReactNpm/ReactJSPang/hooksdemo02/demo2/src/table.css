@@ -1,3 +1,17 @@
-#td {
-  vertical-align: middle !important;
+/* .ant-btn-primary {
+  background: white;
+  border-color: white;
+}
+
+.ant-btn-primary:hover {
+  background: pink;
+  border-color: pink;
+} */
+
+.clickRowStyl {
+  background-color: #f81c3a;
+}
+.clickRowStyl1{
+  background-color: #f0f0f0;
+
 }

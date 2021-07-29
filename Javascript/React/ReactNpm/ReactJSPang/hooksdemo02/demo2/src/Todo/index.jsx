@@ -15,16 +15,19 @@ import moment from 'moment';
 import Item from '../Item'
 import '../table.css'
 
+
+// todo https://github.com/xitingvip/EditableTable/blob/master/EditableTable.js
 export default class Todo extends Component {
 
     state = {
         infos: [
-            { id: 1, issues: "Racing car sprays burning fuel into crowd.", price: 1, date: "2021-07-11", status: false, isNew: false },
-            { id: 2, issues: "Japanese princess to wed commoner.", price: 2, date: "2021-07-15", status: false, isNew: false },
-            { id: 3, issues: "Australian walks 100km after outback crash.", price: 4, date: "2021-07-12", status: false, isNew: false },
-            { id: 4, issues: "Yelena Belova, Natasha Romanoff", price: 3, date: "2021-07-14", status: false, isNew: false }
+            { id: 1, issues: "Racing car sprays burning fuel into crowd.", price: 1, date: "2021-07-11", isNew: false },
+            { id: 2, issues: "Japanese princess to wed commoner.", price: 2, date: "2021-07-15", isNew: false },
+            { id: 3, issues: "Australian walks 100km after outback crash.", price: 4, date: "2021-07-12", isNew: false },
+            { id: 4, issues: "Yelena Belova, Natasha Romanoff", price: 3, date: "2021-07-14", isNew: false }
         ],
-        newinfo: { id: undefined, issues: "", price: 0, date: "", status: false, isNew: true },
+        newinfo: { id: undefined, issues: "", price: 0, date: "", isNew: true },
+        editingKey: ''
     }
 
 
@@ -37,6 +40,7 @@ export default class Todo extends Component {
         })
         this.setState({ infos: new_infos })
     }
+
     deleteIssues = (ct) => {
         return () => {
             console.log("@!!!", ct)
@@ -47,6 +51,7 @@ export default class Todo extends Component {
             this.setState({ infos: new_infos })
         }
     }
+
     editProcess = (id) => {
 
     }
@@ -76,7 +81,7 @@ export default class Todo extends Component {
 
     resetNew = () => {
         this.formRef.current.resetFields(["datepicker", "issueinput", "price"]);
-        this.setState({ newinfo: { id: 0, issues: "", date: "", status: false, isNew: true } })
+        this.setState({ newinfo: { id: 0, issues: "", date: "", isNew: true } })
     }
 
     makeData = (data) => {
@@ -85,19 +90,7 @@ export default class Todo extends Component {
         })
     }
 
-    onClickRow = (record) => {
-        return {
-            onClick: () => {
-                this.setState({
-                    rowId: record.id,
-                });
-            },
-        };
-    }
-
-
     setRowClassName = (record) => {
-        console.log(this.state.rowId)
         console.log(record)
         // console.log("@@",record)
         // let issues = this.state.infos.filter(info=>{
@@ -111,13 +104,15 @@ export default class Todo extends Component {
         console.log(rowID)
         console.log(record.key)
         console.log(record.key === rowID)
-        return record.key === rowID ? 'clickRowStyl1' : 'clickRowStyl';
-
+        return record.key === rowID ? 'clickRowStyl1' : '';
     }
+
+
+
     submitForm = () => {
         // check if submission is valid
         const newInfo = this.state.newinfo
-        // newinfo: { id: undefined, issues: "", price: 0, date: "", status: false, isNew: true },
+        // newinfo: { id: undefined, issues: "", price: 0, date: "", isNew: true },
         if (newInfo.id === undefined || newInfo.issues.length === 0) {
             this.resetNew()
             alert("invalid submission")
@@ -141,19 +136,21 @@ export default class Todo extends Component {
                 sorter: (a, b) => {
                     return new moment(a.Date).format('YYYYMMDD') - new moment(b.Date).format('YYYYMMDD')
                 },
-
+                editable: true,
             },
             {
                 title: 'Issues',
                 dataIndex: 'Issues',
                 key: 'Issues',
                 // onFilter: (value, record) => record.name.indexOf(value) === 0,
+                editable: true,
             },
             {
                 title: 'Price',
                 dataIndex: 'Price',
                 key: 'Price',
                 sorter: (a, b) => a.Price - b.Price,
+                editable: true,
             },
             {
                 title: "Actions",
@@ -225,17 +222,27 @@ export default class Todo extends Component {
                 </Form>
 
                 <Table
+                    style={{ backgroundColor: "pink" }}
                     columns={columns}
                     dataSource={data}
                     pagination={false}
                     onChange={this.onChangeTb}
-                    style={{ width: "700px" }}
+                    style={{ width: "800px" }}
                     // rowClassName={this.setRowClassName}
                     onRow={(record) => {
                         return {
-                            onMouseEnter: event=>{
-                                console.log(event)
+                            onMouseEnter: (event) => {
+                                let tr = event.target.parentNode;
+                                tr.style.color = "red";
+                                // tr.style.fontWeight = 'bold';
+
+                            },
+                            onMouseLeave: (event) => {
+                                let tr = event.target.parentNode;
+                                tr.style.color = "black";
+                                // tr.style.fontWeight = '';
                             }
+
                         }
                     }}
                 />

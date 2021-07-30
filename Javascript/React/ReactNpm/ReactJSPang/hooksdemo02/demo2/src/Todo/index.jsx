@@ -15,7 +15,11 @@ import moment from 'moment';
 import Item from '../Item'
 import '../table.css'
 
-
+/**
+ * ! Two-way binding for form, please read below for details.
+ * ! Two-way binding gives components in your application a way to share data. 
+ * ! Use two-way binding to listen for events and update values simultaneously between parent and child components.
+ */
 // todo https://github.com/xitingvip/EditableTable/blob/master/EditableTable.js
 export default class Todo extends Component {
 
@@ -112,7 +116,6 @@ export default class Todo extends Component {
     submitForm = () => {
         // check if submission is valid
         const newInfo = this.state.newinfo
-        // newinfo: { id: undefined, issues: "", price: 0, date: "", isNew: true },
         if (newInfo.id === undefined || newInfo.issues.length === 0) {
             this.resetNew()
             alert("invalid submission")

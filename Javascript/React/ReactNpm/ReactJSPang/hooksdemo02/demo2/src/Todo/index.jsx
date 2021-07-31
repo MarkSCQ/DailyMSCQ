@@ -27,12 +27,7 @@ import '../table.css'
 // todo https://github.com/xitingvip/EditableTable/blob/master/EditableTable.js
 
 
-/*
-{ id: 1, issues: "Racing car sprays burning fuel into crowd.", price: 1, date: "2021-07-11", isNew: false },
-{ id: 2, issues: "Japanese princess to wed commoner.", price: 2, date: "2021-07-15", isNew: false },
-{ id: 3, issues: "Australian walks 100km after outback crash.", price: 4, date: "2021-07-12", isNew: false },
-{ id: 4, issues: "Yelena Belova, Natasha Romanoff", price: 3, date: "2021-07-14", isNew: false }
-*/
+
 export default class Todo extends Component {
 
     state = {
@@ -85,7 +80,7 @@ export default class Todo extends Component {
         this.setState({
             newinfo: {
                 ...this.state.newinfo,
-                date: moment(memontObject).format('YYYY-MM-DD'),
+                date: moment(memontObject).format('YYYY-MM-DD, H:mm'),
                 id: nanoid()
             }
         })
@@ -137,7 +132,7 @@ export default class Todo extends Component {
             .then(data => {
                 console.log(JSON.stringify(data))
                 console.log(data)
-                this.setState({infos:data})
+                this.setState({ infos: data })
             })
     }
 
@@ -152,7 +147,7 @@ export default class Todo extends Component {
                 //     sorter: (a, b) => a.age - b.age,
                 sorter: (a, b) => {
                     console.log(a.Date)
-                    return new moment(a.Date).format("LL , H:mm") - new moment(b.Date).format("LL , H:mm")
+                    return new moment(a.Date).format("YYYYMMDDHmm") - new moment(b.Date).format("YYYYMMDDHmm")
                 },
                 editable: true,
             },

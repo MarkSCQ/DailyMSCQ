@@ -12,7 +12,11 @@ import 'antd/dist/antd.css'
 import { nanoid } from 'nanoid'
 import moment from 'moment';
 
-import Item from '../Item'
+// import Item from '../Item'
+
+import { getAllData } from './Methods/getdata';
+import { getByDate } from './Methods/getdata';
+import { DateYMD } from './Methods/timeProcess';
 import '../table.css'
 
 /**
@@ -21,16 +25,20 @@ import '../table.css'
  * ! Use two-way binding to listen for events and update values simultaneously between parent and child components.
  */
 // todo https://github.com/xitingvip/EditableTable/blob/master/EditableTable.js
+
+
+/*
+{ id: 1, issues: "Racing car sprays burning fuel into crowd.", price: 1, date: "2021-07-11", isNew: false },
+{ id: 2, issues: "Japanese princess to wed commoner.", price: 2, date: "2021-07-15", isNew: false },
+{ id: 3, issues: "Australian walks 100km after outback crash.", price: 4, date: "2021-07-12", isNew: false },
+{ id: 4, issues: "Yelena Belova, Natasha Romanoff", price: 3, date: "2021-07-14", isNew: false }
+*/
 export default class Todo extends Component {
 
     state = {
         infos: [
-            { id: 1, issues: "Racing car sprays burning fuel into crowd.", price: 1, date: "2021-07-11", isNew: false },
-            { id: 2, issues: "Japanese princess to wed commoner.", price: 2, date: "2021-07-15", isNew: false },
-            { id: 3, issues: "Australian walks 100km after outback crash.", price: 4, date: "2021-07-12", isNew: false },
-            { id: 4, issues: "Yelena Belova, Natasha Romanoff", price: 3, date: "2021-07-14", isNew: false }
         ],
-        newinfo: { id: undefined, issues: "", price: 0, date: "", isNew: true },
+        newinfo: { id: undefined, content: "", price: 0, date: "", isNew: true },
         editingKey: ''
     }
 
@@ -85,23 +93,18 @@ export default class Todo extends Component {
 
     resetNew = () => {
         this.formRef.current.resetFields(["datepicker", "issueinput", "price"]);
-        this.setState({ newinfo: { id: 0, issues: "", date: "", isNew: true } })
+        this.setState({ newinfo: { id: 0, content: "", date: "", isNew: true } })
     }
 
     makeData = (data) => {
         return data.map(info => {
-            return { key: info.id, Issues: info.issues, Date: info.date, Price: info.price }
+            return { key: info.id, Content: info.content, Date: DateYMD(info.date), Price: info.price }
         })
     }
 
     setRowClassName = (record) => {
         console.log(record)
-        // console.log("@@",record)
-        // let issues = this.state.infos.filter(info=>{
-        //     return info.issues===record.Issues
-        // })[0].issues
-        // console.log("#F",issues)
-        // return record.Issues === issues? 'clickRowStyl' : 'clickRowStylBT';
+
         const rowID = this.state.infos.find(info => {
             return info.id === record.key
         }).id
@@ -116,7 +119,7 @@ export default class Todo extends Component {
     submitForm = () => {
         // check if submission is valid
         const newInfo = this.state.newinfo
-        if (newInfo.id === undefined || newInfo.issues.length === 0) {
+        if (newInfo.id === undefined || newInfo.content.length === 0) {
             this.resetNew()
             alert("invalid submission")
             return
@@ -125,6 +128,17 @@ export default class Todo extends Component {
         oldinfos.push(newInfo)
         this.setState({ infos: oldinfos })
         this.resetNew()
+    }
+
+    componentDidMount() {
+
+        getAllData("getData/api/taskList")
+            .then(response => { return response.data })
+            .then(data => {
+                console.log(JSON.stringify(data))
+                console.log(data)
+                this.setState({infos:data})
+            })
     }
 
     render() {
@@ -137,14 +151,15 @@ export default class Todo extends Component {
                 key: 'Date',
                 //     sorter: (a, b) => a.age - b.age,
                 sorter: (a, b) => {
-                    return new moment(a.Date).format('YYYYMMDD') - new moment(b.Date).format('YYYYMMDD')
+                    console.log(a.Date)
+                    return new moment(a.Date).format("LL , H:mm") - new moment(b.Date).format("LL , H:mm")
                 },
                 editable: true,
             },
             {
-                title: 'Issues',
-                dataIndex: 'Issues',
-                key: 'Issues',
+                title: 'Content',
+                dataIndex: 'Content',
+                key: 'Content',
                 // onFilter: (value, record) => record.name.indexOf(value) === 0,
                 editable: true,
             },
@@ -201,7 +216,7 @@ export default class Todo extends Component {
                     <Form.Item name="issueinput" label={<b>Issue</b>}>
                         <Input
                             style={{ width: "330px" }}
-                            onKeyUp={this.inputInfo("issues")} />
+                            onKeyUp={this.inputInfo("content")} />
                     </Form.Item>
 
 
@@ -236,7 +251,7 @@ export default class Todo extends Component {
                         return {
                             onMouseEnter: (event) => {
                                 let tr = event.target.parentNode;
-                                tr.style.color = "red";
+                                tr.style.color = "blue";
                                 // tr.style.fontWeight = 'bold';
 
                             },

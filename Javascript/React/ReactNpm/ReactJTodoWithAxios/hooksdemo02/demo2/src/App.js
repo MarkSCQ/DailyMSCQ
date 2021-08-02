@@ -7,7 +7,7 @@ export default class App extends Component {
     return (
       <div>
         <Todo />
-        <Userdata />
+        {/* <Userdata /> */}
 
       </div>
     )

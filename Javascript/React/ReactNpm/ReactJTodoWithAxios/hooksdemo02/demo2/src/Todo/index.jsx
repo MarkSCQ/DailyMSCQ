@@ -16,8 +16,12 @@ import moment from 'moment';
 
 import { getAllData } from './Methods/getdata';
 import { getByDate } from './Methods/getdata';
+
+import { addRecord } from './Methods/senddata';
+
 import { DateYMD } from './Methods/timeProcess';
-import '../table.css'
+
+// import '../table.css'
 
 /**
  * ! Two-way binding for form, please read below for details.
@@ -33,33 +37,24 @@ export default class Todo extends Component {
     state = {
         infos: [
         ],
-        newinfo: { id: undefined, content: "", price: 0, date: "", isNew: true },
+        newinfo: { taskid: undefined, content: "", price: 0, date: "", tag: "" },
         editingKey: ''
     }
 
 
     formRef = React.createRef()
 
-    deleteProcess = (id) => {
-        console.log("@ ", id)
-        const new_infos = this.state.infos.filter(info => {
-            return info.id !== id
-        })
-        this.setState({ infos: new_infos })
-    }
 
-    deleteIssues = (ct) => {
+    deleteRecord = (ct) => {
         return () => {
-            console.log("@!!!", ct)
-            console.log("@ ", ct.key)
             const new_infos = this.state.infos.filter(info => {
-                return info.id !== ct.key
+                return info.taskid !== ct.key
             })
             this.setState({ infos: new_infos })
         }
     }
 
-    editProcess = (id) => {
+    editProcess = (taskid) => {
 
     }
 
@@ -72,7 +67,7 @@ export default class Todo extends Component {
                     [field]: target.value
                 }
             })
-            console.log("@ ", this.state.newinfo)
+            // console.log("@ ", this.state.newinfo)
         }
     }
 
@@ -80,33 +75,27 @@ export default class Todo extends Component {
         this.setState({
             newinfo: {
                 ...this.state.newinfo,
-                date: moment(memontObject).format('YYYY-MM-DD, H:mm'),
-                id: nanoid()
+                date: moment(memontObject).format('YYYY-MM-DD'),
+                taskid: nanoid()
             }
         })
     }
 
     resetNew = () => {
         this.formRef.current.resetFields(["datepicker", "issueinput", "price"]);
-        this.setState({ newinfo: { id: 0, content: "", date: "", isNew: true } })
+        this.setState({ newinfo: { taskid: "", content: "", date: "", tag: "" } })
     }
 
     makeData = (data) => {
+        
+        data.sort((a, b) => {
+                return new Date(a.date) - new Date(b.date)
+            })
+
         return data.map(info => {
-            return { key: info.id, Content: info.content, Date: DateYMD(info.date), Price: info.price }
+ 
+            return { key: info.taskid, Content: info.content, Date: DateYMD(info.date), Price: info.price }
         })
-    }
-
-    setRowClassName = (record) => {
-        console.log(record)
-
-        const rowID = this.state.infos.find(info => {
-            return info.id === record.key
-        }).id
-        console.log(rowID)
-        console.log(record.key)
-        console.log(record.key === rowID)
-        return record.key === rowID ? 'clickRowStyl1' : '';
     }
 
 
@@ -114,7 +103,7 @@ export default class Todo extends Component {
     submitForm = () => {
         // check if submission is valid
         const newInfo = this.state.newinfo
-        if (newInfo.id === undefined || newInfo.content.length === 0) {
+        if (newInfo.taskid === undefined || newInfo.content.length === 0) {
             this.resetNew()
             alert("invalid submission")
             return
@@ -122,6 +111,10 @@ export default class Todo extends Component {
         const oldinfos = this.state.infos
         oldinfos.push(newInfo)
         this.setState({ infos: oldinfos })
+        const { taskid, date, content, price } = this.state.newinfo
+        // ! addRecord api put here
+        addRecord("getData/api/addRecord", taskid, date, content, price)
+            .then()
         this.resetNew()
     }
 
@@ -130,7 +123,7 @@ export default class Todo extends Component {
         getAllData("getData/api/taskList")
             .then(response => { return response.data })
             .then(data => {
-                console.log(JSON.stringify(data))
+                // console.log(JSON.stringify(data))
                 console.log(data)
                 this.setState({ infos: data })
             })
@@ -146,8 +139,8 @@ export default class Todo extends Component {
                 key: 'Date',
                 //     sorter: (a, b) => a.age - b.age,
                 sorter: (a, b) => {
-                    console.log(a.Date)
-                    return new moment(a.Date).format("YYYYMMDDHmm") - new moment(b.Date).format("YYYYMMDDHmm")
+                    // console.log(a.Date)
+                    return new moment(a.Date).format("YYYYMMDD") - new moment(b.Date).format("YYYYMMDD")
                 },
                 editable: true,
             },
@@ -176,10 +169,10 @@ export default class Todo extends Component {
                             <b style={{ color: "#95de64" }}>Edit</b>
                         </Button>
                         <Button
-                            onClick={this.deleteIssues(record)}
-                            danger
-                            style={{ width: "60px", height: "25px", fontSize: "10px", borderRadius: "8px" }}>
-                            <b>Delete</b>
+                            onClick={this.deleteRecord(record)}
+                            dtype="primary"
+                            style={{ width: "60px", height: "25px", fontSize: "10px", borderRadius: "8px", background: "white", borderColor: "plum" }}>
+                            <b style={{ color: "plum" }}>Delete</b>
                         </Button>
                     </Space>
 
@@ -236,26 +229,29 @@ export default class Todo extends Component {
 
                 <Table
                     style={{ backgroundColor: "pink" }}
+                    bordered
+
                     columns={columns}
                     dataSource={data}
                     pagination={false}
                     onChange={this.onChangeTb}
                     style={{ width: "800px" }}
-                    // rowClassName={this.setRowClassName}
                     onRow={(record) => {
                         return {
                             onMouseEnter: (event) => {
                                 let tr = event.target.parentNode;
-                                tr.style.color = "blue";
-                                // tr.style.fontWeight = 'bold';
+                                for (var i = 0; i < tr.childNodes.length; i++) {
+                                    // changing the background color of each row, this need to be applied over specific tr nodes of each rows
+                                    tr.childNodes[i].style.backgroundColor = "LightSkyBlue"
 
+                                }
                             },
                             onMouseLeave: (event) => {
                                 let tr = event.target.parentNode;
-                                tr.style.color = "black";
-                                // tr.style.fontWeight = '';
+                                for (var i = 0; i < tr.childNodes.length; i++) {
+                                    tr.childNodes[i].style.backgroundColor = "white"
+                                }
                             }
-
                         }
                     }}
                 />

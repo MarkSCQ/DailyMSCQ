@@ -2,12 +2,12 @@ import moment from 'moment'
 
 
 export const DateDetail = (date) => {
-    return moment(date).format('LL , H:mm')
+    return moment(date).format('LL')
 }
 
 
 export const DateYMD = (date) => {
-    return moment(date).format("YYYY-MM-DD, H:mm");
+    return moment(date).format("YYYY-MM-DD");
 }
 
 

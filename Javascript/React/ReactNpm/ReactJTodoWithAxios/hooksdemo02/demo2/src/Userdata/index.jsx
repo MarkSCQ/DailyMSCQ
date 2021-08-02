@@ -116,13 +116,13 @@ export default class Userdata extends Component {
 
     componentDidMount() {
         let year = 2021
-        let month = 7
-        let day = 29
+        let month = 8
+        let day = 1
         getByDate(`getData/api/getByDate/${year}/${month}/${day}`)
             .then(response => {
                 console.log(response.data)
                 let d = response.data[0].date
-                let testd = moment(d).format('MMMM Do YYYY, H:mm')
+                let testd = moment(d).format('MMMM Do YYYY')
                 console.log(testd)
 
                 console.log(moment(d).format('ll'))

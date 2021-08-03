@@ -10,3 +10,8 @@ export const getByDate = (apiUrl) => {
     return axios.get(apiUrl)
 }
 
+export const CharData = (apiurl, chartType) => {
+    return axios.post(apiurl, {
+        charttype: chartType
+    })
+}

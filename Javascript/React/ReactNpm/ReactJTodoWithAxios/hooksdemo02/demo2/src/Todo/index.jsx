@@ -3,8 +3,9 @@ import React, { Component } from 'react'
 import {
     List, Input, Button,
     DatePicker, Form,
-    Table, Tag, Space, Select
+    Table, Tag, Space, Select, Divider, Row, Col, Layout, Menu
 } from 'antd'
+import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
 
 
 import 'antd/dist/antd.css'
@@ -12,13 +13,14 @@ import 'antd/dist/antd.css'
 import { nanoid } from 'nanoid'
 import moment from 'moment';
 
+
 // import Item from '../Item'
 
+import BarChart from './Chart/BarChart';
+import PieChart from './Chart/PieChart';
 import { getAllData } from './Methods/getdata';
 import { getByDate } from './Methods/getdata';
-
 import { addRecord } from './Methods/senddata';
-
 import { DateYMD } from './Methods/timeProcess';
 
 // import '../table.css'
@@ -39,12 +41,24 @@ export default class Todo extends Component {
         ],
         newinfo: { taskid: undefined, content: "", price: 0, date: "", tag: "" },
         tags: [],
-        editingKey: ''
+        editingKey: '',
+        barState: false,
+        pieState: false
+        // chartDisplay: [
+        //     {
+        //         type: "bar",
+        //         displayState: false
+        //     },
+        //     {
+        //         type: "pie",
+        //         displayState: false
+        //     }
+        // ]
     }
 
 
     formRef = React.createRef()
-
+    selectRef = React.createRef()
 
     deleteRecord = (ct) => {
         return () => {
@@ -71,7 +85,16 @@ export default class Todo extends Component {
             // console.log("@ ", this.state.newinfo)
         }
     }
-
+    selectTag = (value) => {
+        // const val = this.selectRef.current.value
+        console.log(value)
+        this.setState({
+            newinfo: {
+                ...this.state.newinfo,
+                tag: value
+            }
+        })
+    }
     dateGetter = (memontObject) => {
         this.setState({
             newinfo: {
@@ -112,6 +135,7 @@ export default class Todo extends Component {
         const oldinfos = this.state.infos
         oldinfos.push(newInfo)
         this.setState({ infos: oldinfos })
+        console.log(this.state)
         const { taskid, date, content, price, tag } = this.state.newinfo
         // ! addRecord api put here
         addRecord("getData/apicore/addRecord", date, content, price, tag)
@@ -123,7 +147,6 @@ export default class Todo extends Component {
                 data => {
                     this.setState({ infos: data.data, tags: data.tags })
                     console.log(this.state)
-
                 }
             )
         this.resetNew()
@@ -139,7 +162,22 @@ export default class Todo extends Component {
                 this.setState({ infos: data.data, tags: data.tags })
             })
     }
-
+    handleClick = e => {
+        console.log('click ', e);
+        console.log('click ', e.key);
+        // const currdisplay = this.state.chartDisplay
+        // barState:false,
+        // pieState:false
+        const currClick = e.key
+        if (currClick === "bar") {
+            this.setState({ barState: true })
+            this.setState({ pieState: false })
+        }
+        if (currClick === "pie") {
+            this.setState({ barState: false })
+            this.setState({ pieState: true })
+        }
+    };
     render() {
         const { infos } = this.state
 
@@ -153,6 +191,62 @@ export default class Todo extends Component {
             'Phone fee': "blue",
             'Network fee': "blue"
         }
+        const monthFilter = [
+            {
+                text: 'Jan',
+                value: '1',
+            },
+            {
+                text: 'Feb',
+                value: '2',
+            },
+            {
+                text: 'Mar',
+                value: '3',
+            },
+            {
+                text: 'Apr',
+                value: '4',
+            },
+            {
+                text: 'Mar',
+                value: '5',
+            },
+            {
+                text: 'June',
+                value: '6',
+            },
+            {
+                text: 'July',
+                value: '7',
+            },
+            {
+                text: 'Aug',
+                value: '8',
+            },
+            {
+                text: 'Sept',
+                value: '9',
+            },
+            {
+                text: 'Oct',
+                value: '10',
+            },
+            {
+                text: 'Nov',
+                value: '11',
+            },
+            {
+                text: 'Dec',
+                value: '12',
+            }
+        ]
+        const { SubMenu } = Menu;
+
+        const tagFilter = [
+        ]
+        const { Header, Footer, Sider, Content } = Layout;
+
         // ! define the table
         const columns = [
             {
@@ -165,14 +259,10 @@ export default class Todo extends Component {
                 editable: true,
 
                 // ! make filters and onFilter tomorrow
-                filters: [
-
-                ],
+                filters: monthFilter,
                 onFilter: (value, record) => {
-
-                    record.name.indexOf(value)
-                    console.log(value)
-                    console.log(record)
+                    const month = moment(record.Date).format("YYYY-M-D").split("-")[1]
+                    return value === month
                 },
 
             },
@@ -198,6 +288,11 @@ export default class Todo extends Component {
                     </>
                 ),
                 editable: true,
+                // filters: this.state.tags,
+                // onFilter: (value, record) => {
+                //     console.log(value)
+                //      return value === record.tag
+                // },
             },
             {
                 title: <div><b>Price</b></div>,
@@ -236,7 +331,7 @@ export default class Todo extends Component {
 
                 <Form
                     ref={this.formRef}
-                    labelCol={{ span: 3 }}
+                    labelCol={{ span: 2 }}
                     wrapperCol={{ span: 10 }}>
 
                     {/* <label><b>Date: &nbsp;&nbsp;</b></label> */}
@@ -266,7 +361,7 @@ export default class Todo extends Component {
 
                     <Form.Item name="tag" label={<b>Tags</b>} >
 
-                        <Select style={{ width: "200px" }} onKeyUp={this.inputInfo("tag")}   >
+                        <Select style={{ width: "200px" }} ref={this.selectRef} onChange={this.selectTag}   >
                             {
                                 this.state.tags.map((item) => {
                                     return <Option value={item} key={item}>{item}</Option>
@@ -278,7 +373,7 @@ export default class Todo extends Component {
 
 
 
-                    <Form.Item wrapperCol={{ offset: 3, span: 16 }}>
+                    <Form.Item wrapperCol={{ offset: 2, span: 16 }}>
 
                         <Button
                             onClick={this.submitForm}
@@ -288,40 +383,77 @@ export default class Todo extends Component {
                             <b>Add</b>
                         </Button>
                     </Form.Item>
-
-
-
                 </Form>
 
-                <Table
-                    style={{ backgroundColor: "pink" }}
-                    bordered
+                <Row>
+                    <Col span={8}>
+                        <Table
+                            style={{ backgroundColor: "pink" }}
+                            bordered
 
-                    columns={columns}
-                    dataSource={data}
-                    pagination={false}
-                    onChange={this.onChangeTb}
-                    style={{ width: "800px" }}
-                    onRow={(record) => {
-                        return {
-                            onMouseEnter: (event) => {
-                                let tr = event.target.parentNode;
-                                for (var i = 0; i < tr.childNodes.length; i++) {
-                                    // changing the background color of each row, this need to be applied over specific tr nodes of each rows
-                                    tr.childNodes[i].style.backgroundColor = "LightSkyBlue"
+                            columns={columns}
+                            dataSource={data}
+                            pagination={false}
+                            onChange={this.onChangeTb}
+                            style={{ width: "800px" }}
+                            onRow={(record) => {
+                                return {
+                                    onMouseEnter: (event) => {
+                                        let tr = event.target.parentNode;
+                                        for (var i = 0; i < tr.childNodes.length; i++) {
+                                            // changing the background color of each row, this need to be applied over specific tr nodes of each rows
+                                            tr.childNodes[i].style.backgroundColor = "LightSkyBlue"
 
+                                        }
+                                    },
+                                    onMouseLeave: (event) => {
+                                        let tr = event.target.parentNode;
+                                        for (var i = 0; i < tr.childNodes.length; i++) {
+                                            tr.childNodes[i].style.backgroundColor = "white"
+                                        }
+                                    }
                                 }
-                            },
-                            onMouseLeave: (event) => {
-                                let tr = event.target.parentNode;
-                                for (var i = 0; i < tr.childNodes.length; i++) {
-                                    tr.childNodes[i].style.backgroundColor = "white"
-                                }
-                            }
-                        }
-                    }}
-                />
-            </div >
+                            }}
+                        />
+                    </Col>
+                    <Col span={8} offset={4}>
+
+                        <Row>
+                            <Col span={4} >
+                                <Menu
+                                    onClick={this.handleClick}
+                                    style={{ width: 120 }}
+                                    defaultSelectedKeys={['bar']}
+                                    mode="inline"
+                                >
+                                    <Menu.ItemGroup key="g1" title="Charts">
+                                        <Menu.Item key="bar">Bar Chart</Menu.Item>
+                                        <Menu.Item key="pie">Pie Chart</Menu.Item>
+                                    </Menu.ItemGroup>
+                                </Menu>
+                            </Col>
+                            <Col span={4} offset={4}>
+                                <div
+                                    style={{
+                                        display: this.state.barState ? "block" : "none"
+                                    }}>
+                                    <BarChart />
+                                </div>
+                                <div
+                                    style={{
+                                        display: this.state.pieState ? "block" : "none"
+                                    }}>
+                                    <PieChart />
+                                </div>
+                            </Col>
+                        </Row>
+                    </Col>
+                </Row>
+
+
+                {/* <Route path="./Chart/BarChart.jsx" component={BarChart} />
+                <Route path="./Chart/PieChart.jsx" component={PieChart} /> */}
+            </div>
         )
     }
 }

@@ -21,7 +21,7 @@ export default class Userdata extends Component {
 
 
     btnAxio = () => {
-        axios.get("getData/api/taskList")
+        axios.get("getData/apicore/taskList")
             .then(response => { return response.data })
             .then(data => { console.log(JSON.stringify(data)) })
     }
@@ -76,10 +76,10 @@ export default class Userdata extends Component {
         //         console.warn(err)
         //     })
 
-        // axios.post('getData/api/getByDatePost', {
+        // axios.post('getData/apicore/getByDatePost', {
         //     year: year,
         //     month: month,
-        //     day: day
+        //     day: day,
         // })
         //     .then((response) => {
         //         console.log("@", response)
@@ -94,11 +94,15 @@ export default class Userdata extends Component {
 
         formData.append('year', year);
         formData.append('month', month);
-        formData.append('day', day);
+        formData.append('day', day); 
         console.log("$!@", formData)
-        axios.post('getData/api/getByDatePost', formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data; boundary=something'
+        axios({
+            method: "post",
+            url: "getData/apicore/getByDatePost",
+            data: {
+                year: year,
+                month: month,
+                day: day
             }
         })
             .then((response) => {
@@ -118,7 +122,7 @@ export default class Userdata extends Component {
         let year = 2021
         let month = 8
         let day = 1
-        getByDate(`getData/api/getByDate/${year}/${month}/${day}`)
+        getByDate(`getData/apicore/getByDate/${year}/${month}/${day}`)
             .then(response => {
                 console.log(response.data)
                 let d = response.data[0].date
@@ -134,13 +138,13 @@ export default class Userdata extends Component {
                 // this.setState({ info: testd })
                 return response.data
             })
-        getAllData("getData/api/taskList")
-            .then(response => {
-                console.log("@", response.data)
+        // getAllData("getData/apicore/taskList")
+        //     .then(response => {
+        //         console.log("@", response.data)
 
-                this.setState({ listdata: response.data })
-                return response.data
-            })
+        //         this.setState({ listdata: response.data })
+        //         return response.data
+        //     })
 
     }
 
@@ -149,7 +153,7 @@ export default class Userdata extends Component {
         let month = 7
         let day = 29
         console.log(this.state.sendDate)
-        getAllData("getData/api/taskList")
+        getAllData("getData/apicore/taskList")
             .then(response => {
                 console.log(response.data)
                 return response.data
@@ -182,14 +186,14 @@ export default class Userdata extends Component {
                     info: {this.state.info}<br />
                 </div>
 
-                <div>
+                {/* <div>
                     {
                         this.state.listdata.map(data => {
                             console.log(data.content)
                             return <div key={data.id}>{data.content}</div>
                         })
                     }
-                </div>
+                </div> */}
 
             </div>
         )

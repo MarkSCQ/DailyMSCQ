@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import {
     List, Input, Button,
     DatePicker, Form,
-    Table, Tag, Space
+    Table, Tag, Space, Select
 } from 'antd'
 
 
@@ -38,6 +38,7 @@ export default class Todo extends Component {
         infos: [
         ],
         newinfo: { taskid: undefined, content: "", price: 0, date: "", tag: "" },
+        tags: [],
         editingKey: ''
     }
 
@@ -87,14 +88,14 @@ export default class Todo extends Component {
     }
 
     makeData = (data) => {
-        
+
         data.sort((a, b) => {
-                return new Date(a.date) - new Date(b.date)
-            })
+            return new Date(a.date) - new Date(b.date)
+        })
 
         return data.map(info => {
- 
-            return { key: info.taskid, Content: info.content, Date: DateYMD(info.date), Price: info.price }
+
+            return { key: info.taskid, Content: info.content, Tag: [info.tag], Date: DateYMD(info.date), Price: info.price }
         })
     }
 
@@ -111,55 +112,102 @@ export default class Todo extends Component {
         const oldinfos = this.state.infos
         oldinfos.push(newInfo)
         this.setState({ infos: oldinfos })
-        const { taskid, date, content, price } = this.state.newinfo
+        const { taskid, date, content, price, tag } = this.state.newinfo
         // ! addRecord api put here
-        addRecord("getData/api/addRecord", taskid, date, content, price)
-            .then()
+        addRecord("getData/apicore/addRecord", date, content, price, tag)
+            .then(response => {
+                console.log(response.data)
+                return response.data
+            })
+            .then(
+                data => {
+                    this.setState({ infos: data.data, tags: data.tags })
+                    console.log(this.state)
+
+                }
+            )
         this.resetNew()
     }
 
     componentDidMount() {
 
-        getAllData("getData/api/taskList")
+        getAllData("getData/apicore/taskList")
             .then(response => { return response.data })
             .then(data => {
                 // console.log(JSON.stringify(data))
                 console.log(data)
-                this.setState({ infos: data })
+                this.setState({ infos: data.data, tags: data.tags })
             })
     }
 
     render() {
         const { infos } = this.state
+
+        const tagColor = {
+            'Food': "green",
+            'Entertainment': "yellow",
+            'Water fee': "blue",
+            'Electricity fee': "red",
+            'Gas fee': "blue",
+            'Rental fee': "red",
+            'Phone fee': "blue",
+            'Network fee': "blue"
+        }
         // ! define the table
         const columns = [
             {
-                title: 'Date',
+                title: <div><b>Date</b></div>,
                 dataIndex: 'Date',
                 key: 'Date',
-                //     sorter: (a, b) => a.age - b.age,
                 sorter: (a, b) => {
-                    // console.log(a.Date)
                     return new moment(a.Date).format("YYYYMMDD") - new moment(b.Date).format("YYYYMMDD")
                 },
                 editable: true,
+
+                // ! make filters and onFilter tomorrow
+                filters: [
+
+                ],
+                onFilter: (value, record) => {
+
+                    record.name.indexOf(value)
+                    console.log(value)
+                    console.log(record)
+                },
+
             },
             {
-                title: 'Content',
+                title: <div><b>Content</b></div>,
                 dataIndex: 'Content',
                 key: 'Content',
-                // onFilter: (value, record) => record.name.indexOf(value) === 0,
                 editable: true,
             },
             {
-                title: 'Price',
+                title: <div><b>Tag</b></div>,
+                dataIndex: 'Tag',
+                key: 'Tag',
+                render: tags => (
+                    <>
+                        {tags.map(tag => {
+                            return (
+                                <Tag color={tagColor[tag]} key={tag}>
+                                    {tag.toUpperCase()}
+                                </Tag>
+                            );
+                        })}
+                    </>
+                ),
+                editable: true,
+            },
+            {
+                title: <div><b>Price</b></div>,
                 dataIndex: 'Price',
                 key: 'Price',
                 sorter: (a, b) => a.Price - b.Price,
                 editable: true,
             },
             {
-                title: "Actions",
+                title: <div><b>Actions</b></div>,
                 render: (text, record) => (
                     <Space size="middle">
                         <Button
@@ -181,13 +229,14 @@ export default class Todo extends Component {
         ];
 
         const data = this.makeData(infos)
+        const { Option } = Select;
 
         return (
             <div style={{ margin: "50px" }}>
 
                 <Form
                     ref={this.formRef}
-                    labelCol={{ span: 1 }}
+                    labelCol={{ span: 3 }}
                     wrapperCol={{ span: 10 }}>
 
                     {/* <label><b>Date: &nbsp;&nbsp;</b></label> */}
@@ -214,7 +263,22 @@ export default class Todo extends Component {
                             style={{ width: "330px" }}
                             onKeyUp={this.inputInfo("price")} />
                     </Form.Item>
-                    <Form.Item wrapperCol={{ offset: 1, span: 16 }}>
+
+                    <Form.Item name="tag" label={<b>Tags</b>} >
+
+                        <Select style={{ width: "200px" }} onKeyUp={this.inputInfo("tag")}   >
+                            {
+                                this.state.tags.map((item) => {
+                                    return <Option value={item} key={item}>{item}</Option>
+
+                                })
+                            }
+                        </Select>
+                    </Form.Item>
+
+
+
+                    <Form.Item wrapperCol={{ offset: 3, span: 16 }}>
 
                         <Button
                             onClick={this.submitForm}
@@ -224,6 +288,8 @@ export default class Todo extends Component {
                             <b>Add</b>
                         </Button>
                     </Form.Item>
+
+
 
                 </Form>
 
@@ -255,7 +321,7 @@ export default class Todo extends Component {
                         }
                     }}
                 />
-            </div>
+            </div >
         )
     }
 }

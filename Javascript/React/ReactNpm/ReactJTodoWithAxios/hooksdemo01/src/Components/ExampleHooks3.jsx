@@ -6,16 +6,18 @@ function INDEX() {
 
     useEffect(() => {
         console.log("INDEX has come")
-        return () => {
+        // component 解绑
+        return ()=>{
             console.log("INDEX has gone")
         }
-    })
+    },[])
+    // 只要状态发生变化 都会执行一次解绑。useEffect第二个参数等于空，解绑后才执行；
     return <h1>MAIN PAGE</h1>
 }
 function LIST() {
     useEffect(() => {
         console.log("LIST has come")
-        return () => {
+        return ()=>{
             console.log("LIST has gone")
         }
     })
@@ -35,21 +37,23 @@ export default function ExampleHooks3() {
         <div>
             <h1>The current num is {count}</h1>
             <button onClick={() => setCount(count + 1)}>+1s</button>
-
             <BrowserRouter>
+
                 <ul>
                     <li>
-                        <Link to="/">MAIN</Link>
+                        <Link to="/">
+                            Main page
+                        </Link>
                     </li>
                     <li>
-                        <Link to="/LIST/">LIST</Link>
+                        <Link to="/list/">
+                            List
+                        </Link>
                     </li>
                 </ul>
                 <Route path="/" exact component={INDEX} />
-                <Route path="/LIST/" component={LIST} />
+                <Route path="/list/" component={LIST} />
             </BrowserRouter>
-
-
         </div>
     )
 }

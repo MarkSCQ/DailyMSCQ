@@ -7,17 +7,17 @@ function INDEX() {
     useEffect(() => {
         console.log("INDEX has come")
         // component 解绑
-        return ()=>{
+        return () => {
             console.log("INDEX has gone")
         }
-    },[])
+    }, [])
     // 只要状态发生变化 都会执行一次解绑。useEffect第二个参数等于空，解绑后才执行；
     return <h1>MAIN PAGE</h1>
 }
 function LIST() {
     useEffect(() => {
         console.log("LIST has come")
-        return ()=>{
+        return () => {
             console.log("LIST has gone")
         }
     })
@@ -27,16 +27,20 @@ function LIST() {
 export default function ExampleHooks3() {
 
 
-    const [count, setCount] = useState(233) // deconstructing array in es6. useState(val) initialize the state value using val
+    const [count, setCount] = useState("post") // deconstructing array in es6. useState(val) initialize the state value using val
 
     // componentDidMount + componentDidUpdate 
     useEffect(() => {
         console.log("you have clicked ", count)
-    })
+        return () => {
+            console.log("state changed", count)
+        }
+    }, [count])
     return (
         <div>
             <h1>The current num is {count}</h1>
-            <button onClick={() => setCount(count + 1)}>+1s</button>
+            <button onClick={() => setCount("post")}>+post</button>
+            <button onClick={() => setCount("get")}>+get</button>
             <BrowserRouter>
 
                 <ul>

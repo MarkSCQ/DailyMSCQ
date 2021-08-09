@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+
+    <script type="text/javascript">
+
+        function changeUL() {
+            let ul = document.getElementById("root").childNodes
+
+            let i = 0;
+            let j = ul.length - 1;
+
+            while (i < j) {
+                let tmp = ul[i].textContent
+                ul[i].textContent = ul[j].textContent
+                ul[j].textContent = tmp
+                i++
+                j--
+            }
+         }
+
+    </script>
+
+    <ul id="root">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+
+    <button onclick="changeUL()">apply fun</button>
+
+</body>
+
+</html>

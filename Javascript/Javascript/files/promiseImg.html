@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="imgdiv"></div>
+
+    <script type="text/javascript">
+        const src = "https://randomuser.me/api/portraits/women/74.jpg"
+        function loadimg(src) {
+
+            return new Promise((resolve, reject) => {
+                const img = document.createElement('img')
+
+                img.onload = () => {
+                    resolve(img)
+                }
+                img.onerror = () => {
+                    reject(new Error("error loading"))
+                }
+                img.src = src
+                document.getElementById("imgdiv").appendChild(img)
+            })
+        }
+
+        loadimg(src).then(img => {
+            console.log(img.width)
+            return img
+        }).then(img => {
+            console.log(img.height)
+        }).catch(err => {
+            console.log(err)
+        })
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>
+
+    </title>
+
+</head>
+
+<body>
+    <div id="title"></div>
+    <script type="text/javascript" src="../react.development.js"></script>
+    <script type="text/javascript" src="../react-dom.development.js"></script>
+    <script type="text/javascript" src="../babel.min.js"></script>
+
+
+    <script type="text/babel">
+
+
+
+        class LifeCycle extends React.Component {
+
+            constructor(props) {
+                super(props);
+                this.click1 = this.click1.bind(this)
+            }
+            click1() {
+                "strict mode"
+
+                console.log("click 1 ", this)
+            }
+
+            click2() {
+                console.log("click 1 ", this)
+            }
+
+            render() {
+                return (
+                    <div>
+                        <button onClick={() => {
+                            console.log(this)
+                        }}
+                        >
+                            clickclg
+                        </button>
+
+                        <button onClick={this.click1}
+                        >
+                            click1
+                        </button>
+
+                        <button onClick={this.click2}
+                        >
+                            click2
+                        </button>
+                    </div>
+                )
+            }
+        }
+
+
+        ReactDOM.render(<LifeCycle />, document.getElementById("title"));
+
+
+
+    </script>
+</body>
+
+</html>

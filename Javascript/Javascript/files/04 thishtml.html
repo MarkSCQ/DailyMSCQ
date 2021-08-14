@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <p id="demo"></p>
+
+    <p id="demo1"> </p>
+
+    <script type="text/javascript">
+
+        function fnthis(a) {
+            alert(a)
+        }
+
+        function fnnothis() {
+            alert(this)
+        }
+
+
+        // var obj = { a: 1 };
+        // var obj2 = {
+        //     a: 2,
+        //     foo1: function () {
+        //         console.log(this.a)
+        //     },
+        //     foo2: function () {
+        //         function inner() {
+        //             console.log(this)
+        //             console.log(this.a)
+        //         }
+        //         inner();
+        //     }
+        // };
+
+        // document.getElementById("demo").innerHTML = obj2.foo1();
+        // document.getElementById("demo1").innerHTML = obj2.foo2();
+
+
+
+        var obj1 = {
+            a: 1
+        }
+        var obj2 = {
+            a: 2,
+            foo1: function () {
+                console.log(this.a)
+            },
+            foo2: function () {
+                function inner() {
+                    console.log("inner begins")
+                    console.log(this)
+                    console.log(this.a)
+                }
+                console.log("----------------")
+
+                inner()
+                console.log("----------------")
+                inner.call(this)
+                console.log("inner end")
+
+            }
+        }
+        var a = 3
+        obj2.foo1()
+        obj2.foo2()
+
+
+    </script>
+
+    <h2>My First JavaScript</h2>
+
+    <button type="button" onclick="alert(this)">
+        buttonthis
+    </button>
+
+    <button type="button" onclick="fnthis(this)">
+        buttonthis
+    </button>
+
+    <button type="button" onclick="fnnothis()">
+        buttonfnnothis
+    </button>
+
+
+</body>
+
+</html>

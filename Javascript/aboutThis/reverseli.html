@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    aslfkdhalfg hasoljf blk112347?!#$U
+
+
+
+
+    <ul id="root">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+
+    <button onclick="changeUL()">apply fun</button>
+
+    <p><a id="link" href="#" onclick="return EventHandler(this);">click me</a></p>
+    !
+    asdfas
+    !@#!@#
+
+    !@#
+
+    @#!@#!@#!@
+    <script type="text/javascript">
+
+        function changeUL() {
+            let ul = document.getElementById("root").childNodes
+
+            let i = 0;
+            let j = ul.length - 1;
+
+            while (i < j) {
+                let tmp = ul[i].textContent
+                ul[i].textContent = ul[j].textContent
+                ul[j].textContent = tmp
+                i++
+                j--
+            }
+        }
+        function EventHandler() {
+            console.log(this);
+        }
+        function Person() {
+            this.name = "van"
+            console.log(this)
+            this.display = function display() {
+                console.log(this)
+            }
+        }
+
+        const f = new Person()
+        f.display()
+
+
+        var html = document.documentElement.innerText;
+        console.log(typeof html);
+        console.log(html)
+        function detect(html) {
+            var reg = /[^A-Za-z0-9]/gm;
+            console.log(html.match(reg))
+        }
+        detect(html)
+
+
+        const ar = [1, 2, 3, 4, 5]
+        const sm = ar.reduce((preVal, currVal) => {
+            return preVal + currVal
+        })
+        console.log(sm);
+        const reducer = (preVal,currVal)=>preVal+currVal
+        console.log(ar.reduce(reducer,0))
+    </script>
+</body>
+
+</html>

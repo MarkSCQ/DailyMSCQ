@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ 
 <html lang="en">
 
 <head>
@@ -12,7 +12,8 @@
     <div id="imgdiv"></div>
 
     <script type="text/javascript">
-        const src = "https://randomuser.me/api/portraits/women/74.jpg"
+
+        const src = "https://randomuser.me/api/portraits/women/74.jpg";
         function loadimg(src) {
 
             return new Promise((resolve, reject) => {
@@ -28,15 +29,22 @@
                 document.getElementById("imgdiv").appendChild(img)
             })
         }
+        /*
+            loadimg(src).then(img => {
+                console.log(img.width)
+                return img
+            }).then(img => {
+                console.log(img.height)
+            }).catch(err => {
+                console.log(err)
+            })
+        */
 
-        loadimg(src).then(img => {
-            console.log(img.width)
-            return img
-        }).then(img => {
-            console.log(img.height)
-        }).catch(err => {
-            console.log(err)
-        })
+
+        (async function () {
+            const img = await loadimg(src)
+            console.log(img.width,img.height)
+        })()
     </script>
 
 </body>

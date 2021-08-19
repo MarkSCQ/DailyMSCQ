@@ -1,20 +1,10 @@
-const arr = [1, 2, 3]
-arr.reduce((p, x) => {
-    return p.then(() => {
-        return new Promise(r => {
-            setTimeout(() => r(console.log(x)), 1000)
+const arr = [1, 2, 3, 4, 5]
+
+arr.reduce((proObj, currVal) => {
+    return proObj.then(() => {
+        return new Promise(resolve => {
+            setTimeout(() => { resolve(console.log(currVal)) }, 1000)
         })
     })
+
 }, Promise.resolve())
-
-
-
-// const arr = [1, 2, 3]
-// arr.reduce((p, x) =>
-//     p.then(() =>
-//         new Promise(r =>
-//             setTimeout(
-//                 () => r(console.log(x)), 1000)
-//         )
-//     ), Promise.resolve()
-// )

@@ -1,3 +1,22 @@
+// from https://www.youtube.com/watch?v=vAp0aNIVsXU&list=PL_Ykv8s0HisskfGeMXVudS_MtTtSrZM-V&index=79
+
+
+const states = {
+    PENDING: "pending",
+    FULFILLED: "fulfilled",
+    REJECTED: "rejected"
+}
+
+
+class myPromise {
+    constructor(computation) {
+        this._state = state.PENDING
+
+        this._value = undefined
+        this._reason = undefined
+
+        this._thenQueue = []
+        this._finallyQueue = []
 
         if (typeof computation === 'function') {
             setTimeout(() => {

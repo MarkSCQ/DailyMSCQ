@@ -1,67 +1,118 @@
-// from https://www.youtube.com/watch?v=vAp0aNIVsXU&list=PL_Ykv8s0HisskfGeMXVudS_MtTtSrZM-V&index=79
+// based on https://juejin.cn/post/6844903607968481287#heading-9
 
-
-const states = {
+const STATE = {
     PENDING: "pending",
     FULFILLED: "fulfilled",
     REJECTED: "rejected"
 }
 
+// if promise is not undefind or null and the promise then is a function
+const isThen = (promise) => { return typeof promise.then === "function" && promise }
 
 class myPromise {
-    constructor(computation) {
-        this._state = state.PENDING
+    constructor(executor) {
+        this.state = STATE.PENDING
+        this.value = undefined
 
-        this._value = undefined
-        this._reason = undefined
+        this.callbacks = []
+        // ! 在运行时是否会出错
+        try {
+            executor(this.resolve.bind(this), this.reject.bind(this))
+        }
+        catch (ex) {
+            // console.log(ex)
+            this.reject(ex)
+        }
+    }
 
-        this._thenQueue = []
-        this._finallyQueue = []
-
-        if (typeof computation === 'function') {
+    resolve(value) {
+        // ! 根据promise定义 只有pending才可以跳转到别的状态
+        if (this.state === STATE.PENDING) {
+            this.state = STATE.FULFILLED
+            this.value = value
+            // ! 满足异步特性
             setTimeout(() => {
-                try {
-                    computation(
-                        this._onFulfilled.bind(this),
-                        this._onRejected.bind(this)
-                    )
-                }
-                catch (ex) {
+                this.callbacks.map(callback => {
+                    callback.onFulfilled(this.value)
+                })
+            });
 
+        }
+
+    }
+    reject(reason) {
+        // ! 根据promise定义 只有pending才可以跳转到别的状态
+        if (this.state === STATE.PENDING) {
+            this.state = STATE.REJECTED
+            this.reason = reason
+            // ! 满足异步特性
+            setTimeout(() => {
+                this.callbacks.map(callback => {
+                    callback.onRejected(this.reason)
+                })
+            });
+
+        }
+    }
+
+    then(onFulfilled, onRejected) {
+
+        // ! onFulfilled onRejected是否是函数？
+        // ! 在Promise中定义如果不为函数，则会继承上一个then中返回的promise的值
+
+        if (typeof onFulfilled !== 'function') {
+            onFulfilled = () => {
+            }
+        }
+
+        if (typeof onRejected !== 'function') {
+            onRejected = () => {
+            }
+        }
+
+        if (this.state === STATE.PENDING) {
+            this.callbacks.push({
+                onFulfilled: value => {
+                    try {
+                        onFulfilled(value)
+                    } catch (error) {
+                        onRejected(error)
+
+                    }
+                },
+                onRejected: reason => {
+                    try {
+                        onRejected(reason)
+                    } catch (error) {
+                        onRejected(error)
+                    }
                 }
             })
         }
 
-    }
+        // 如果当前是 fulfilled 状态
+        if (this.state === STATE.FULFILLED) {
+            setTimeout(() => {
+                try {
+                    onFulfilled(this.value)
+                }
+                catch (error) {
+                    onRejected(error)
+                }
+            })
 
-    then(fulfilledFn, catchFn) {
-        const controllPromise = new myPromise()
-        this.then._thenQueue.push([controllPromise, fulfilledFn, catchFn])
-    }
-    catch() {
-    }
-    finally() {
-
-    }
-    _propagateFulfilled() {
-
-    }
-
-    _propagateRejected() {
-
-    }
-
-    _onFulfilled(value) {
-        if (this._state === states.PENDING) {
-            this._state = states.FULFILLED
-            this._value = value
-            this._propagateFulfilled()
         }
-    }
-    _onRejected(reason) {
-        if (this._state === states.REJECTED)
-            this._state = states.FULFILLED
-        this.reason = reason
-        this._propagateRejected()
+        // 如果当前是 rejected 状态
+        if (this.state === STATE.REJECTED) {
+            setTimeout(() => {
+                try {
+                    onRejected(this.reason)
+                }
+                catch (error) {
+                    onRejected(error)
+                }
+            })
+
+        }
     }
 }

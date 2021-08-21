@@ -8,18 +8,39 @@
 
 
 
+    <script type="text/javascript" src="./myPromise.js">
 
+
+    </script>
     <title>Document</title>
 </head>
 
 <body>
+    <script>
 
+        let p = new myPromise(
+            (resolve, reject) => {
+                setTimeout(() => {
+                    // resolve("resolve");
+                    reject("reject")
+                    console.log("object");
+                }, 1000)
+            })
+            .then(
+                resolveval => console.log(resolveval),
+                rejectval => console.log(rejectval)
+            );
+        console.log("Global")
+
+
+
+    </script>
 
     <div id="imgdiv"></div>
 
     <!-- <script type="text/javascript" src="./promiseTraficLight.js"></script> -->
     <!-- <script type="text/javascript" src="./MergePromise.js"></script> -->
-    <script type="text/javascript" src="./PromiseLoadingImg.js"></script>
+
 </body>
 
 </html>

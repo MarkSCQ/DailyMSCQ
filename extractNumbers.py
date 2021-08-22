@@ -1,5 +1,34 @@
 
 
+
+import seaborn as sns
+import pandas as pd
+
+def hello():
+    print("hi")
+
+sns.plot()
+
+
+
+
+
+
+
+
+
+hello()
+
+
+
+
+
+
+
+
+"""
+
+
 infos = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
 
 extracts = [2, 4, 6, 8, 10]
@@ -37,3 +66,4 @@ def extractNums(infos, extracts):
 
 
 extractNums(infos, extracts)
+"""

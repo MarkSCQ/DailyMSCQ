@@ -8,7 +8,7 @@
 
 
 
-    <script type="text/javascript" src="./myPromise.js">
+    <script type="text/javascript" src="./PromiseWithComments.js">
 
 
     </script>
@@ -18,21 +18,20 @@
 <body>
     <script>
 
-        let p = new myPromise(
+        const p = new myPromise(
             (resolve, reject) => {
                 setTimeout(() => {
-                    // resolve("resolve");
-                    reject("reject")
-                    console.log("object");
-                }, 1000)
+                    resolve("resolve")
+                }, 1000);
+                // throw new Error("ERROR!")
             })
-            .then(
-                resolveval => console.log(resolveval),
-                rejectval => console.log(rejectval)
-            );
-        console.log("Global")
-
-
+            .then(val => {
+                console.log(val)
+                console.log(isThenable(val))
+            })
+            .then(val => console.log(val))
+        const p1 = Promise.reject(122)
+        console.log(p1)
 
     </script>
 

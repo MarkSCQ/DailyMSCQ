@@ -19,22 +19,34 @@
     <script>
 
 
-        const p = new myPromise(resolve => { resolve(1) })
+        // const p = new myPromise(resolve => { resolve(1) })
+        //     .then(res => {
+        //         console.log(1, res)
+        //         return res
+        //     })
+        //     .then(res => {
+        //         console.log(2, res)
+        //         throw new Error("ERROR")
+        //     })
+        //     .catch(res => {
+        //         console.log(res)
+        //         return 2333
+        //     })
+        //     .then(err => {
+        //         console.log("ERR!!", err)
+        //     })
+
+        myPromise.resolve(3434)
             .then(res => {
                 console.log(res)
                 return res
             })
             .then(res => {
-                console.log(res)
-                return new Error("ERROR")
+                console.log("error")
+                throw new Error("throw error")
+                return res
             })
-            .catch(res => {
-                console.log(res)
-            })
-            .catch(err => {
-                console.log("ERR!!", err)
-            })
-
+            .then(res => console.log("123", res))
     </script>
 
     <div id="imgdiv"></div>

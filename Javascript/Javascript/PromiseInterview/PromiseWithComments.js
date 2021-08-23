@@ -70,6 +70,7 @@ class myPromise {
 
     then(fulfilledFn, catchFn) {
         // ! 新建一个Promise
+
         const controlledPromise = new myPromise()
 
         // ! 将当前新建的promise和对应的fulfilledFn和catchFn入队
@@ -78,7 +79,12 @@ class myPromise {
         // ! 因为当前的promise和对应的函数入队，判断上一级promise的状态。
         // ! 在propagate函数中对于当前的promise进行了赋值的处理
         // ! 所以在return中返回的不会是一个空的promise（除非上级promise的值是undefined）
+
+        // ! catch 如果发生了错误抛出。那么捕获，
+
+
         if (this._state === states.FULFILLED) {
+
             this._propagateFulfilled()
         }
         else if (this._state === states.REJECTED) {
@@ -123,8 +129,16 @@ class myPromise {
                 // ! 但是要考虑到当前处理的promise结果 是否能够进行then的操作？
                 // ! notice: 这里的fulfilledFn不是当前class中定义的 _onFulfilled
                 // ! notice：这里的fulfilledFn 是一个函数，他是可以有返回值的
-                const valueOrPromise = fulfilledFn(this._value)
-                console.log(fulfilledFn)
+                
+                // ! 2021 8 23 新增内容 解决了throw中无法抛出bug的问题
+                let valueOrPromise
+                try {
+                    console.log("HERE")
+                    valueOrPromise = fulfilledFn(this._value)
+                } catch (error) {
+                    console.log("throw the error",error)
+                    return 
+                }
                 /** 
                  * * 举个例子
                  * * 比如说当前的fulfilledFn为 (value)=>{console.log(value)}
@@ -133,8 +147,6 @@ class myPromise {
                  * * 但是如果当前的valueOrPromise是一个Promise对象，那么就可以进入这个isThenable
                  * * 因为Promise对象拥有then的方法
                  */
-                console.log("current valueOrPromise", valueOrPromise)
-                console.log("current isThenable", isThenable(valueOrPromise))
                 // ? 如果这个valueOrPromise有then可以调用，那么直接进行处理。思考什么时候会有这种情况
                 if (isThenable(valueOrPromise)) {
                     valueOrPromise.then(

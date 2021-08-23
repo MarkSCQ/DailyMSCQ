@@ -1,0 +1,164 @@
+<html>
+
+<head>
+	<title>Auto Job Classifier</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+	<style>
+		#jobTitle {}
+
+		#jobDescription {}
+
+		.cellPredicts {
+			border: none !important;
+			height: 100px !important;
+			background-color: #FFF !important;
+		}
+	</style>
+	<script text="text/javascript">
+
+	</script>
+</head>
+
+<body>
+	<div style="margin-top: 66px;">
+		<h2 style="text-align: center
+	  ;">
+			Auto Job Post Classifier
+		</h2>
+		<hr>
+		<div class="container  my-4">
+			<div class="row">
+				<!-- <div class="col-md-8 mx-auto" style="width: 80%;">
+				<form action="http://localhost:5000" method="POST">
+					<div class="col-sm-9">
+						<div class="form-group  purple-border">
+							<label for="comment">
+								<b>Job Title:</b>
+							</label>
+							<textarea class="form-control" id="query1" name="query1" autofocus>{{query1}}</textarea>
+						</div>
+						<div class="form-group  purple-border">
+							<label for="comment">
+								<b>Job Description:</b>
+							</label>
+							<textarea class="form-control" id="query2" name="query2" autofocus>{{query2}}</textarea>
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<button type="submit" class="btn btn-primary" name="submit">SUBMIT</button>
+					</div>
+
+
+				</form>
+			</div> -->
+
+				<table class="table table-borderless" style="width: 100%;border: none;">
+					<form action="http://localhost:5000" method="POST">
+						<tr>
+							<td class="table-default" style="text-align: left">
+								<h5><b>Job Title:</b></h5>
+								<br>
+								<textarea class="form-control" id="query1" name="query1" autofocus>{{query1}}</textarea>
+							</td>
+						</tr>
+						<tr>
+							<td class="table-default" style="text-align: left">
+								<h5><b>Job Description:</b></h5>
+								<br>
+								<textarea class="form-control" id="query1" name="query1" autofocus>{{query1}}</textarea>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<button type="submit" class="btn btn-primary" name="submit">SUBMIT</button>
+
+							</td>
+						</tr>
+
+					</form>
+
+				</table>
+
+				<!-- 
+			<div class="row">
+				<div class="col-sm-9">
+					<div class="parent">
+						<textarea class="form-control" rows="1" id="comment" class="left" name="query6" rows="2"
+							cols="5" autofocus>{{output1}}</textarea>
+						<textarea class="form-control" rows="1" id="comment" class="right" name="query7" rows="2"
+							cols="5" autofocus>{{output2}}</textarea>
+
+					</div>
+
+					<div>
+						<textarea class="form-control" rows="1" id="comment" name="query8" rows="2" cols="5"
+							autofocus>{{output5}}</textarea>
+						<textarea class="form-control" rows="1" id="comment" name="query9" rows="2" cols="5"
+							autofocus>{{output4}}</textarea>
+
+
+					</div>
+
+					<textarea class="form-control" rows="1" id="comment" name="query10" rows="2" cols="5"
+						autofocus>{{output6}}</textarea>
+				</div>
+			</div> -->
+
+				<table class="table table-borderless" style="width: 100%;;">
+					<tr>
+						<td style="text-align: center;">
+							<h5><b>Predictions</b></h5>
+						</td>
+						<td style="text-align: center;">
+							<h5><b>Confidence Values</b></h5>
+						</td>
+					</tr>
+					<tr>
+						<td class="table-default" style="text-align: center">
+							<textarea class="form-control cellPredicts" autofocus readonly>
+							{{output1}}
+						</textarea>
+						</td>
+						<td class="table-default" style="text-align: center">
+							<textarea class="form-control cellPredicts" autofocus readonly>
+							{{output2}}
+						</textarea>
+
+						</td>
+					</tr>
+					<tr>
+						<td class="table-default" style="text-align: center">
+							<textarea class="form-control cellPredicts" autofocus readonly>
+							{{output5}}
+						</textarea>
+						</td>
+						<td class="table-default" style="text-align: center">
+							<textarea class="form-control cellPredicts" autofocus readonly>
+							{{output4}}
+						</textarea>
+						</td>
+					</tr>
+					<tr>
+						<td class="table-default" style="text-align: center">
+							<textarea class="form-control cellPredicts" autofocus readonly>
+							{{output6}}
+						</textarea>
+						</td>
+						<td class="table-default" style="text-align: center">
+							<textarea class="form-control cellPredicts" autofocus readonly>
+							{{output7}}
+						</textarea>
+						</td>
+					</tr>
+
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

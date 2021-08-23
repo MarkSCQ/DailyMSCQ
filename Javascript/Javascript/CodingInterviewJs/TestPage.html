@@ -5,19 +5,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-
-    <script type="text/javascript" src="./PromiseWithComments.js"> </script>
-
-
-    </script>
     <title>Document</title>
+
+    <script type="text/javascript" src="./4_myPromise.js"></script>
+
 </head>
 
 <body>
-    <script>
 
+    <script>
 
         const p = new myPromise(resolve => { resolve(1) })
             .then(res => {
@@ -26,10 +22,10 @@
             })
             .then(res => {
                 console.log(res)
-                return new Error("ERROR")
+                return 2333
             })
-            .catch(res => {
-                console.log(res)
+            .then(res => {
+                throw new Error("ERROR")
             })
             .catch(err => {
                 console.log("ERR!!", err)
@@ -37,8 +33,7 @@
 
     </script>
 
-    <div id="imgdiv"></div>
-
+    <h1 style="margin: 80px;">This is for testing</h1>
 
 </body>
 

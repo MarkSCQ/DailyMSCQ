@@ -10,7 +10,7 @@ const states = {
 // ! 判断当前的输入值 maybePromise 是不是一个Promise
 // ! 因为只有promise才能够拥有then，且then为一个函数
 const isThenable = (maybePromise) => {
-    return maybePromise && typeof maybePromise.then === 'function '
+    return maybePromise && typeof maybePromise.then === 'function'
 }
 
 

@@ -1,0 +1,167 @@
+<html>
+
+<head>
+	<title>Auto Job Classifier</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+	<style>
+		.jobTitle {
+			border-radius: 15px;
+		}
+
+		.jobDescription {
+			border-radius: 15px;
+		}
+
+		.cellPredicts {
+			border-radius: 15px;
+			height: 100px !important;
+		}
+	</style>
+	<script text="text/javascript">
+
+	</script>
+</head>
+
+<body>
+	<div style="margin-top: 66px;">
+		<h2 style="text-align: center
+	  ;">
+			<b>Auto Job Post Classifier</b>
+		</h2>
+		<div class="container  my-4">
+			<hr>
+
+			<div class="row">
+
+				<table class="table table-borderless" style="width: 100%;border: none;">
+					<form action="http://localhost:5000" method="POST">
+						<tr>
+							<td class="table-default" style="text-align: left">
+								<h5><b>Job Title:</b></h5>
+								<br>
+								<textarea class="form-control jobTitle" id="query1" name="query1" rows="1" cols="200"
+									autofocus>{{query1}}</textarea>
+							</td>
+						</tr>
+						<tr>
+							<td class="table-default" style="text-align: left">
+								<h5><b>Job Description:</b></h5>
+								<br>
+								<textarea class="form-control jobDescription" id="query2" name="query2" rows="15"
+									cols="200" autofocus>{{query2}}</textarea>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<button type="submit" class="btn btn-primary" name="submit">SUBMIT</button>
+
+							</td>
+						</tr>
+
+					</form>
+
+				</table>
+
+				<!-- 
+			<div class="row">
+				<div class="col-sm-9">
+					<div class="parent">
+						<textarea class="form-control" rows="1" id="comment" class="left" name="query6" rows="2"
+							cols="5" autofocus>{{output1}}</textarea>
+						<textarea class="form-control" rows="1" id="comment" class="right" name="query7" rows="2"
+							cols="5" autofocus>{{output2}}</textarea>
+
+					</div>
+
+					<div>
+						<textarea class="form-control" rows="1" id="comment" name="query8" rows="2" cols="5"
+							autofocus>{{output5}}</textarea>
+						<textarea class="form-control" rows="1" id="comment" name="query9" rows="2" cols="5"
+							autofocus>{{output4}}</textarea>
+
+
+					</div>
+
+					<textarea class="form-control" rows="1" id="comment" name="query10" rows="2" cols="5"
+						autofocus>{{output6}}</textarea>
+				</div>
+			</div> -->
+
+				<table class="table table-borderless" style="width: 100%;">
+					<tr>
+						<td style="text-align: center;width: 500px;">
+							<h5><b>Predictions</b></h5>
+						</td>
+						<td style="text-align: center;width: 500px;">
+							<h5><b>Confidence Values</b></h5>
+						</td>
+					</tr>
+					<tr>
+						<td class="table-default tbcells">
+							<div class="form-control cellPredicts" contentEditable="true" autofocus>
+								<label class="fonttext">{{output1}}</label>
+							</div>
+						</td>
+						<td class="table-default tbcells">
+							<div class="form-control cellPredicts" contentEditable="true" autofocus>
+								<label class="fonttext">{{output2}}</label>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="table-default tbcells">
+							<div class="form-control cellPredicts" contentEditable="true" autofocus>
+								<label class="fonttext">{{output5}}</label>
+							</div>
+						</td>
+						<td class="table-default tbcells">
+							<div class="form-control cellPredicts" contentEditable="true" autofocus>
+								<label class="fonttext">{{output4}}</label>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="table-default tbcells">
+							<div class="form-control cellPredicts" contentEditable="true" autofocus>
+								<label class="fonttext">{{output6}}</label>
+							</div>
+						</td>
+						<td class="table-default tbcells">
+							<div class="form-control cellPredicts" contentEditable="true" autofocus>
+								<label class="fonttext">{{output7}}</label>
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+
+
+	<script type="text/javascript">
+		document.querySelectorAll(".cellPredicts").forEach((ele) => {
+			ele.addEventListener("mouseover", () => {
+				ele.style.backgroundColor = "LightCoral";
+				ele.childNodes.forEach(node => {
+					if (node.className === "fonttext") {
+						node.style.color = "skyblue"
+					}
+				})
+			});
+			ele.addEventListener("mouseout", () => {
+				ele.style.background = "white";
+				ele.childNodes.forEach(node => {
+					if (node.className === "fonttext") {
+						node.style.color = "black"
+					}
+				})
+			})
+		});
+	</script>
+</body>
+
+</html>

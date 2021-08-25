@@ -69,8 +69,7 @@ class myPromise {
     }
 
     then(fulfilledFn, catchFn) {
-        // ! 新建一个Promise
-
+        // ! 新建一个Promise,合格新的promise将作为当前的then的返回值，在thequeue中进行处理这个promise
         const controlledPromise = new myPromise()
 
         // ! 将当前新建的promise和对应的fulfilledFn和catchFn入队
@@ -80,17 +79,12 @@ class myPromise {
         // ! 在propagate函数中对于当前的promise进行了赋值的处理
         // ! 所以在return中返回的不会是一个空的promise（除非上级promise的值是undefined）
 
-        // ! catch 如果发生了错误抛出。那么捕获，
-
-
         if (this._state === states.FULFILLED) {
-
             this._propagateFulfilled()
         }
         else if (this._state === states.REJECTED) {
             this._propagateRejected()
         }
-
         return controlledPromise
     }
 
@@ -129,15 +123,17 @@ class myPromise {
                 // ! 但是要考虑到当前处理的promise结果 是否能够进行then的操作？
                 // ! notice: 这里的fulfilledFn不是当前class中定义的 _onFulfilled
                 // ! notice：这里的fulfilledFn 是一个函数，他是可以有返回值的
-                
+
                 // ! 2021 8 23 新增内容 解决了throw中无法抛出bug的问题
                 let valueOrPromise
                 try {
-                    console.log("HERE")
+                    console.log("propagateFulfilled try block")
                     valueOrPromise = fulfilledFn(this._value)
                 } catch (error) {
-                    console.log("throw the error",error)
-                    return 
+                    console.log("propagateFulfilled catch block")
+                    console.log(error)
+                    // ! 报错 但是不印象下一级的promise的信息
+                    // return
                 }
                 /** 
                  * * 举个例子
@@ -175,7 +171,14 @@ class myPromise {
     _propagateRejected() {
         this._thenQueue.forEach(([controlledPromise, _, catchFn]) => {
             if (typeof catchFn === "function") {
-                const valueOrPromise = catchFn(this._reason)
+                let valueOrPromise
+                try {
+                    console.log("_propagateRejected try block")
+                    valueOrPromise = catchFn(this._reason)
+                } catch (error) {
+                    console.log("_propagateRejected catch block")
+                    console.log(error)
+                }
                 if (isThenable(valueOrPromise)) {
                     valueOrPromise.then(
                         value => controlledPromise._onFulfilled(value),
@@ -195,11 +198,8 @@ class myPromise {
             controlledPromise._onRejected(this._reason)
         })
         this._finallyQueue = []
-
         this._thenQueue = []
     }
-
-
 }
 
 // MyPromise.js

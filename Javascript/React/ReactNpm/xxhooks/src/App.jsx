@@ -23,23 +23,31 @@ function App() {
       // setCount(count++) is not allowed, this setCount is equal to setCount(count=count+1)
     }
   */
+  let reducerFn
+  const [count, countDispatcher] = useReducer(reducerFn, 0)
 
-  // useReducer 方法
-  const reducerFn = (prevState, action) => {
+  reducerFn = (prevState, action) => {
     switch (action.type) {
       case "add":
-        return prevState + 1
+        return prevState + 2
       case "minus":
-        return prevState - 1
+        return prevState - 2
       default:
         return prevState
     }
   }
-  const [count, countDispatcher] = useReducer(reducerFn, 0)
+
+  // useReducer 方法
+
 
   console.log(count)
-  const onCount = (param) => {
+
+  const addCount = (param) => {
     countDispatcher({ type: "add", value: 2 })
+  }
+
+  const minusCount = (param) => {
+    countDispatcher({ type: "minus", value: 2 })
   }
   return (
     <div className="App">
@@ -51,7 +59,8 @@ function App() {
       </div>
 
 
-      <button onClick={() => { onCount() }}>COUNT</button>
+      <button onClick={() => { addCount() }}>COUNT+2</button>
+      <button onClick={() => { minusCount() }}>COUNT-2</button>
     </div>
   );
 }

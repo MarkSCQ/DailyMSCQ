@@ -33,9 +33,17 @@ def printRecursiveIn(root):
 
 
 def printIn(root):
-    stacK = []
+    stack = []
     values = []
 
+    stack = []
+    while root != None or len(stack) != 0:
+        while root != None:
+            stack.append(root)
+            root = root.left
+        root = stack.pop()
+        print(root.value)
+        root = root.right
 
 def printRecursivePost(root):
     if root == None:
@@ -88,9 +96,9 @@ def main():
     # printPre(root)
     # print("==================================")
     # printRecursiveIn(root)
-    printRecursivePost(root)
+    printRecursiveIn(root)
     print("==================================")
-    printPost(root)
+    printIn(root)
 
 
 if __name__ == '__main__':

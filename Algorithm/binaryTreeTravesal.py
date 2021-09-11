@@ -13,17 +13,6 @@ def printRecursivePre(root):
     printRecursivePre(root.right)
 
 
-def printPre(root):
-    stack = []
-    while root != None or len(stack) != 0:
-        while root != None:
-            stack.append(root)
-            print(root.value)
-            root = root.left
-        root = stack.pop()
-        root = root.right
-
-
 def printRecursiveIn(root):
     if root == None:
         return None
@@ -31,19 +20,6 @@ def printRecursiveIn(root):
     print(root.value)
     printRecursiveIn(root.right)
 
-
-def printIn(root):
-    stack = []
-    values = []
-
-    stack = []
-    while root != None or len(stack) != 0:
-        while root != None:
-            stack.append(root)
-            root = root.left
-        root = stack.pop()
-        print(root.value)
-        root = root.right
 
 def printRecursivePost(root):
     if root == None:
@@ -53,19 +29,66 @@ def printRecursivePost(root):
     print(root.value)
 
 
-def printPost(root):
+def printPre(root):
+    # ! store nodes
     stack = []
-    pre = None
-
     while root != None or len(stack) != 0:
+        # ! Preorder Root->leftChild->rightChild
+        while root != None:
+            # ! store current root's left child and left child's left descendents
+            stack.append(root)
+            print(root.value)
+            root = root.left
+        # ! when finish the left children/descendents storage
+        # ! pop out the last one, the last added left descendent
+        root = stack.pop()
+        # ! after printing the left value in the nested while iteration,
+        # ! reassign the root to the right
+        root = root.right
+
+
+def printIn(root):
+    stack = []
+    # ! if root is not none: the tree at lesat has one node;
+    # ! if stack is not 0: meaning there are nodes stored in the stack
+    while root != None or len(stack) != 0:
+        # ! add all current left descedents to the stack,
+        # ! while root is not none,
+        # ! for example, previous rount print LEFT value,
+        # ! however the left does not have any kids.
+        # ! so this nested iteration will be skipped.
+        # ! the root=stack.pop() will reassign Root as the new root
+        # ~             ROOT
+        # ~             /  \
+        # ~         LEFT    RIGHT
         while root != None:
             stack.append(root)
             root = root.left
-        root = stack[-1]
+        # ! order leftChild, Root, rightChild
+        # ! all left descendents have been added
+        # ! pop the last one, which is the leftmost node
+        root = stack.pop()
+        print(root.value)
+        root = root.right
 
+
+def printPost(root):
+    # ! stack store nodes
+    stack = []
+    # ! store previous node in the previous round(iteration)
+    pre = None
+    while root != None or len(stack) != 0:
+        # ! store left descedents in the stack
+        while root != None:
+            stack.append(root)
+            root = root.left
+        # ! get the last added node
+        root = stack[-1]
+        # ! condition: check whether should go for the right node
         if root.right != None and root.right != pre:
             root = root.right
         else:
+            # ! get value, pop old node, reset pre and root node
             print(root.value)
             stack.pop()
             pre = root

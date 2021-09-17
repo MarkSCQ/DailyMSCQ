@@ -34,6 +34,7 @@ class Solution1(object):
         # ! check if one pair is valid
         def valid(A):
             bal = 0
+            # ! balance number is 0. ( +1   ) -1
             for c in A:
                 if c == '(':
                     bal += 1

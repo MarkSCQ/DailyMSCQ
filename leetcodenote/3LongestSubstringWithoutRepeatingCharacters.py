@@ -1,8 +1,5 @@
 '''
-
 Given a string s, find the length of the longest substring without repeating characters.
-
-
 Example 1:
 
 Input: s = "abcabcbb"
@@ -23,7 +20,6 @@ Example 4:
 
 Input: s = ""
 Output: 0
-
 '''
 
 
@@ -37,7 +33,7 @@ class Solution:
         left = 0
         # ! sliding window, right index, used to extend the sliding window
         right = 0
-        # ! when right is smaller than the length of string s. 
+        # ! when right is smaller than the length of string s.
         # ! the maximum length that satisfiied the description is len of original string
         while right < len(s):
             # ! set the right window element

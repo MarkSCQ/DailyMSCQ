@@ -1,11 +1,8 @@
-
 """
 https://leetcode.com/problems/validate-stack-sequences/
 
 Share
 Given two integer arrays pushed and popped each with distinct values, return true if this could have been the result of a sequence of push and pop operations on an initially empty stack, or false otherwise.
-
-
 
 Example 1:
 
@@ -22,18 +19,9 @@ Input: pushed = [1,2,3,4,5], popped = [4,3,5,1,2]
 Output: false
 Explanation: 1 cannot be popped before 2.
 
-
+Solution: Greedy
 """
 
-
-"""
-
-Solution:
-
-Greedy
-
-
-"""
 
 class Solution(object):
     def validateStackSequences(self, pushed, popped):

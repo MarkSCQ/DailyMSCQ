@@ -11,12 +11,17 @@ class Solution(object):
         """
         rows, cols = len(dungeon), len(dungeon[0])
         dp = [[float('inf')] * cols for _ in range(rows)]
-        # ! 
         def get_min_health(currCell, nextRow, nextCol):
+            # ! currCell, current cell value
+            # ! nextRow, the structrue is reversed, the next row here denotes the row upper
+            # ! nextCol, the next col is the column to the current column
+            
+            # ! boundary check
             if nextRow >= rows or nextCol >= cols:
                 return float('inf')
+            # ! update value based on current situation
             nextCell = dp[nextRow][nextCol]
-            # hero needs at least 1 point to survive
+            # ! hero needs at least 1 point to survive
             return max(1, nextCell - currCell)
 
         # ! staring from the right bottom element
@@ -28,9 +33,8 @@ class Solution(object):
                 right_health = get_min_health(currCell, row, col+1)
                 # ! from up
                 down_health = get_min_health(currCell, row+1, col)
-                # ! update previous health value
+                # ! update health value
                 next_health = min(right_health, down_health)
-                
                 # ! initialized value of health matrix is "inf"
                 if next_health != float('inf'):
                     min_health = next_health

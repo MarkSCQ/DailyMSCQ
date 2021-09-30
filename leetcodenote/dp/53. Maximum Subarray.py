@@ -34,7 +34,7 @@ class Solution:
 
         for i in range(1, len(nums)):
             num = nums[i]
-
+            
             currSubArrSum = max(num, currSubArrSum+num)
             currMax = max(currMax, currSubArrSum)
         return currMax

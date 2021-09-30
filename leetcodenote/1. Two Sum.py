@@ -16,3 +16,21 @@ class Solution:
             # ! for the second one is that the answer is not itself
             if ans in targetDic and targetDic[ans]!=i:
                 return [i,targetDic[ans]]
+
+
+"""
+! One Pass
+"""
+class Solution2:
+    def twoSum(self, nums, target) :
+        # store data of nums in one dictionary,
+        # key is nums value, value is index
+        targetDic = {}
+
+        for i in range(len(nums)):
+            ltarget = target-nums[i]
+            if ltarget in targetDic:
+                return [i,targetDic[ltarget]]
+                
+            targetDic[nums[i]]=i
+        

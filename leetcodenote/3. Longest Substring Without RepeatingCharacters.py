@@ -44,12 +44,14 @@ class Solution:
             else:
                 dic[r] += 1
             # ! if duplicated then shift the left of window to right
+            # ! be careful, the while below will be triggered when dir[r]>1
             while dic[r] > 1:
                 # ! get left index element
+                # ! notice the left here is the duplicate element 
                 l = s[left]
                 # ! left element amount -1
                 dic[l] -= 1
-                # ! shift the left index
+                # ! shift the left edge of window to right
                 left += 1
             # ~ comparing the previous max length and current max length
             res = max(res, right-left+1)

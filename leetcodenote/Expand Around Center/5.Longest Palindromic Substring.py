@@ -99,7 +99,7 @@ while True:
         break
 
 
-l = int(input())
-s = list(map(int, input().split()))
-k = int(input())
-head = Node()
+# l = int(input())
+# s = list(map(int, input().split()))
+# k = int(input())
+# head = Node()

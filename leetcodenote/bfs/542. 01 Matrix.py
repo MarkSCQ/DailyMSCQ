@@ -53,7 +53,7 @@ def updateMatrix(mat):
     queue = deque()
     # ! push all 0 cell in to queue
     for i in range(height):
-        for j in range(width):
+        for j in range(width): 
             if mat[i][j] == 0:
                 dist[i][j] = 0
                 queue.append([i, j])

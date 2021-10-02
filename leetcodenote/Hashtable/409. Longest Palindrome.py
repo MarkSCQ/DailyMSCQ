@@ -49,11 +49,16 @@ in step 2, the calculation part has several details,
 
 """
 
+"""
+return 构造最长的回文子串所需要的字母的数量（用给定的字符串）
+"""
+
 
 class Solution:
     def longestPalindrome(self, s):
         data = {}
 
+        # ! count the frequency of characters in the input string
         for _item in s:
             if _item not in data:
                 data[_item] = 1
@@ -62,9 +67,9 @@ class Solution:
 
         curr = 0
         for key in data:
-            # ! we add each possible solution to the curr. //2*2 means we want to add even number. For example, if data[key]==3, then 3//2*2 will be 2.
+            # ! we add each possible solution to the curr. //2*2 means we want to add even number. For example, if data[key]==3, then 3//2*2 will be 2
             curr += data[key]//2*2
-            # ! here is the magic, if the curernt's reminder is 0 and the current data[key] is odd, then add 1
+            # ! here is the magic, if the curernt's reminder is 0 and the current data[key] is odd, then add 1。这里的if做到了一个向下取整的功能。
             if curr % 2 == 0 and data[key] % 2 == 1:
                 curr += 1
         # ~ when doing calculation on these two steps in the last for loop, I was wondering that what if we have many different odd characters? lets say a=3 b=7...

@@ -18,18 +18,21 @@ Output: [0]
 
 
 class Solution:
-    def moveZeroes(self, nums: List[int]) -> None:
+    def moveZeroes(self, nums) :
         """
-        Do not return anything, modify nums in-place instead.
+        ! two pointers, 
+        ! one is used for searching the zeros,
+        ! another is for non zeros
         """
 
-        # pos non zeros
+        # ! pos non zeros
         pos = 0
-        # for zeros
+        # ! for zeros
         for i in range(len(nums)):
             element = nums[i]
 
             if element != 0:
+                # ! exchange
                 nums[pos], nums[i] = nums[i], nums[pos]
                 pos += 1
         return nums

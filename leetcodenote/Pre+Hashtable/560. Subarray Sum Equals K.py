@@ -46,15 +46,23 @@ solution: using cumulative sum and hashmap(dictionary)
 
 class Solution:
     def subarraySum(self, nums, k):
+        # ! initiliation, when there is no sum, the frequency is 1
         culsum = {0: 1}
         count = 0
         tmp = 0
         for i in range(len(nums)):
             tmp += nums[i]
+            # ! 1. the target sum of subarray is k. a+b=c => a=c-b,
+            # ! 2. tmp-k, whats the meaning of it? first, tmp is the accumulative sum, which is the sum of these indics numbers [0,....,currentindex]
+            # !         tmp can be splited into two parts, tmp-k:[0,....someindex], k:[someindex+1,....,currentindex]
+            # !     this means if we know tmp-k exists, then k must exist. Since the key is accumulative sum and value is the frequency of current accumulative sum. 
+            # !     What we need to achive is using count+=culsum[tmp-k]
             if tmp-k in culsum:
                 count += culsum[tmp-k]
             else:
                 count += 0
+                
+            # ! count the prefix sum, the frequency of currnet prefix sum
             if tmp in culsum:
                 culsum[tmp] += 1
             else:

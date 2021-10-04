@@ -1,6 +1,11 @@
 """
 463IslandPerimeter
+
+
+for each cell, check the cell's position and finally using 4 minus the different position's potential edge which is based on the neighbors' value
 """
+
+
 class Solution:
     def islandPerimeter(self, grid):
         height = len(grid)
@@ -16,14 +21,14 @@ class Solution:
                     else:
                         # ! if current cell is not on the 0th cell, this menas it may have an upper border
                         up = grid[i - 1][j]
-                    
+
                     # ! fi the current cell is on the 0th col
                     if j == 0:
                         left = 0
                     else:
                         # ! it may have a border on the 0th col
                         left = grid[i][j - 1]
-                    
+
                     # ! for the last row
                     if i == height - 1:
                         down = 0

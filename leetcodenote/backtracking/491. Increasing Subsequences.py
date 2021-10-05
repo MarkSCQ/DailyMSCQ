@@ -23,7 +23,7 @@ def findSubsequences(nums):
     res = []
 
     def findsub(nums, tmplist, index):
-        # ! when the tmplist size is bigger than 1 
+        # ! when the tmplist size is bigger than 1
         if len(tmplist) > 1:
             t = [tmplist[i] for i in range(len(tmplist))]
             # ! duplicate check
@@ -32,7 +32,7 @@ def findSubsequences(nums):
 
         # ! for each number in the nums, doing subsequence adding
         for i in range(index, len(nums)):
-            # ! if the tmplist is empty or 
+            # ! if the tmplist is empty or
             # ! the last element of tmplist is smaller and equal to the current number of nums
             if len(tmplist) == 0 or tmplist[len(tmplist)-1] <= nums[i]:
                 # ! append the current number to tmplist
@@ -41,23 +41,18 @@ def findSubsequences(nums):
                 findsub(nums, tmplist, i+1)
                 # ! backtrack
                 tmplist.pop(len(tmplist)-1)
-        
 
     findsub(nums, [], 0)
     return res
 
 
-nums = [4,6,7,7]
+nums = [4, 6, 7, 7]
 findSubsequences(nums)
-
-
 
 
 # class Solution(object):
 
-        
 
-            
 #     def findSubsequences(self, nums: List[int]) -> List[List[int]]:
 #         res = []
 

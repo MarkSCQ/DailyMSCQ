@@ -35,7 +35,6 @@ class Solution:
         fast = dummy
         slow = dummy
 
-
         for i in range(n+1):
             fast = fast.next
         while fast != None:

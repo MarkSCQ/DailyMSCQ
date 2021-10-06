@@ -1,16 +1,11 @@
-// 所有组件的外壳组件
-
-import React, { Component } from 'react'
-
-import CountUI from './container/Count'
-
-
-export default class App extends Component {
-  render() {
+import React from 'react'
+import ClassCounter from './components/ClassCounter'
+import HookCounter from './components/HookCounter'
+export default function App() {
     return (
-      <div>
-        <CountUI />
-      </div>
+        <div>
+            <ClassCounter />
+            <HookCounter />
+        </div>
     )
-  }
 }

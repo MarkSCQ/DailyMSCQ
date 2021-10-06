@@ -31,7 +31,7 @@ def mySqrt1(x):
 
 # ! solution2 makes more sence when first seeing this
 # ! as noticed, the main difference between solution1 and solution2 is condition checking.
-def mySqrt2( x):
+def mySqrt2(x):
     l, r = 0, x
     while l <= r:
         mid = l + (r-l)//2
@@ -43,17 +43,38 @@ def mySqrt2( x):
             l = mid + 1
 
 # ! solution3 newton method
+
+
 def mySqrt3(self, x):
     if x < 2:
         return x
-    
+
     x0 = x
     x1 = (x0 + x / x0) / 2
     while abs(x0 - x1) >= 1:
         x0 = x1
-        x1 = (x0 + x / x0) / 2        
-        
+        x1 = (x0 + x / x0) / 2
+
     return int(x1)
 
 # a = 30
 # mySqrt(30)
+
+
+class Solution:
+    def mySqrt(self, x):
+        if x == 0:
+            return 0
+
+        left = 0
+        right = x+1
+        mid = 0
+
+        while left < right:
+            mid = left+(right-left)//2
+            # ! can never be set as >= , 2*2=4, dead loop
+            if mid*mid > x:
+                right = mid
+            else:
+                left = mid+1
+        return left-1

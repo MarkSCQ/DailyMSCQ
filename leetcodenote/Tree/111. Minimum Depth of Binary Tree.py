@@ -50,6 +50,48 @@ class Solution:
 
         return mindepth+1
 
+class Solution:
+    def minDepth(self, root):
+        # ! precheck, the validation of root (Case 4)
+        if not root:
+            return 0
+        # ! left and right are not None (Case 1)
+        if not root.left and not root.right: 
+            return 1
+        
+        # ! recursion 
+        left = self.minDepth(root.left)
+        right = self.minDepth(root.right)
+        
+        # ! if right child does not exist then left+1  (Case 3)
+        if not root.right:
+            return left+1
+        # ! if left child does not exist then right+1 (Case 2)
+        if not root.left:
+            return right+1
+        """
+        Case 1
+            root
+            /  \
+        left    right
+
+        Case 2
+            root
+            /  
+        left    
+        
+        Case 3
+            root
+                \
+                right
+        
+        Case 4
+            root
+            /   \
+        None    None
+        """
+        
+        return min(left,right)+1
 
 """
 The any() function returns True if any element of an iterable is True. If not, it returns False.

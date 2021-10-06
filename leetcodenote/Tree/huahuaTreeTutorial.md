@@ -31,9 +31,9 @@
 
 - Key to tree problems: recursion
   ![Example](/leetcodenote/imgs/hhtree_6.PNG)
-	1 precheck
-	2 left tree and right tree recursion
-	3 return the results
+  1 precheck
+  2 left tree and right tree recursion
+  3 return the results
 
 - Templates!
 
@@ -43,11 +43,15 @@
 
   - One Root
     ![Example](/leetcodenote/imgs/hhtree_template.PNG)
-	- 
-
-
+    条件判断，
+    左右节点 递归
+    return
   - Two Roots
     ![Example](/leetcodenote/imgs/hhtree_template_1.PNG)
 
-
 <!-- https://www.youtube.com/watch?v=PbGl8_-bZxI stop at 26:30  -->
+
+
+
+
+

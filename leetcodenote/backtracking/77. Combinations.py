@@ -24,12 +24,11 @@ Output: [[1]]
 """
 
 
-
 # ! k is the length of each pair
 # ! n is the range, from 1 to n
 class Solution:
-    def combine(self, n: int, k: int) -> List[List[int]]:
-        
+    def combine(self, n, k):
+
         def backtrack(first=1, curr=[]):
             # ! if the combination is done
             if len(curr) == k:
@@ -46,3 +45,21 @@ class Solution:
         output = []
         backtrack()
         return output
+
+
+class Solution:
+    def combine(self, n, k):
+        res = []
+
+        def makecomb(start, comb):
+            if len(comb) == k:
+                res.append(comb.copy())
+                return
+            for i in range(start, n+1):
+                comb.append(i)
+                self.combine(start+1, comb)
+                comb.pop()
+                pass
+
+        makecomb(1, [])
+        return res

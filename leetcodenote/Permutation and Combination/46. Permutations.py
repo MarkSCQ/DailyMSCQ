@@ -20,6 +20,7 @@ Output: [[1]]
 
 
 """
+Backtracking
 Structure of this method
           [1,2,3]
         /    |    \

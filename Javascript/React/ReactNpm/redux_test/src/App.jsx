@@ -1,5 +1,5 @@
 import React from 'react'
-import ClassCounter from './components/ClassCounter'
+import HookCounterOne from './components/HookCounterOne'
 import HookCounter from './components/HookCounter'
 import HookCounter2 from './components/HookCounter2'
 import HookCounter3 from './components/HookCounter3'
@@ -7,11 +7,8 @@ import HookCounter4 from './components/HookCounter4'
 export default function App() {
     return (
         <div>
-            <ClassCounter />
-            <HookCounter />
-            <HookCounter2 />
-            <HookCounter3 />
-            <HookCounter4 />
+            <HookCounterOne />
+
         </div>
     )
 }
@@ -29,4 +26,4 @@ export default function App() {
 
 // stop at use effect
 // 
-// https://www.youtube.com/watch?v=06Y6aJzTmXY&list=PLC3y8-rFHvwisvxhZ135pogtX7_Oe3Q3A&index=6 
+// https://www.youtube.com/watch?v=06Y6aJzTmXY&list=PLC3y8-rFHvwisvxhZ135pogtX7_Oe3Q3A&index=6  

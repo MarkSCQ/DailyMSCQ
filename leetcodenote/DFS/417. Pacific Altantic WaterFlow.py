@@ -9,13 +9,11 @@ DFS:
 class Solution:
 
     def pacificAtlantic(self, heights):
-    
-    # ! check validation of input
         if not heights:
             return heights
 
-        m = len(heights)
-        n = len(heights[0])
+        height = len(heights)
+        width = len(heights[0])
 
         pvisited = set()
         avisited = set()
@@ -25,16 +23,35 @@ class Solution:
         def dfs(visited, x, y):
             visited.add((x, y))
             for dx, dy in direction:
+
                 new_x, new_y = x+dx, y+dy
-                if 0 <= new_x < m and 0 <= new_y < n and (new_x, new_y) not in visited and heights[new_x][new_y] >= heights[x][y]:
-                    dfs(visited, new_x, new_y)
 
-        for i in range(m):
+                if new_x >= height or new_y >= width or new_x < 0 or new_y < 0:
+                    continue
+                if (new_x, new_y) in visited:
+                    continue
+                if heights[new_x][new_y] < heights[x][y]:
+                    continue
+                dfs(visited, new_x, new_y)
+
+        for i in range(height):
             dfs(pvisited, i, 0)
-            dfs(avisited, i, n-1)
+            dfs(avisited, i, width-1)
 
-        for j in range(m):
+        for j in range(width):
             dfs(pvisited, 0, j)
-            dfs(avisited, m-1, j)
-            
+            dfs(avisited, height-1, j)
+
         return list(pvisited.intersection(avisited))
+
+
+"""
+BFS
+"""
+
+
+class Solution2:
+
+    def pacificAtlantic(self, heights):
+        height = len(heights)
+        width = len(heights[0])

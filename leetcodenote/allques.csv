@@ -1,5 +1,5 @@
 ,type,question
-0,Array,15.3Sum.py
+0,Array,15. 3Sum.py
 1,Array,252. Meeting Rooms.py
 2,Array,283. Move Zeroes.py
 3,Array,378. Kth Smallest Element in a Sorted Matrix.py
@@ -7,139 +7,131 @@
 5,Array,463. Island Perimeter.py
 6,Array,937. Reorder Data In Log Files.py
 7,Backtracking,22. Generate Parentheses.py
-8,Backtracking,491. Increasing Subsequences.py
-9,Backtracking,698. Partition to K Equal Sum Subsets.py
-10,Backtracking,79. Word Search.py
-11,Backtracking,Backtracking.md
-12,BFS,286. Walls and Gates.py
-13,BFS,317. Shortest Distance from All Buildings.py
-14,BFS,490. The Maze.py
-15,BFS,542. 01 Matrix.py
-16,BFS,994. Rotting Oranges.py
+8,Backtracking,79. Word Search.py
+9,Backtracking,491. Increasing Subsequences.py
+10,Backtracking,698. Partition to K Equal Sum Subsets.py
+11,BFS,286. Walls and Gates.py
+12,BFS,317. Shortest Distance from All Buildings.py
+13,BFS,490. The Maze.py
+14,BFS,542. 01 Matrix.py
+15,BFS,994. Rotting Oranges.py
+16,Binary Search,69. Sqrt.py
 17,Binary Search,278. First Bad Verison.py
 18,Binary Search,374. Guess Number Higher or Lower.py
-19,Binary Search,69. Sqrt.py
-20,Binary Search,875. Koko Eating Bananas.py
-21,Binary Search,BinarySearch.py
-22,Binary Search,huahuaBinarySearch.md
-23,DFS,130. Surrounded Regions.py
-24,DFS,1448. Count Good Nodes in Binary Tree.py
-25,DFS,200. Number of Islands.cpp
-26,DFS,200. Number of Islands.py
-27,DFS,212. Word Search II.py
-28,DFS,417. Pacific Altantic WaterFlow.py
-29,DFS,463. Island Perimeter.py
-30,DFS,529. Minesweeper.py
-31,DFS,694. Number of Distinct Islands.py
-32,DFS,695. Max Area of Island.py
-33,DFS,695. MaxAreaofIsland
-34,DFS,733. Flood Fill.py
-35,DFS,79. Word Search.py
-36,DFS,summary.md
-37,DP,11. Container With Most Water.md
-38,DP,1137. Tribonacci Number.py
-39,DP,1143. Longest Common Sequence.py
-40,DP,120. Triangle.py
-41,DP,121. Best Time To Buy And Sell Stock.py
-42,DP,123. Best Time to Buy and Sell Stock III.py
-43,DP,128. Longest Consecutive Sequence.py
-44,DP,152. Maximum Product Subarray.py
-45,DP,1524. Number of Sub-arrays With Odd Sum.py
-46,DP,174. Dungeon.py
-47,DP,174. DungeonGame.py
-48,DP,198. House Robber.py
-49,DP,231. House Robber II.py
-50,DP,243. Shortest Word Distance.py
-51,DP,279. Perfect Squares.py
-52,DP,300. Longest Increasing Subsequence.py
-53,DP,309. Best Time to Buy and Sell Stock with Cooldown.py
-54,DP,413. Arithmetic Slices.py
-55,DP,416. Partition Equal Subset Sum.py
-56,DP,42. Trapping Rain Water.py
-57,DP,45. Jump Game II.py
-58,DP,455. Assign Cookies.py
-59,DP,516. Longest Palindroimic Subsequence.py
-60,DP,53. Maximum Subarray.py
-61,DP,55. Jump Game.py
-62,DP,64. Minimum Path Sum.py
-63,DP,70. Climbing Stairs.py
-64,DP,740. Delete and Earn.py
-65,DP,764. Min Cost Climbing Stairs.py
-66,DP,Product Subarry .py
-67,Expand Around Center,5.Longest Palindromic Substring.py
-68,Hashtable,1. Two Sum.py
-69,Hashtable,220. Contains Duplicate III.py
-70,Hashtable,242. Valid Anagram.py
-71,Hashtable,347. Top K Frequent Elements.py
-72,Hashtable,409. Longest Palindrome.py
-73,Hashtable,49. Group Anagrams.py
-74,Linked List,141. Linked List Cycle.py
-75,Linked List,19. Remove Nth Node From End of List.py
-76,Linked List,21. Merge Two Sorted Lists.py
-77,Linked List,24. Swap Nodes in Pairs.java
-78,Linked List,725. Split Linked List in Parts.py
-79,Linked List,876. Middle of the Linked List.py
-80,Numbers,1134. Armstrong Number.py
-81,Numbers,9. Palindrome Number.py
-82,Numbers,perfectNum.py
-83,Permutation and Combination,266. Palindrom Permutation.py
-84,Permutation and Combination,39. Combination Sum Example.png
-85,Permutation and Combination,39. Combination Sum.py
-86,Permutation and Combination,46. Permutations.py
-87,Permutation and Combination,77. Combinations.py
-88,Permutation and Combination,78. Subsets.py
-89,Permutation and Combination,784. Letter Case Permutation.py
-90,Pre+Hashtable,14. Longest Common Prefix.py
-91,Pre+Hashtable,560. Subarray Sum Equals K.py
-92,Set,217. Contains Duplicate.py
-93,Set,219. Contains Duplicate II.py
-94,Sliding Window,159. Longest Substring with At Most Two Distinct Characters.py
-95,Sliding Window,209. Minimum Size Subarray Sum.py
-96,Sliding Window,253. Meeting Romes II.py
-97,Sliding Window,3. Longest Substring Without Repeating Characters.py
-98,Sliding Window,325. Maximum Size Subarray Sum Equals k.py
-99,Sliding Window,424. Longest Repeating Character Replacement.py
-100,Sliding Window,713. Subarray Product Less Than k.py
-101,Stack,1087. Brace Expansion.py
-102,Stack,20. Valid Parantheses.py
-103,Stack,946. Validate Stack Sequences.py
-104,Stack,decodingString.py
-105,Stack,DepthOfBrackets.py
-106,String,1249. Minimum Remove to Make Valid Parentheses.py
-107,String,165. Compare Version Numbers.py
-108,String,459. Repeated Substring Pattern.py
-109,String,557. Reverse Words in a String III.py
-110,String,567. Permutation in String.py
-111,String,647. Palindromic Substrings.py
-112,Tree,100. Same Tree.py
-113,Tree,1008. Construct Binary Search Tree from Preorder Traversal.py
-114,Tree,102. Binary Tree Level Order Traversal.py
-115,Tree,104. Maximum Depth of Binary Tree.py
-116,Tree,105. Construct Binary Tree from Preorder and Inorder Traversal.py
-117,Tree,106. Construct Binary Tree from Inorder and Postorder Traversal.py
-118,Tree,107. Binary Tree Level Order Traversal II.py
-119,Tree,111. Minimum Depth of Binary Tree.py
-120,Tree,112. Path Sum.py
-121,Tree,116. Populating Next Right Pointers in Each Node.py
-122,Tree,208. Implement Trie (Prefix Tree).py
-123,Tree,226. Invert Binary Tree.py
-124,Tree,404. Sum of Left Leaves.py
-125,Tree,437. Path Sum III.py
-126,Tree,543. Diameter of Binary Tree.py
-127,Tree,617. Merge Two Binary Tree.py
-128,Tree,637. Average of Levels in Binary Tree.py
-129,Tree,94. Binary Tree Inorder Traversal.py
-130,Tree,951. Flip Equivalent Binary Trees.py
-131,Tree,993. Cousins in Binary Tree.py
-132,Tree,CreateBST.py
-133,Tree,find all levels.md
-134,Tree,huahuaTreeTutorial.md
+19,Binary Search,875. Koko Eating Bananas.py
+20,Binary Search,3000. BinarySearch.py
+21,DFS,79. Word Search.py
+22,DFS,130. Surrounded Regions.py
+23,DFS,200. Number of Islands.py
+24,DFS,212. Word Search II.py
+25,DFS,417. Pacific Altantic WaterFlow.py
+26,DFS,463. Island Perimeter.py
+27,DFS,529. Minesweeper.py
+28,DFS,694. Number of Distinct Islands.py
+29,DFS,695. Max Area of Island.py
+30,DFS,733. Flood Fill.py
+31,DFS,1448. Count Good Nodes in Binary Tree.py
+32,DP,42. Trapping Rain Water.py
+33,DP,45. Jump Game II.py
+34,DP,53. Maximum Subarray.py
+35,DP,55. Jump Game.py
+36,DP,64. Minimum Path Sum.py
+37,DP,70. Climbing Stairs.py
+38,DP,120. Triangle.py
+39,DP,121. Best Time To Buy And Sell Stock.py
+40,DP,123. Best Time to Buy and Sell Stock III.py
+41,DP,128. Longest Consecutive Sequence.py
+42,DP,152. Maximum Product Subarray.py
+43,DP,152. Product Subarry .py
+44,DP,174. Dungeon.py
+45,DP,174. DungeonGame.py
+46,DP,198. House Robber.py
+47,DP,231. House Robber II.py
+48,DP,243. Shortest Word Distance.py
+49,DP,279. Perfect Squares.py
+50,DP,300. Longest Increasing Subsequence.py
+51,DP,309. Best Time to Buy and Sell Stock with Cooldown.py
+52,DP,413. Arithmetic Slices.py
+53,DP,416. Partition Equal Subset Sum.py
+54,DP,455. Assign Cookies.py
+55,DP,516. Longest Palindroimic Subsequence.py
+56,DP,740. Delete and Earn.py
+57,DP,764. Min Cost Climbing Stairs.py
+58,DP,1137. Tribonacci Number.py
+59,DP,1143. Longest Common Sequence.py
+60,DP,1524. Number of Sub-arrays With Odd Sum.py
+61,Expand Around Center,5. Longest Palindromic Substring.py
+62,Hashtable,1. Two Sum.py
+63,Hashtable,49. Group Anagrams.py
+64,Hashtable,220. Contains Duplicate III.py
+65,Hashtable,242. Valid Anagram.py
+66,Hashtable,347. Top K Frequent Elements.py
+67,Hashtable,409. Longest Palindrome.py
+68,Linked List,19. Remove Nth Node From End of List.py
+69,Linked List,21. Merge Two Sorted Lists.py
+70,Linked List,24. Swap Nodes in Pairs.java
+71,Linked List,141. Linked List Cycle.py
+72,Linked List,725. Split Linked List in Parts.py
+73,Linked List,876. Middle of the Linked List.py
+74,Numbers,9. Palindrome Number.py
+75,Numbers,1134. Armstrong Number.py
+76,Numbers,3004. perfectNum.py
+77,Permutation and Combination,39. Combination Sum.py
+78,Permutation and Combination,46. Permutations.py
+79,Permutation and Combination,77. Combinations.py
+80,Permutation and Combination,78. Subsets.py
+81,Permutation and Combination,266. Palindrom Permutation.py
+82,Permutation and Combination,784. Letter Case Permutation.py
+83,Pre+Hashtable,14. Longest Common Prefix.py
+84,Pre+Hashtable,560. Subarray Sum Equals K.py
+85,Set,217. Contains Duplicate.py
+86,Set,219. Contains Duplicate II.py
+87,Sliding Window,3. Longest Substring Without Repeating Characters.py
+88,Sliding Window,159. Longest Substring with At Most Two Distinct Characters.py
+89,Sliding Window,209. Minimum Size Subarray Sum.py
+90,Sliding Window,253. Meeting Romes II.py
+91,Sliding Window,325. Maximum Size Subarray Sum Equals k.py
+92,Sliding Window,424. Longest Repeating Character Replacement.py
+93,Sliding Window,713. Subarray Product Less Than k.py
+94,Stack,20. Valid Parantheses.py
+95,Stack,394. Decode String.py
+96,Stack,496. Next Greater Element I.py
+97,Stack,946. Validate Stack Sequences.py
+98,Stack,1087. Brace Expansion.py
+99,Stack,3001. DepthOfBrackets.py
+100,String,165. Compare Version Numbers.py
+101,String,459. Repeated Substring Pattern.py
+102,String,557. Reverse Words in a String III.py
+103,String,567. Permutation in String.py
+104,String,647. Palindromic Substrings.py
+105,String,1249. Minimum Remove to Make Valid Parentheses.py
+106,Tree,94. Binary Tree Inorder Traversal.py
+107,Tree,100. Same Tree.py
+108,Tree,102. Binary Tree Level Order Traversal.py
+109,Tree,104. Maximum Depth of Binary Tree.py
+110,Tree,105. Construct Binary Tree from Preorder and Inorder Traversal.py
+111,Tree,106. Construct Binary Tree from Inorder and Postorder Traversal.py
+112,Tree,107. Binary Tree Level Order Traversal II.py
+113,Tree,111. Minimum Depth of Binary Tree.py
+114,Tree,112. Path Sum.py
+115,Tree,116. Populating Next Right Pointers in Each Node.py
+116,Tree,208. Implement Trie (Prefix Tree).py
+117,Tree,226. Invert Binary Tree.py
+118,Tree,404. Sum of Left Leaves.py
+119,Tree,437. Path Sum III.py
+120,Tree,543. Diameter of Binary Tree.py
+121,Tree,617. Merge Two Binary Tree.py
+122,Tree,637. Average of Levels in Binary Tree.py
+123,Tree,951. Flip Equivalent Binary Trees.py
+124,Tree,993. Cousins in Binary Tree.py
+125,Tree,1008. Construct Binary Search Tree from Preorder Traversal.py
+126,Tree,3002. CreateBST.py
+127,Two Pointer,7. ReverseInteger.py
+128,Two Pointer,88. Merge Sorted Array.py
+129,Two Pointer,167. Two Sum II - Input Array is Sorted.py
+130,Two Pointer,167. Two SumII-Input Array Is Sorted.py
+131,Two Pointer,344. Reverse String.py
+132,Two Pointer,392. Is Subsequence.py
+133,Two Pointer,608. Valid PalindromeII.py
+134,Two Pointer,977. Squares of a Sorted Array.py
 135,Two Pointer,1099. Two Sum Less Than K.py
-136,Two Pointer,167. Two Sum II - Input Array is Sorted.py
-137,Two Pointer,167. Two SumII-Input Array Is Sorted.py
-138,Two Pointer,344. Reverse String.py
-139,Two Pointer,392. Is Subsequence.py
-140,Two Pointer,608. Valid PalindromeII.py
-141,Two Pointer,7. ReverseInteger.py
-142,Two Pointer,88. Merge Sorted Array.py
-143,Two Pointer,977. Squares of a Sorted Array.py

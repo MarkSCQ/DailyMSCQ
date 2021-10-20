@@ -16,14 +16,27 @@ def readFilesToCsv(default='a'):
 
         if os.path.isdir(fp):
             files[fold] = os.listdir(fp)
-
+    files_dic = {}
     files_list = []
+    
     for key in files:
+        files_dic[key] = []
         for f in files[key]:
-            files_list.append([key, f])
+            checkf = f.split('.')
+            if checkf[-1] == "md" or checkf[-1] == "png":
+                continue
 
+            files_dic[key].append(f)
+        files_dic[key] = sorted(
+            files_dic[key], key=lambda x: int(x.partition('.')[0]))
+        print(files_dic[key])
+    for key in files_dic:
+        for f in files_dic[key]:
+            files_list.append([key, f])
     df = pd.DataFrame(files_list, columns=['type', 'question'], dtype=float)
+    df.sort_values(by=['type'])
     df.to_csv("allques.csv", mode=default)
+
 
 
 def RollToday(default=3):
@@ -45,14 +58,12 @@ def RollToday(default=3):
         toAddQues = quesAll[quesIndex]
         if toAddQues not in quesRec:
             today.append(toAddQues)
-            # quesRec.add(toAddQues)
 
     quesDf = pd.read_csv(pathFromQues)
 
     # ! update rec
     for i in today:
         _type = quesDf.loc[quesDf.question == i, "type"].values[0]
-        # print(_type)
         todayques = {
             "date": [str(date.today())],
             "type": [_type],

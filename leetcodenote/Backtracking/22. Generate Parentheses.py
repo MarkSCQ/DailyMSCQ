@@ -46,8 +46,9 @@ class solution:
                 stack.append(")")
                 backtrack(openN, closeN+1)
                 stack.pop()
-        backtrack(0,0)
+        backtrack(0, 0)
         return res
+
 
 class Solution2:
     def generateParenthesis(self, n):

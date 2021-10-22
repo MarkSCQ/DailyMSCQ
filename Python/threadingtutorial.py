@@ -11,7 +11,7 @@ def func(name):
 
 
 if __name__ == '__main__':
-    format = "%(asctime)s: %(message)s"
+    format = "%(asctime)s: %(message)s" 
     logging.basicConfig(format=format, level=logging.INFO,
                         datefmt="%H:%M:%S")
     logging.info("before")
@@ -21,5 +21,15 @@ if __name__ == '__main__':
 
     logging.info("end")
 
-    x.join()
+    # x.join()
     logging.info("Done")
+
+
+"""
+
+parallelism
+
+cpu speed: ghz
+
+
+"""

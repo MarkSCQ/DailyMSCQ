@@ -18,7 +18,7 @@ def readFilesToCsv(default='a'):
             files[fold] = os.listdir(fp)
     files_dic = {}
     files_list = []
-    
+
     for key in files:
         files_dic[key] = []
         for f in files[key]:
@@ -38,7 +38,6 @@ def readFilesToCsv(default='a'):
     df.to_csv("allques.csv", mode=default)
 
 
-
 def RollToday(default=3):
     pathFromQues = "../leetcodenote/allques.csv"
     pathFromRecords = "../leetcodenote/record.csv"
@@ -48,7 +47,7 @@ def RollToday(default=3):
 
     notFinised = True
 
-    today = []
+    today = set()
     while notFinised:
         if len(today) == default:
             notFinised = False
@@ -57,7 +56,7 @@ def RollToday(default=3):
         quesIndex = np.random.randint(0, len(quesAll)-1)
         toAddQues = quesAll[quesIndex]
         if toAddQues not in quesRec:
-            today.append(toAddQues)
+            today.add(toAddQues)
 
     quesDf = pd.read_csv(pathFromQues)
 
@@ -76,4 +75,4 @@ def RollToday(default=3):
 
 
 # readFilesToCsv('w')
-RollToday(default=3)
+RollToday(default=4)

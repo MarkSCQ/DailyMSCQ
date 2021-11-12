@@ -69,6 +69,7 @@ class Solution:
         for key in data:
             # ! we add each possible solution to the curr. //2*2 means we want to add even number. For example, if data[key]==3, then 3//2*2 will be 2
             curr += data[key]//2*2
+            # ! another detail, we do not need to drop the keys if the amount of one character is odd
             # ! here is the magic, if the curernt's reminder is 0 and the current data[key] is odd, then add 1。这里的if做到了一个向下取整的功能。
             if curr % 2 == 0 and data[key] % 2 == 1:
                 curr += 1

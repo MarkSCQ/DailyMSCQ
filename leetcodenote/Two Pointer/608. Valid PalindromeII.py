@@ -36,13 +36,30 @@ Thess two check is "at most deleteing one character"
 """
 
 
+"""
+
+Example 
+
+        a   b   c   d   d   a
+        ✔️  X           X  ✔️  
+        check "bcdd" "cdda"
+        Then   return True
+
+
+"""
+
+
 class Solution:
     def validPalindrome(self, s):
         head = 0
         tail = len(s)-1
 
         while head < tail:
-
+            # ! if not match, check leftsub and rightsub
+            # ! this is a Misalignment check.
+            # ! as known, the python [:] is left included and right excluded
+            # ! head+1 and tail+1 is move the index with one offset
+            # ! if the sub is equal to each other, then return True, either any of them fail, return False
             if s[head] != s[tail]:
                 leftsub = s[head:tail]
                 rightsub = s[head+1:tail+1]

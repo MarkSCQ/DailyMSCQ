@@ -41,3 +41,21 @@ class Solution:
 
         # return True if sd==td else False
         return sorted(s) == sorted(t)
+
+
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+        sl=[0]*26
+        tl=[0]*26
+        
+        for i in range(len(s)):
+            sl[ord(s[i])-97]+=1
+        for i in range(len(t)):
+            tl[ord(t[i])-97]+=1
+            
+        for i in range(len(sl)):
+            if tl[i]==sl[i]:
+                continue
+            else:
+                return False
+        return True

@@ -12,7 +12,8 @@ class RegisterForm(FlaskForm):
 
     def validate_email_address(self, email_address_to_check):
 
-        email = User.query.filter_by(email=email_address_to_check.data).first()
+        email = User.query.filter_by(
+            email_address=email_address_to_check.data).first()
         if email:
             raise ValidationError("Email exists, use another email")
 
@@ -32,3 +33,18 @@ class RegisterForm(FlaskForm):
     # the naming for the validation functions follows some rules,
     # the flask validation system will check the the function whose name is like validate_[field name]
     # and then it will use this function to check the field
+
+
+class LoginForm(FlaskForm):
+
+    username = StringField(label='User Name:', validators=[DataRequired()])
+    password = PasswordField(label='Password:', validators=[DataRequired()])
+    submit = SubmitField(label='Sign In')
+
+
+class PurchaseItemForm(FlaskForm):
+    submit = SubmitField(label='Buy it')
+
+
+class SellItemForm(FlaskForm):
+    submit = SubmitField(label='Sell it')
